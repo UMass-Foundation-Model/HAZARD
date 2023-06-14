@@ -373,7 +373,7 @@ class LLM:
 					len(processed_input['nearest_object']) > 0 and \
 					processed_input['nearest_object'][0]['category'] in self.target_objects:
 				return "pick_up", processed_input['nearest_object'][0]['id']
-			if len(processed_input['holding_objects']) > 0 and \
+			if len(processed_input['holding_objects']) > 0 and len(self.action_history) > 0 and \
 					self.action_history[-1].startswith('go put object into <shopping cart>') and \
 					processed_input['action_result']:
 				return "drop", self.action_history[-1].split('(')[1].split(')')[0]

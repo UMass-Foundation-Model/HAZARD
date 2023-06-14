@@ -1,5 +1,8 @@
 # Installation
 
+### System
+We tested our code on an Intel i9-9900k Desktop with RTX2080Super. Our pytorch version is 2.0 with CUDA 11.7. Running ThreeDWorld requires a working Xserver. If you are running on a headless machine, please follow the instructions in **TDW Build**. Be aware that not all headless servers provide Xserver privileges.
+
 ### Dependencies
 
 We use `pytorch` for training and evaluation, so it's recommended to install it separately from the [official website](https://pytorch.org/).

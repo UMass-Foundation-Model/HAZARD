@@ -37,10 +37,10 @@ class SceneSetup:
                     for obj in log_objects:
                         if obj['id'] == target and obj['category'] not in self.targets:
                             self.targets.append(obj['category'])
-                            self.target_id2category[obj['id']] = obj['category']
-                            self.target_id2name[obj['id']] = obj['name']
                         if obj['id'] == target and obj['name'] not in self.target_names:
                             self.target_names.append(obj['name'])
+                        self.target_id2category[obj['id']] = obj['category']
+                        self.target_id2name[obj['id']] = obj['name']
             else:
                 for target in self.targets:
                     for obj in log_objects:

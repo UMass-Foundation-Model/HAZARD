@@ -48,6 +48,8 @@ The data directory should be a subfolder of either `data/room_setup_fire` or `da
 
 To train an RL agent, you need to install [openai-baselines](https://github.com/openai/baselines) from source (the release has some missing imports). Then refer to `ppo/run.sh` to see the three commented commands. Before running this script, replace the PYTHONPATH with the absolute path of your repository.
 
+We also provide our trained checkpoints in [google drive](https://drive.google.com/file/d/12Y1trqosOP5BPuZJt4ebxHBDxQKpMaLf/view?usp=sharing). After downloading, unzip it and put it under `ppo/trained_models` or modify the paths in `policy/rl.py`.
+
 ### Others
 Some agents may have a different name than claimed in the paper. For example, `random` is actually the rule-based agent where randomness is only on choosing the target.
 

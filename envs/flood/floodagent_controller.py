@@ -14,10 +14,11 @@ from tdw.replicant.image_frequency import ImageFrequency
 from envs.flood import FloodController
 from tdw.add_ons.floorplan_flood import FloorplanFlood
 from tdw.tdw_utils import TDWUtils
+from tdw.librarian import HumanoidLibrarian
 from tdw.add_ons.log_playback import LogPlayback
 from tdw.output_data import OutputData, Images
 from tdw.scene_data.scene_bounds import SceneBounds
-# from vision import Detector
+from vision import Detector
 from model import Semantic_Mapping
 from utils.scene_setup import SceneSetup
 import numpy as np
@@ -43,8 +44,8 @@ class FloodAgentController(FloodController):
         self.comm_counter = 0
         self.use_gt = kwargs.get("use_gt", True)
         self.single_room = single_room
-        # if not self.use_gt:
-        #     self.detector = Detector(**kwargs)
+        if not self.use_gt:
+            self.detector = Detector(**kwargs)
         # self.init_seg(vocab_path=f"{os.getcwd()}/seg/vocab.txt")
         if use_local_resources:
             self.update_replicant_url()
@@ -125,6 +126,7 @@ class FloodAgentController(FloodController):
                 if tp[:4] == "send" or tp.find("avatar") != -1 or "avatar_id" in command:
                     continue
                 filtered_commands.append(command)
+            # json.dump(filtered_commands, open("/data/private/zqh/tmp.json", "w"))
             self.communicate(filtered_commands)
 
         if len(self.agents) == 0:
@@ -249,7 +251,22 @@ class FloodAgentController(FloodController):
             if self.manager.objects[obj].has_buoyancy:
                 commands.append({"$type": "set_kinematic_state", "id": obj, "is_kinematic": False, "use_gravity": True})
         self.communicate(commands)
-        self.communicate({"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)})
+
+        commands = [{"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)}]
+        """add a backpack or similar to the agent's left hand"""
+        self.container_name = "backpack" if "container" not in setup.other else setup.other["container"]
+        self.container_id = self.get_unique_id()
+        self.manager.add_object(ObjectStatus(idx=self.container_id, waterproof=True, has_buoyancy=False))
+        
+        agent_pos = self.agents[0].dynamic.transform.position
+        commands.append(self.get_add_object(model_name=self.container_name, object_id=self.container_id, position=TDWUtils.array_to_vector3(agent_pos)))
+        self.communicate(commands)
+        self.agents[0].grasp(target=self.container_id, arm=Arm.left, axis=None, angle=None)
+        self.next_key_frame()
+        self.agents[0].reach_for(target=TDWUtils.array_to_vector3([-0.3, 1.0, 0.3]), absolute=False, arrived_at=0.1, arm=Arm.left)
+        self.next_key_frame()
+        self.agents[0].reset_arm(arm=Arm.left)
+        self.next_key_frame()
 
         # TODO add source
         # self.init_obi()
@@ -423,12 +440,16 @@ class FloodAgentController(FloodController):
         raw observation: RGBD, temperature
         """
         rgb = self.agents[agent_idx].dynamic.get_pil_image()
+        
         seg_mask = None
         if self.use_gt:
             seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")))
         else:
-            raise NotImplementedError
-            # seg_mask = self.detector.get_seg_mask(rgb)
+            rcnn_mask = self.detector.inference(np.array(rgb))
+            seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")),
+                                                        rcnn=rcnn_mask,
+                                                        id_list=self.manager.id_list)
+
         depth = TDWUtils.get_depth_values(self.agents[agent_idx].dynamic.images["depth"], width=self.screen_size, height=self.screen_size)
         depth = np.flip(depth, axis=0)
 

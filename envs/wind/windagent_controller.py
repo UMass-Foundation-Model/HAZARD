@@ -5,24 +5,26 @@ from envs.wind.object import ObjectStatus, AgentStatus
 from envs.wind.agent import *
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
 from tdw.add_ons.image_capture import ImageCapture
+from tdw.add_ons.logger import Logger
 from tdw.add_ons.log_playback import LogPlayback
 from tdw.replicant.arm import Arm
 from tdw.replicant.image_frequency import ImageFrequency
 from model import Semantic_Mapping
 from envs.wind import WindController
 from tdw.tdw_utils import TDWUtils
+from tdw.librarian import HumanoidLibrarian
 import numpy as np
 import cv2
 import copy
 import os
-# from vision import Detector
+from vision import Detector
 from utils.local_asset import get_local_url
 from utils.scene_setup import SceneSetup
 from tdw.output_data import OutputData, Images
 
 PATH = os.path.dirname(os.path.abspath(__file__))
-# go to parent directory until it contains envs folder
-while not os.path.exists(os.path.join(PATH, "envs")):
+# go to parent directory until the folder name is embodied-strategy
+while os.path.basename(PATH) != "embodied-strategy":
     PATH = os.path.dirname(PATH)
 
 import torch
@@ -35,17 +37,18 @@ class WindAgentController(WindController):
     """
     Never ever use self.commands in here! For safety uses, self.commands can only be used in parent class
     """
-    def __init__(self, use_local_resources: bool = False, image_capture_path: str = None, **kwargs) -> None:
+    def __init__(self, use_local_resources: bool = False, image_capture_path: str = None, log_path: str = None, **kwargs) -> None:
         self.use_local_resources = use_local_resources
         self.image_capture_path = image_capture_path
+        self.log_path = log_path
         self.frame_count = 0
         super().__init__(**kwargs)
         self.screen_size = kwargs.get("screen_size", 512)
         self.agents: List[WindAgent] = []
         self.comm_counter = 0
         self.use_gt = kwargs.get("use_gt", True)
-        # if not self.use_gt:
-        #     self.detector = Detector(**kwargs)
+        if not self.use_gt:
+            self.detector = Detector(**kwargs)
         if use_local_resources:
             self.update_replicant_url()
         
@@ -94,8 +97,16 @@ class WindAgentController(WindController):
     def init_scene(self, setup: SceneSetup):
         self.reset_scene()
 
+        if self.log_path is not None:
+            logger = Logger(self.log_path)
+            self.add_ons.append(logger)
+            self.communicate([])
         # for obj in setup.objects:
         #     self.manager.add_object(obj)
+        if self.log_path is not None:
+            logger = Logger(self.log_path)
+            self.add_ons.append(logger)
+            self.communicate([])
         for commands in setup.commands_list:
             filtered_commands = []
             for command in commands:
@@ -149,7 +160,13 @@ class WindAgentController(WindController):
                     {"$type": "set_target_framerate", "framerate": 30}]
 
         if self.image_capture_path != None:
-            camera = ThirdPersonCamera(avatar_id="record", position={"x": 0.0, "y": 8.0, "z": 0.0},
+            pos = setup.agent_positions[0]
+            pos[1] = 8.0
+            theta = self.RNG.random() * 2 * np.pi
+            pos[0] += np.cos(theta) * 2
+            pos[2] += np.sin(theta) * 2
+            
+            camera = ThirdPersonCamera(avatar_id="record", position=TDWUtils.array_to_vector3(pos),
                                        look_at=self.agents[0].replicant_id)
             self.add_ons.extend([camera])
         # if self.video_path is not None:
@@ -307,8 +324,10 @@ class WindAgentController(WindController):
         if self.use_gt:
             seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")))
         else:
-            raise NotImplementedError
-            # seg_mask = self.detector.get_seg_mask(rgb)
+            rcnn_mask = self.detector.inference(np.array(rgb))
+            seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")),
+                                                        rcnn=rcnn_mask,
+                                                        id_list=self.manager.id_list)
         # print(seg_mask.shape, seg_mask.max())
         depth = TDWUtils.get_depth_values(self.agents[agent_idx].dynamic.images["depth"], width=self.screen_size, height=self.screen_size)
         depth = np.flip(depth, axis=0)

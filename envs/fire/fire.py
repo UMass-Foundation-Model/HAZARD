@@ -159,15 +159,15 @@ class FireController(Controller):
             self.fire_info[idx].last_spread = self.frame_count
 
     def fire_step(self, resp):
-        for idx in self.manager.objects_start_burning:
-            self.commands.append({"$type": "set_color",
-                                    "id": idx,
-                                    "color": {"r": 1.0, "g": 0.0, "b": 0.0, "a": 0.5}})
-            self.add_fire_object(idx)
+        # for idx in self.manager.objects_start_burning:
+        #     self.commands.append({"$type": "set_color",
+        #                             "id": idx,
+        #                             "color": {"r": 1.0, "g": 0.0, "b": 0.0, "a": 0.5}})
+        #     self.add_fire_object(idx)
         for idx in self.manager.objects_stop_burning:
-            self.commands.append({"$type": "set_color",
-                                    "id": idx,
-                                    "color": {"r": 0.0, "g": 0.0, "b": 0.0, "a": 0.5}})
+            # self.commands.append({"$type": "set_color",
+            #                         "id": idx,
+            #                         "color": {"r": 0.0, "g": 0.0, "b": 0.0, "a": 0.5}})
             self.commands.append({"$type": "destroy_visual_effect",
                                     "id": self.fire_info[idx].fire_id})
             self.manager.remove_object(self.fire_info[idx].fire_id)

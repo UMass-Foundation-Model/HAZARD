@@ -1,66 +1,14 @@
 import pdb
-import random
+
+import rule_based
 import numpy as np
 import copy
 from tqdm import tqdm
 
-class HAgent:
-    def __init__(self, task):
-        self.agent_type = "h_agent"
-        self.agent_name = "Bob"
-        self.task = task
-        self.last_action = None
-        assert task in ['fire', 'flood']
-
-    def reset(self, goal_objects, objects_info):
-        self.target_objects = goal_objects
-        self.objects_info = objects_info
-
-    def return_action(self, action):
-        self.last_action = action[0]
-        return action
-
-    def choose_target(self, state, processed_input):
-        self.current_step = processed_input['step']
-        holding_objects = processed_input['holding_objects']
-        agent_map = state["goal_map"]
-        agent_points = (agent_map == -2).nonzero()
-        if type(agent_points[0]) == np.ndarray:
-            agent_pos = (agent_points[0].astype(float).mean(),
-                         agent_points[1].astype(float).mean())
-        else:
-            agent_pos = (agent_points[:, 0].float().mean().item(),
-                         agent_points[:, 1].float().mean().item())
-        if len(holding_objects) > 0:
-            return self.return_action(("drop", None))
-        object_list = processed_input['explored_object_name_list']
-        if len(processed_input['nearest_object']) > 0:
-            if processed_input['nearest_object'][0]['category'] in self.target_objects and self.last_action != "pick_up":
-                return self.return_action(('pick_up', None))
-        target_list = []
-        for obj in object_list:
-            if obj['category'] in self.target_objects:
-                id_map = state['sem_map']['explored'] * state['sem_map']['id']
-                object_points = (id_map == int(obj['id'])).nonzero()
-                if type(object_points[0]) == np.ndarray:
-                    object_pos = (object_points[0].astype(float).mean(),
-                                 object_points[1].astype(float).mean())
-                else:
-                    object_pos = (object_points[:, 0].float().mean().item(),
-                                 object_points[:, 1].float().mean().item())
-                dist = np.linalg.norm(np.array((object_pos[0]-agent_pos[0],
-                                                object_pos[1]-agent_pos[1])))
-                target_list.append((dist, obj['id']))
-        if len(target_list) > 0:
-            sorted(target_list, key=lambda x: x[0])
-            return self.return_action(('walk_to', target_list[0][1]))
-        other_choices = [('walk_to', obj['id']) for obj in object_list]
-        other_choices.append(('explore', None))
-        return self.return_action(random.choice(other_choices))
-
-
 class mcts_state_H:
-    def __init__(self, target_list: list = None, container_list: list = None, agent_pos: list = None, holding_objects: list = None, last_action: tuple = None, last_action_success: bool = True, task = None, last_cost = 10000):
+    def __init__(self, object_info, target_list: list = None, container_list: list = None, agent_pos: list = None,
+                 holding_objects: list = None, last_action: tuple = None, last_action_success: bool = True,
+                 task = None, last_cost = 10000, status_history = None):
         self.target_list = target_list
         self.container_list = container_list
         self.agent_pos = agent_pos
@@ -68,6 +16,7 @@ class mcts_state_H:
         self.last_action = last_action
         self.task = task
         self.c = 5e-2 if self.task in ['fire', 'flood'] else 5e-2
+        self.status_history = status_history
         if self.last_action is None: self.last_action = ('None', None)
         self.last_action_success = last_action_success
         self.is_expanded = False
@@ -76,6 +25,7 @@ class mcts_state_H:
         self.children = None
         self.children_cost = None
         self.last_cost = last_cost
+        self.objects_info = object_info
     def __str__(self):
         return f"target_list: {self.target_list}, container_list: {self.container_list}, agent_pos: {self.agent_pos}, holding_objects: {self.holding_objects}, last_action: {self.last_action}, last_action_success: {self.last_action_success}"
 
@@ -128,6 +78,34 @@ class mcts_state_H:
             for obj in self.target_list:
                 mcts_trans.append({'action': ("walk_to", obj['id']), 'cost': self.get_distance(self.agent_pos, obj['pos'])})
 
+        # consider value
+        for action in mcts_trans:
+            if action['action'][1] == None or action['cost'] == 0:
+                continue
+            value = 1
+            for object in self.target_list:
+                if action['action'][1] == object['id']:
+                    value = self.objects_info[object['category']]['value']
+            if self.task in ['fire', 'flood']:
+                vulnerable = 1e5
+                for object in self.target_list:
+                    if action['action'][1] == object['id']:
+                        value = self.objects_info[object['category']]['value']
+                        if 'waterproof' in self.objects_info[object['category']]:
+                            vulnerable = 1e5 if self.objects_info[object['category']]['waterproof'] == 1 else 0.01
+                        elif 'fireproof' in self.objects_info[object['category']]:
+                            vulnerable = 1000 if self.objects_info[object['category']]['fireproof'] == 1 else 100
+                if int(action['action'][1]) not in self.status_history:
+                    pass
+                elif len(self.status_history[int(action['action'][1])]) == 1:
+                    vulnerable -= self.status_history[int(action['action'][1])][-1]
+                else:
+                    delta = self.status_history[int(action['action'][1])][-1] - self.status_history[int(action['action'][1])][-2]
+                    status_prediction = self.status_history[int(action['action'][1])][-1] + delta
+                    vulnerable -= status_prediction
+                if vulnerable < 0:
+                    value /= 2
+            action['cost'] /= value
         return mcts_trans
 
     def apply_trans(self, action):
@@ -167,7 +145,7 @@ class mcts_state_H:
             remain_dis += max(2 * self.get_distance(self.agent_pos, self.target_list[i]['pos']) - 5, 0)
         return remain_dis
 
-class HAgentWind_FROM_MCTS:
+class GreedyAgent:
     def __init__(self, task):
         self.debug = False
         self.rooms_explored = None
@@ -190,6 +168,7 @@ class HAgentWind_FROM_MCTS:
         self.discount = 0.95
         self.max_rollout_step = 20
         self.last_cost = 10000
+        self.status_history = {}
         #DWH: constant from wah code, maybe change later
 
     def goal2description(self, goal_objects):
@@ -210,8 +189,37 @@ class HAgentWind_FROM_MCTS:
         self.need_to_go = None
         self.last_action = None
         self.last_action_result = True
+        self.objects_info = objects_info
+
+    def save_object_history_info(self, state, obj_id):
+        if self.task in ["fire", "flood"]:
+            obj_mask = (state["raw"]["seg_mask"] == obj_id)
+            if type(obj_mask) != np.ndarray:
+                temp = state["raw"]["log_temp"] * obj_mask.cpu().numpy()
+                avg_temp = (temp.sum() / obj_mask.sum()).item()
+            else:
+                temp = state["raw"]["log_temp"] * obj_mask
+                avg_temp = temp.sum() / obj_mask.sum()
+            if obj_id not in self.status_history:
+                self.status_history[obj_id] = [avg_temp]
+            else:
+                self.status_history[obj_id].append(avg_temp)
+        else:
+            id_map = state['sem_map']['explored'] * state['sem_map']['id']
+            object_points = (id_map == obj_id).nonzero()
+            if type(object_points[0]) == np.ndarray:
+                object_center = (object_points[0].astype(float).mean(), object_points[1].astype(float).mean())
+            else:
+                object_center = (object_points[:, 0].float().mean().item(), object_points[:, 1].float().mean().item())
+            if obj_id not in self.status_history:
+                self.status_history[obj_id] = [object_center]
+            else:
+                self.status_history[obj_id].append(object_center)
 
     def choose_target(self, state, processed_input):
+        current_objects_ids = set(state["raw"]['seg_mask'].flatten())
+        for obj_id in current_objects_ids:
+            self.save_object_history_info(state, obj_id)
         if self.debug:
             print(processed_input)
         self.object_list = copy.deepcopy(processed_input['explored_object_name_list'])
@@ -259,6 +267,7 @@ class HAgentWind_FROM_MCTS:
                 self.containers.append(self.object_list[i])
 
         mcts_root = mcts_state_H(
+                object_info=self.objects_info,
                 target_list = copy.deepcopy(self.need_to_go), 
                 container_list = copy.deepcopy(self.containers), 
                 agent_pos = copy.deepcopy(agent_pos), 
@@ -266,7 +275,8 @@ class HAgentWind_FROM_MCTS:
                 last_action = copy.deepcopy(self.last_action), 
                 last_action_success = self.last_action_result,
                 last_cost = self.last_cost,
-                task = self.task)
+                status_history = self.status_history,
+                task = self.task,)
         print(mcts_root.get_available_trans())
         
         plan, action = self.mcts(mcts_root)
@@ -275,7 +285,24 @@ class HAgentWind_FROM_MCTS:
         print(plan, action)
         self.last_action = action
         return action
-    
+
+    def calculate_score(self, curr_node: mcts_state_H, child: mcts_state_H, expr = True):
+        parent_visit_count = curr_node.num_visited
+        self_visit_count = child.num_visited
+
+        if self_visit_count == 0:
+            u_score = 1e6
+            q_score = 0
+        else:
+            exploration_rate = np.log((1 + parent_visit_count + self.c_base) / self.c_base) + self.c_init
+            u_score = exploration_rate * np.sqrt(parent_visit_count) / float(1 + self_visit_count)
+            q_score = child.sum_value / self_visit_count
+
+        score = q_score + u_score
+        if expr == False: 
+            score = q_score
+        return score
+
     def select_child(self, curr_node: mcts_state_H, expr = True):
         scores = [curr_node.children_cost[i] for i in range(len(curr_node.children_cost))]
         costs = curr_node.children_cost
@@ -284,7 +311,7 @@ class HAgentWind_FROM_MCTS:
         selected_child_index = random.choice(maxIndex)
         selected_child = curr_node.children[selected_child_index]
         return selected_child, costs[selected_child_index], curr_node.get_available_trans()[selected_child_index]['action']
-    
+
     def initialize_children(self, curr_node: mcts_state_H):
         available_trans = curr_node.get_available_trans()
         n_state = []
@@ -303,10 +330,13 @@ class HAgentWind_FROM_MCTS:
         if expanded_leaf_node is not None:
             leaf_node.is_expanded = True
         return leaf_node
-    
+
     def mcts(self, root: mcts_state_H):
-        curr_node = root
-        plans = []
-        self.expand(curr_node)
-        next_node, cost, action = self.select_child(curr_node, expr = False)
+        try:
+            curr_node = root
+            plans = []
+            self.expand(curr_node)
+            next_node, cost, action = self.select_child(curr_node, expr = False)
+        except:
+            return [], None
         return plans, action  # return the plan and action

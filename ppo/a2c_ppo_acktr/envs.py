@@ -56,7 +56,7 @@ def make_vec_envs(env_name,
                   map_size_v=64,
                   grid_size=0.25,
                   debug=False,
-                  port=1071):
+                  port=12138):
     
     #ports = random.sample(range(1071, 1091), num_processes)
     ports = [port + i for i in range(num_processes)]

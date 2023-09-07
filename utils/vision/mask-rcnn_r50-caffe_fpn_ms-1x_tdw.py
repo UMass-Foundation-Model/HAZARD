@@ -1,8 +1,8 @@
 _base_ = 'mask-rcnn_r50-caffe_fpn_ms-poly-3x_coco.py'
 
 dataset_type = 'CocoDataset'
-classes = ('apple', 'backpack', 'bag, handbag, pocketbook, purse', 'banana', 'bed', 'book', 'bowl', 'box', 'cabinet', 'chair', 'chocolate candy', 'coffee maker', 'coffee table, cocktail table', 'cookie sheet', 'dishwasher', 'dog house', 'floor lamp', 'fork', 'globe', 'hairbrush', 'headphone', 'jug', 'kitchen utensil', 'knife', 'laptop, laptop computer', 'microwave', 'painting', 'pan', 'pen', 'pencil', 'pepper mill, pepper grinder', 'picture', 'printer', 'refrigerator', 'sculpture', 'sofa', 'spoon', 'suitcase', 'table', 'table lamp', 'teakettle', 'television set', 'throw pillow', 'toaster', 'toothbrush', 'toy', 'trunk', 'vase', 'wineglass')
-data_root='/home/zfchen/csl/test/tdw_rcnn/data_rcnn'
+classes = ('apple', 'backpack', 'bag, handbag, pocketbook, purse', 'banana', 'basket', 'book', 'bookshelf', 'bottle', 'bottle cork', 'bowl', 'box', 'bread', 'cabinet', 'camera', 'candle', 'carving fork', 'chair', 'chocolate candy', 'coaster', 'coffee grinder', 'coffee maker', 'coin', 'cup', 'dining table', 'dishwasher', 'fork', 'gas cooker', 'hairbrush', 'headphone', 'houseplant', 'ipod', 'jar', 'jug', 'key', 'kitchen utensil', 'knife', 'lighter', 'microwave', 'microwave, microwave oven', 'money', 'orange', 'painting', 'pan', 'pen', 'pepper mill, pepper grinder', 'picture', 'plate', 'pot', 'printer', 'radiator', 'saltshaker, salt shaker', 'sandwich', 'scissors', 'shelf', 'shirt button', 'shopping cart', 'soap dispenser', 'soda can', 'spoon', 'stool', 'suitcase', 'table', 'teakettle', 'throw pillow', 'toaster', 'toothbrush', 'vase', 'water faucet', 'wineglass')
+data_root='/home/winnie/csl/images2'
 
 # train_dataloader = dict(
 #     batch_size=4,
@@ -65,8 +65,8 @@ data_root='/home/zfchen/csl/test/tdw_rcnn/data_rcnn'
 # 将所有的 `num_classes` 默认值修改为 5（原来为80）
 model = dict(
     roi_head=dict(
-        bbox_head=dict(num_classes=49),
-        mask_head=dict(num_classes=49)))
+        bbox_head=dict(num_classes=69),
+        mask_head=dict(num_classes=69)))
 
 vis_backends = [
     dict(type='LocalVisBackend'),

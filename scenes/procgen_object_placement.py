@@ -28,10 +28,11 @@ scenes = args.scene
 seed = args.seed
 np.random.seed(seed)
 
-TDWUtils.set_default_libraries(scene_library="../../local_asset_linux/scenes.json",
-                               model_library="../../local_asset_linux/models.json")
+# TDWUtils.set_default_libraries(scene_library="../../local_asset_linux/scenes.json",
+#                                model_library="../../local_asset_linux/models.json")
 print(0)
-c = Controller(launch_build=False)
+# c = Controller(launch_build=False)
+c = Controller()
 
 print(1)
 occ = OccupancyMap()
@@ -203,7 +204,7 @@ fire_position = [grid_to_real(fire, origin, grid_size) for fire in fire_position
 import json
 values = []
 t_val = 0
-with open('./value.json', 'r') as f:
+with open('./value_name.json', 'r') as f:
     d = json.load(f)
 i = 0
 for index, obj in enumerate(candidate_targets):

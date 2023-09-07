@@ -1,5 +1,5 @@
 import pdb
-import random
+import rule_based
 import numpy as np
 import openai
 import json

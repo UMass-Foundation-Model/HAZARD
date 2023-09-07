@@ -1,0 +1,5893 @@
+[
+    {
+        "$type": "set_screen_size",
+        "width": 1280,
+        "height": 720
+    },
+    {
+        "$type": "add_scene",
+        "name": "mm_craftroom_3a",
+        "url": "https://tdw-public.s3.amazonaws.com/scenes/windows/2020.2/mm_craftroom_3a"
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_single_door_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_24_single_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.329046471420288,
+            "y": 0,
+            "z": -3.152081253265381
+        },
+        "category": "cabinet",
+        "id": 13908351,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13908351,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 13908351,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 62.719657,
+        "id": 13908351
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 13908351
+    },
+    {
+        "$type": "add_box_container",
+        "id": 13908351,
+        "container_id": 11807757,
+        "position": {
+            "x": 0.00092754,
+            "y": 0.92720306,
+            "z": 0.00266671
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30556023,
+            "y": 0.005,
+            "z": 0.31819868
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 13908351,
+        "container_id": 11606885,
+        "position": {
+            "x": -0.00010885,
+            "y": 0.48690215,
+            "z": -0.02265313
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.2961338,
+            "y": 0.38508281,
+            "z": 0.280144095
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "square_coaster_rubber",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.2/square_coaster_rubber",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.1856846054575967,
+            "y": 0.92220306,
+            "z": -3.303737925270608
+        },
+        "category": "coaster",
+        "id": 13544198,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 176.75917926808566,
+            "z": 0
+        },
+        "id": 13544198
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13544198,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.2,
+        "id": 13544198
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.75,
+        "static_friction": 0.8,
+        "bounciness": 0.5,
+        "id": 13544198
+    },
+    {
+        "$type": "add_object",
+        "name": "kettle_2",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/kettle_2",
+        "scale_factor": 0.8099999,
+        "position": {
+            "x": 1.201582049085906,
+            "y": 0.10181933999999998,
+            "z": -3.2910185352409083
+        },
+        "category": "teakettle",
+        "id": 13693419,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 346.5308512999929,
+            "z": 0
+        },
+        "id": 13693419
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13693419,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 24.139585066586733,
+        "id": 13693419
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 13693419
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 13544198,
+        "parent_id": 13908351
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 13693419,
+        "parent_id": 13908351
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 13908351,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 13544198
+    },
+    {
+        "$type": "unparent_object",
+        "id": 13693419
+    },
+    {
+        "$type": "add_object",
+        "name": "dishwasher_4_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/dishwasher_4_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.323705471420288,
+            "y": 0,
+            "z": -2.5199222032653807
+        },
+        "category": "dishwasher",
+        "id": 5026217,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5026217,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 5026217,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 755.2081875,
+        "id": 5026217
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.35,
+        "id": 5026217
+    },
+    {
+        "$type": "add_box_container",
+        "id": 5026217,
+        "container_id": 3773020,
+        "position": {
+            "x": -0.00597145,
+            "y": 0.80620158,
+            "z": -0.00364737
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.29677896,
+            "y": 0.005,
+            "z": 0.308293805
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 5026217,
+        "container_id": 12269805,
+        "position": {
+            "x": -0.00597128,
+            "y": 0.48106404,
+            "z": -0.01678993
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.292728005,
+            "y": 0.317041205,
+            "z": 0.2749023
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "dishwasher_4_counter_top",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/dishwasher_4_counter_top",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.323705471420288,
+            "y": 0,
+            "z": -2.5199222032653807
+        },
+        "category": "cabinet",
+        "id": 12427525,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 270,
+            "z": 0
+        },
+        "id": 12427525
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12427525,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 12427525,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 11.504304,
+        "id": 12427525
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 12427525
+    },
+    {
+        "$type": "add_box_container",
+        "id": 12427525,
+        "container_id": 14088246,
+        "position": {
+            "x": 0,
+            "y": 0.9713115,
+            "z": 0
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.3275375,
+            "y": 0.01,
+            "z": 0.3206143
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "teakettle_01",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/teakettle_01",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.2930039925596142,
+            "y": 0.9213195,
+            "z": -2.6045830363030404
+        },
+        "category": "teakettle",
+        "id": 3129423,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 85.09043949449045,
+            "z": 0
+        },
+        "id": 3129423
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3129423,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 16.323141765315086,
+        "id": 3129423
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 3129423
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 12427525,
+        "parent_id": 5026217
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3129423,
+        "parent_id": 5026217
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 5026217,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 12427525
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3129423
+    },
+    {
+        "$type": "add_object",
+        "name": "sink_cabinet_unit_wood_beech_honey_porcelain_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/sink_cabinet_unit_wood_beech_honey_porcelain_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.3277219714202881,
+            "y": 0,
+            "z": -1.4435579532653806
+        },
+        "category": "cabinet",
+        "id": 610694,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 610694,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 610694,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 148.00373000000002,
+        "id": 610694
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 610694
+    },
+    {
+        "$type": "add_box_container",
+        "id": 610694,
+        "container_id": 5173846,
+        "position": {
+            "x": 0,
+            "y": 0.86054379,
+            "z": 0
+        },
+        "tag": "inside",
+        "half_extents": {
+            "x": 0.29709223,
+            "y": 0.07024521,
+            "z": 0.14246927
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 610694,
+        "container_id": 10335655,
+        "position": {
+            "x": 0.57651665,
+            "y": 0.930789,
+            "z": 0
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.185852485,
+            "y": 0.005,
+            "z": 0.323521
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 610694,
+        "container_id": 7128615,
+        "position": {
+            "x": -0.56117231,
+            "y": 0.930789,
+            "z": 0
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.185852485,
+            "y": 0.005,
+            "z": 0.323521
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 610694,
+        "container_id": 9505950,
+        "position": {
+            "x": -0.00040993,
+            "y": 0.43727697,
+            "z": -0.03987658
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.74448368,
+            "y": 0.334023105,
+            "z": 0.262476565
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "scissors",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/scissors",
+        "scale_factor": 0.1,
+        "position": {
+            "x": 1.8555819954328068,
+            "y": 0.925789,
+            "z": -1.6023252887993462
+        },
+        "category": "scissors",
+        "id": 6936066,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 45.022867824574625,
+            "z": 0
+        },
+        "id": 6936066
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6936066,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 6936066
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 6936066
+    },
+    {
+        "$type": "add_object",
+        "name": "ripple",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/ripple",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.7176225214869001,
+            "y": 0.925789,
+            "z": -1.6025030033658563
+        },
+        "category": "coin",
+        "id": 13405009,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 321.1528986800318,
+            "z": 0
+        },
+        "id": 13405009
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13405009,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.02710955549218852,
+        "id": 13405009
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.35,
+        "id": 13405009
+    },
+    {
+        "$type": "add_object",
+        "name": "scissors",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/scissors",
+        "scale_factor": 0.1,
+        "position": {
+            "x": 0.8861615153771115,
+            "y": 0.103253865,
+            "z": -1.5475467905916707
+        },
+        "category": "scissors",
+        "id": 3352656,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 205.26549389959547,
+            "z": 0
+        },
+        "id": 3352656
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3352656,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 3352656
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 3352656
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_honey_jar",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_honey_jar",
+        "scale_factor": 0.3874204,
+        "position": {
+            "x": 1.1258240167954858,
+            "y": 0.103253865,
+            "z": -1.3869584989416495
+        },
+        "category": "jar",
+        "id": 11841160,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 281.6716324399222,
+            "z": 0
+        },
+        "id": 11841160
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11841160,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 3.5595279769040644,
+        "id": 11841160
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.1,
+        "id": 11841160
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_gold_glass_soap_dispenser(max)",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b05_gold_glass_soap_dispenser(max)",
+        "scale_factor": 0.0254,
+        "position": {
+            "x": 1.3259905237173808,
+            "y": 0.103253865,
+            "z": -1.5873152985152836
+        },
+        "category": "soap dispenser",
+        "id": 15687350,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 174.3509338000392,
+            "z": 0
+        },
+        "id": 15687350
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 15687350,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 6.486407600459643,
+        "id": 15687350
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.49,
+        "id": 15687350
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_whiskeybottle",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_whiskeybottle",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.526216229934669,
+            "y": 0.103253865,
+            "z": -1.386888511555799
+        },
+        "category": "bottle",
+        "id": 7551638,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 6.280624133749937,
+            "z": 0
+        },
+        "id": 7551638
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7551638,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.25,
+        "id": 7551638
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 7551638
+    },
+    {
+        "$type": "add_object",
+        "name": "filler_2010",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/filler_2010",
+        "scale_factor": 0.1215766,
+        "position": {
+            "x": 1.725987812730108,
+            "y": 0.103253865,
+            "z": -1.5871105036610276
+        },
+        "category": "soap dispenser",
+        "id": 11563244,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 94.4791670822225,
+            "z": 0
+        },
+        "id": 11563244
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11563244,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.335590984672308,
+        "id": 11563244
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.3,
+        "static_friction": 0.35,
+        "bounciness": 0.471,
+        "id": 11563244
+    },
+    {
+        "$type": "add_object",
+        "name": "brizo_solna",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/brizo_solna",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.3277219714202881,
+            "y": 0.930789,
+            "z": -1.6303184532653807
+        },
+        "category": "water faucet",
+        "id": 281610,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "id": 281610
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 281610,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 281610,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.7615067665465176,
+        "id": 281610
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 281610
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 6936066,
+        "parent_id": 610694
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 13405009,
+        "parent_id": 610694
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3352656,
+        "parent_id": 610694
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 11841160,
+        "parent_id": 610694
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 15687350,
+        "parent_id": 610694
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7551638,
+        "parent_id": 610694
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 11563244,
+        "parent_id": 610694
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 281610,
+        "parent_id": 610694
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 610694,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 6936066
+    },
+    {
+        "$type": "unparent_object",
+        "id": 13405009
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3352656
+    },
+    {
+        "$type": "unparent_object",
+        "id": 11841160
+    },
+    {
+        "$type": "unparent_object",
+        "id": 15687350
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7551638
+    },
+    {
+        "$type": "unparent_object",
+        "id": 11563244
+    },
+    {
+        "$type": "unparent_object",
+        "id": 281610
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_36_two_door_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_36_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.327985421420288,
+            "y": 0,
+            "z": -0.2244105032653807
+        },
+        "category": "cabinet",
+        "id": 2164004,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 2164004,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 2164004,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 91.3241,
+        "id": 2164004
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 2164004
+    },
+    {
+        "$type": "add_box_container",
+        "id": 2164004,
+        "container_id": 16357740,
+        "position": {
+            "x": 0.00021029,
+            "y": 0.92760003,
+            "z": -0.00253588
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.458042355,
+            "y": 0.005,
+            "z": 0.319138555
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 2164004,
+        "container_id": 16719862,
+        "position": {
+            "x": 0.00072876,
+            "y": 0.48571201,
+            "z": -0.02190749
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.445793835,
+            "y": 0.385041155,
+            "z": 0.280881865
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "kettle",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/kettle",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.0968717706024902,
+            "y": 0.100670855,
+            "z": -0.3629976300616212
+        },
+        "category": "teakettle",
+        "id": 6150088,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 357.142416070893,
+            "z": 0
+        },
+        "id": 6150088
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6150088,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.6,
+        "id": 6150088
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 6150088
+    },
+    {
+        "$type": "add_object",
+        "name": "cgaxis_models_61_17_vray",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/cgaxis_models_61_17_vray",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.4564940270667972,
+            "y": 0.100670855,
+            "z": -0.16264603976169706
+        },
+        "category": "coffee grinder",
+        "id": 5445835,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 214.37825970888463,
+            "z": 0
+        },
+        "id": 5445835
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5445835,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 4.2577436892315745,
+        "id": 5445835
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.3,
+        "static_friction": 0.35,
+        "bounciness": 0.2,
+        "id": 5445835
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 6150088,
+        "parent_id": 2164004
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 5445835,
+        "parent_id": 2164004
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 2164004,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 6150088
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5445835
+    },
+    {
+        "$type": "add_object",
+        "name": "appliance-ge-profile-microwave_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/appliance-ge-profile-microwave_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.327985421420288,
+            "y": 0.92142,
+            "z": -0.2244105032653807
+        },
+        "category": "microwave",
+        "id": 8822467,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 8822467,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 8822467,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 114.066719,
+        "id": 8822467
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 8822467
+    },
+    {
+        "$type": "add_box_container",
+        "id": 8822467,
+        "container_id": 4679726,
+        "position": {
+            "x": -0.25995726,
+            "y": 0.42499829,
+            "z": -0.01405447
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.185157265,
+            "y": 0.005,
+            "z": 0.18544265
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 8822467,
+        "container_id": 6906904,
+        "position": {
+            "x": -0.0660259,
+            "y": 0.20992671,
+            "z": -0.02134468
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.37272723,
+            "y": 0.209173395,
+            "z": 0.177155455
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "scissors",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/scissors",
+        "scale_factor": 0.1,
+        "position": {
+            "x": 1.0198667338472718,
+            "y": 1.34141829,
+            "z": -0.23658198288139148
+        },
+        "category": "scissors",
+        "id": 6441629,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 96.02598824239561,
+            "z": 0
+        },
+        "id": 6441629
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6441629,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 6441629
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 6441629
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 6441629,
+        "parent_id": 8822467
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 8822467,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 6441629
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_36_two_door_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_36_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.327985421420288,
+            "y": 0,
+            "z": 0.6898844967346189
+        },
+        "category": "cabinet",
+        "id": 2355689,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 2355689,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 2355689,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 91.3241,
+        "id": 2355689
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 2355689
+    },
+    {
+        "$type": "add_box_container",
+        "id": 2355689,
+        "container_id": 14426311,
+        "position": {
+            "x": 0.00021029,
+            "y": 0.92760003,
+            "z": -0.00253588
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.458042355,
+            "y": 0.005,
+            "z": 0.319138555
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 2355689,
+        "container_id": 2258137,
+        "position": {
+            "x": 0.00072876,
+            "y": 0.48571201,
+            "z": -0.02190749
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.445793835,
+            "y": 0.385041155,
+            "z": 0.280881865
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "ripple",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/ripple",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.0613572013900592,
+            "y": 0.92260003,
+            "z": 0.631865754784988
+        },
+        "category": "coin",
+        "id": 10223891,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 346.77850274426476,
+            "z": 0
+        },
+        "id": 10223891
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 10223891,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.02710955549218852,
+        "id": 10223891
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.35,
+        "id": 10223891
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bottle-2014-2018",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_bottle-2014-2018",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.0962687628153018,
+            "y": 0.100670855,
+            "z": 0.5515860540411248
+        },
+        "category": "bottle",
+        "id": 2269435,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 342.41879441490823,
+            "z": 0
+        },
+        "id": 2269435
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 2269435,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.8,
+        "id": 2269435
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 2269435
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bottle_2_max",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_bottle_2_max",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.4569272290759998,
+            "y": 0.100670855,
+            "z": 0.7514764298878711
+        },
+        "category": "bottle",
+        "id": 4581361,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 327.9993356654885,
+            "z": 0
+        },
+        "id": 4581361
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 4581361,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.30466455427813344,
+        "id": 4581361
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 4581361
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 10223891,
+        "parent_id": 2355689
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 2269435,
+        "parent_id": 2355689
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 4581361,
+        "parent_id": 2355689
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 2355689,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 10223891
+    },
+    {
+        "$type": "unparent_object",
+        "id": 2269435
+    },
+    {
+        "$type": "unparent_object",
+        "id": 4581361
+    },
+    {
+        "$type": "add_object",
+        "name": "basket_18inx18inx12iin_bamboo",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2019.2/basket_18inx18inx12iin_bamboo",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.3801742264153842,
+            "y": 0,
+            "z": 1.4255319967346196
+        },
+        "category": "basket",
+        "id": 6339254,
+        "affordance_points": [
+            {
+                "x": -0.2285,
+                "y": 0.305,
+                "z": 0.0
+            },
+            {
+                "x": 0.2285,
+                "y": 0.305,
+                "z": 0.0
+            },
+            {
+                "x": 0,
+                "y": 0.305,
+                "z": 0.2285
+            },
+            {
+                "x": 0,
+                "y": 0.305,
+                "z": -0.2285
+            }
+        ]
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6339254,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.0,
+        "id": 6339254
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.45,
+        "static_friction": 0.48,
+        "bounciness": 0.5,
+        "id": 6339254
+    },
+    {
+        "$type": "add_box_container",
+        "id": 6339254,
+        "container_id": 11880557,
+        "position": {
+            "x": 0,
+            "y": 0.15855943,
+            "z": 0
+        },
+        "tag": "inside",
+        "half_extents": {
+            "x": 0.21984615,
+            "y": 0.146440565,
+            "z": 0.21988902
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "pcylinder222",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/pcylinder222",
+        "scale_factor": 0.4782968,
+        "position": {
+            "x": 1.4346498842005955,
+            "y": 0.30500000000000027,
+            "z": 1.3441635516522847
+        },
+        "category": "fork",
+        "id": 432053,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 292.30600672714945,
+            "y": 196.48669596974645,
+            "z": 8.941587480883083
+        },
+        "id": 432053
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 432053,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.1070424073986942,
+        "id": 432053
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 432053
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0007_steak_knife",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vk0007_steak_knife",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.3051910499253394,
+            "y": 0.5550000000000003,
+            "z": 1.4486270721860197
+        },
+        "category": "knife",
+        "id": 16087721,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 253.44951782385323,
+            "y": 264.4123459948249,
+            "z": 18.323037277261932
+        },
+        "id": 16087721
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 16087721,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.1345414983916271,
+        "id": 16087721
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 16087721
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": -1.50908308856833,
+        "id": 6339254,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "basket_18inx18inx12iin_plastic_lattice",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2019.2/basket_18inx18inx12iin_plastic_lattice",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.3672485387980302,
+            "y": 0,
+            "z": 1.98253199673462
+        },
+        "category": "basket",
+        "id": 864079,
+        "affordance_points": [
+            {
+                "x": -0.2285,
+                "y": 0.305,
+                "z": 0.0
+            },
+            {
+                "x": 0.2285,
+                "y": 0.305,
+                "z": 0.0
+            },
+            {
+                "x": 0,
+                "y": 0.305,
+                "z": 0.2285
+            },
+            {
+                "x": 0,
+                "y": 0.305,
+                "z": -0.2285
+            }
+        ]
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 864079,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.0,
+        "id": 864079
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.45,
+        "static_friction": 0.48,
+        "bounciness": 0.5,
+        "id": 864079
+    },
+    {
+        "$type": "add_box_container",
+        "id": 864079,
+        "container_id": 11347926,
+        "position": {
+            "x": 0,
+            "y": 0.15855929,
+            "z": 0
+        },
+        "tag": "inside",
+        "half_extents": {
+            "x": 0.219846255,
+            "y": 0.14644071,
+            "z": 0.219889125
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0055_tableknife",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vk0055_tableknife",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.270557785449163,
+            "y": 0.30500000000000027,
+            "z": 2.038273765461242
+        },
+        "category": "knife",
+        "id": 3527414,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 144.4316511902492,
+            "y": 270.7943211524898,
+            "z": 63.37640569000631
+        },
+        "id": 3527414
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3527414,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.12651837164412427,
+        "id": 3527414
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 3527414
+    },
+    {
+        "$type": "add_object",
+        "name": "b06_circle",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b06_circle",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.3025172178484463,
+            "y": 0.5550000000000003,
+            "z": 1.9110842343869439
+        },
+        "category": "coin",
+        "id": 15347373,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 33.31106816734765,
+            "y": 170.1788510469219,
+            "z": 78.8463289038726
+        },
+        "id": 15347373
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 15347373,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.003983201271751113,
+        "id": 15347373
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.35,
+        "id": 15347373
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": -0.2872468706082998,
+        "id": 864079,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "mater_high_stool_al_69",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/mater_high_stool_al_69",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.388001821420288,
+            "y": 0,
+            "z": 2.5968402967346202
+        },
+        "category": "stool",
+        "id": 13621090,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13621090,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 32.41243660449982,
+        "id": 13621090
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.2,
+        "id": 13621090
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 13621090,
+        "container_id": 5606380,
+        "position": {
+            "x": -0.00067162,
+            "y": 0.65032465,
+            "z": 0.00021665
+        },
+        "tag": "on",
+        "radius": 0.212488135,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 165.07735593264698,
+        "id": 13621090,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "kids_luggage_2",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/kids_luggage_2",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.4605612994202881,
+            "y": 0,
+            "z": 3.1176914467346206
+        },
+        "category": "suitcase",
+        "id": 13373756,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13373756,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 25.910565704107285,
+        "id": 13373756
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.67,
+        "bounciness": 0.375,
+        "id": 13373756
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 13373756,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_two_door_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_24_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.3333625880950928,
+            "y": 0,
+            "z": 3.1402094421569826
+        },
+        "category": "cabinet",
+        "id": 5691576,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5691576,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 5691576,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 71.20617,
+        "id": 5691576
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 5691576
+    },
+    {
+        "$type": "add_box_container",
+        "id": 5691576,
+        "container_id": 739951,
+        "position": {
+            "x": 0.00039721,
+            "y": 0.92740173,
+            "z": 0.00150564
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.306132585,
+            "y": 0.005,
+            "z": 0.319348125
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 5691576,
+        "container_id": 9275790,
+        "position": {
+            "x": 0.00082399,
+            "y": 0.28498729,
+            "z": -0.01887377
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.293332145,
+            "y": 0.18441785,
+            "z": 0.28164695
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "apple",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/apple",
+        "scale_factor": 0.08862933,
+        "position": {
+            "x": -1.4781544530899016,
+            "y": 0.92240173,
+            "z": 3.0361860755455568
+        },
+        "category": "apple",
+        "id": 8295228,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 99.12891767036562,
+            "z": 0
+        },
+        "id": 8295228
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 8295228,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.30235627386719,
+        "id": 8295228
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.561,
+        "id": 8295228
+    },
+    {
+        "$type": "add_object",
+        "name": "vray_043",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vray_043",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4579415970198486,
+            "y": 0.10056944000000001,
+            "z": 3.0440624585607194
+        },
+        "category": "teakettle",
+        "id": 12497044,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 42.043353960569746,
+            "z": 0
+        },
+        "id": 12497044
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12497044,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.6,
+        "id": 12497044
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 12497044
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 8295228,
+        "parent_id": 5691576
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 12497044,
+        "parent_id": 5691576
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 5691576,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 8295228
+    },
+    {
+        "$type": "unparent_object",
+        "id": 12497044
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_wall_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_24_wall_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4570505880950928,
+            "y": 1.289581,
+            "z": 3.1410176421569824
+        },
+        "category": "cabinet",
+        "id": 12479497,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12479497,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 12479497,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 21.341894,
+        "id": 12479497
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 12479497
+    },
+    {
+        "$type": "add_box_container",
+        "id": 12479497,
+        "container_id": 3386818,
+        "position": {
+            "x": -0.00221835,
+            "y": 0.77717001,
+            "z": 0.01261972
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30464034,
+            "y": 0.005,
+            "z": 0.18041368
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 12479497,
+        "container_id": 14094597,
+        "position": {
+            "x": -0.00056393,
+            "y": 0.3822588,
+            "z": 0.01207337
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.29507263,
+            "y": 0.369993895,
+            "z": 0.16248736
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "glass3",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/glass3",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.6135908235768985,
+            "y": 1.301845905,
+            "z": 3.103393085271051
+        },
+        "category": "wineglass",
+        "id": 7761560,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 134.71924964669068,
+            "z": 0
+        },
+        "id": 7761560
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7761560,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.0,
+        "id": 7761560
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.6,
+        "id": 7761560
+    },
+    {
+        "$type": "add_object",
+        "name": "glass3",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/glass3",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4533596500485686,
+            "y": 1.301845905,
+            "z": 3.1427388832082217
+        },
+        "category": "wineglass",
+        "id": 11028873,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 19.982953480125943,
+            "z": 0
+        },
+        "id": 11028873
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11028873,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.0,
+        "id": 11028873
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.6,
+        "id": 11028873
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7761560,
+        "parent_id": 12479497
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 11028873,
+        "parent_id": 12479497
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7761560,
+        "parent_id": 12479497
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 11028873,
+        "parent_id": 12479497
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 12479497,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7761560
+    },
+    {
+        "$type": "unparent_object",
+        "id": 11028873
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7761560
+    },
+    {
+        "$type": "unparent_object",
+        "id": 11028873
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_two_door_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_24_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.3333625880950928,
+            "y": 0,
+            "z": 2.528592842156982
+        },
+        "category": "cabinet",
+        "id": 15491231,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 15491231,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 15491231,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 71.20617,
+        "id": 15491231
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 15491231
+    },
+    {
+        "$type": "add_box_container",
+        "id": 15491231,
+        "container_id": 7345382,
+        "position": {
+            "x": 0.00039721,
+            "y": 0.92740173,
+            "z": 0.00150564
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.306132585,
+            "y": 0.005,
+            "z": 0.319348125
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 15491231,
+        "container_id": 12957429,
+        "position": {
+            "x": 0.00082399,
+            "y": 0.28498729,
+            "z": -0.01887377
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.293332145,
+            "y": 0.18441785,
+            "z": 0.28164695
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "spatula2",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/spatula2",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4776897312603883,
+            "y": 0.92240173,
+            "z": 2.424766011517039
+        },
+        "category": "kitchen utensil",
+        "id": 12804808,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 254.63230370993685,
+            "z": 0
+        },
+        "id": 12804808
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12804808,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.13,
+        "id": 12804808
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.3,
+        "static_friction": 0.35,
+        "bounciness": 0.7,
+        "id": 12804808
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_whiskeybottle",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_whiskeybottle",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.457550688695078,
+            "y": 0.10056944000000001,
+            "z": 2.3923731394779706
+        },
+        "category": "bottle",
+        "id": 1814397,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 15.62974369342983,
+            "z": 0
+        },
+        "id": 1814397
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1814397,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.25,
+        "id": 1814397
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 1814397
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 12804808,
+        "parent_id": 15491231
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1814397,
+        "parent_id": 15491231
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 15491231,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 12804808
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1814397
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_wall_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_24_wall_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4570505880950928,
+            "y": 1.289581,
+            "z": 2.5294010421569824
+        },
+        "category": "cabinet",
+        "id": 959576,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 959576,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 959576,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 21.341894,
+        "id": 959576
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 959576
+    },
+    {
+        "$type": "add_box_container",
+        "id": 959576,
+        "container_id": 11376850,
+        "position": {
+            "x": -0.00221835,
+            "y": 0.77717001,
+            "z": 0.01261972
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30464034,
+            "y": 0.005,
+            "z": 0.18041368
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 959576,
+        "container_id": 16264988,
+        "position": {
+            "x": -0.00056393,
+            "y": 0.3822588,
+            "z": 0.01207337
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.29507263,
+            "y": 0.369993895,
+            "z": 0.16248736
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.301845905,
+            "z": 2.5414744121569823
+        },
+        "category": "plate",
+        "id": 10562300,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 10562300,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 10562300
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 10562300
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 10562300,
+        "container_id": 15245392,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.321704115,
+            "z": 2.5414744121569823
+        },
+        "category": "plate",
+        "id": 12475724,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12475724,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 12475724
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 12475724
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 12475724,
+        "container_id": 13435024,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.341562325,
+            "z": 2.5414744121569823
+        },
+        "category": "plate",
+        "id": 7974092,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7974092,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 7974092
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 7974092
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 7974092,
+        "container_id": 7010857,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.361420535,
+            "z": 2.5414744121569823
+        },
+        "category": "plate",
+        "id": 5277562,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5277562,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 5277562
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 5277562
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 5277562,
+        "container_id": 7359421,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.381278745,
+            "z": 2.5414744121569823
+        },
+        "category": "plate",
+        "id": 3359490,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3359490,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 3359490
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 3359490
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 3359490,
+        "container_id": 8950991,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 10562300,
+        "parent_id": 959576
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 12475724,
+        "parent_id": 959576
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7974092,
+        "parent_id": 959576
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 5277562,
+        "parent_id": 959576
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3359490,
+        "parent_id": 959576
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 959576,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 10562300
+    },
+    {
+        "$type": "unparent_object",
+        "id": 12475724
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7974092
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5277562
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3359490
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_two_door_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_24_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.3333625880950928,
+            "y": 0,
+            "z": 1.9169762421569823
+        },
+        "category": "cabinet",
+        "id": 16378744,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 16378744,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 16378744,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 71.20617,
+        "id": 16378744
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 16378744
+    },
+    {
+        "$type": "add_box_container",
+        "id": 16378744,
+        "container_id": 6679248,
+        "position": {
+            "x": 0.00039721,
+            "y": 0.92740173,
+            "z": 0.00150564
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.306132585,
+            "y": 0.005,
+            "z": 0.319348125
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 16378744,
+        "container_id": 8929305,
+        "position": {
+            "x": 0.00082399,
+            "y": 0.28498729,
+            "z": -0.01887377
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.293332145,
+            "y": 0.18441785,
+            "z": 0.28164695
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "bung",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.2/bung",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4779564016039293,
+            "y": 0.92240173,
+            "z": 1.7633195378373518
+        },
+        "category": "bottle cork",
+        "id": 11238654,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 320.41980770331605,
+            "z": 0
+        },
+        "id": 11238654
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11238654,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.1,
+        "id": 11238654
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.45,
+        "static_friction": 0.48,
+        "bounciness": 0.45,
+        "id": 11238654
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_coffee_grinder",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b05_coffee_grinder",
+        "scale_factor": 0.254,
+        "position": {
+            "x": -1.4580718383207028,
+            "y": 0.10056944000000001,
+            "z": 1.781134147498298
+        },
+        "category": "coffee grinder",
+        "id": 5153128,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 189.72650194413535,
+            "z": 0
+        },
+        "id": 5153128
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5153128,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 7.8230846440419555,
+        "id": 5153128
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.3,
+        "static_friction": 0.35,
+        "bounciness": 0.2,
+        "id": 5153128
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 11238654,
+        "parent_id": 16378744
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 5153128,
+        "parent_id": 16378744
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 16378744,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 11238654
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5153128
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_wall_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_24_wall_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4570505880950928,
+            "y": 1.289581,
+            "z": 1.9177844421569823
+        },
+        "category": "cabinet",
+        "id": 4475842,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 4475842,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 4475842,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 21.341894,
+        "id": 4475842
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 4475842
+    },
+    {
+        "$type": "add_box_container",
+        "id": 4475842,
+        "container_id": 15291719,
+        "position": {
+            "x": -0.00221835,
+            "y": 0.77717001,
+            "z": 0.01261972
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30464034,
+            "y": 0.005,
+            "z": 0.18041368
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 4475842,
+        "container_id": 2208167,
+        "position": {
+            "x": -0.00056393,
+            "y": 0.3822588,
+            "z": 0.01207337
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.29507263,
+            "y": 0.369993895,
+            "z": 0.16248736
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.301845905,
+            "z": 1.9298578121569823
+        },
+        "category": "plate",
+        "id": 1021152,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1021152,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 1021152
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 1021152
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 1021152,
+        "container_id": 7396552,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.321704115,
+            "z": 1.9298578121569823
+        },
+        "category": "plate",
+        "id": 3420661,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3420661,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 3420661
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 3420661
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 3420661,
+        "container_id": 2529453,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.341562325,
+            "z": 1.9298578121569823
+        },
+        "category": "plate",
+        "id": 3386139,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3386139,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 3386139
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 3386139
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 3386139,
+        "container_id": 13935553,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.361420535,
+            "z": 1.9298578121569823
+        },
+        "category": "plate",
+        "id": 89240,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 89240,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 89240
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 89240
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 89240,
+        "container_id": 9912952,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.381278745,
+            "z": 1.9298578121569823
+        },
+        "category": "plate",
+        "id": 1142216,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1142216,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 1142216
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 1142216
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 1142216,
+        "container_id": 10327128,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate05",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.401136955,
+            "z": 1.9298578121569823
+        },
+        "category": "plate",
+        "id": 6527571,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6527571,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 6527571
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 6527571
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 6527571,
+        "container_id": 11845531,
+        "position": {
+            "x": -0.00010856,
+            "y": 0.01008297,
+            "z": -0.00019886
+        },
+        "tag": "on",
+        "radius": 0.054492785,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1021152,
+        "parent_id": 4475842
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3420661,
+        "parent_id": 4475842
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3386139,
+        "parent_id": 4475842
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 89240,
+        "parent_id": 4475842
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1142216,
+        "parent_id": 4475842
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 6527571,
+        "parent_id": 4475842
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 4475842,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1021152
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3420661
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3386139
+    },
+    {
+        "$type": "unparent_object",
+        "id": 89240
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1142216
+    },
+    {
+        "$type": "unparent_object",
+        "id": 6527571
+    },
+    {
+        "$type": "add_object",
+        "name": "gas_stove_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/gas_stove_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.2417812380950928,
+            "y": 0,
+            "z": 1.1111678421569824
+        },
+        "category": "gas cooker",
+        "id": 11608554,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11608554,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 11608554,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2404.3891949999997,
+        "id": 11608554
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.35,
+        "id": 11608554
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11608554,
+        "container_id": 3879104,
+        "position": {
+            "x": 0.01628575,
+            "y": 0.88177783,
+            "z": -0.00160444
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.255564215,
+            "y": 0.005,
+            "z": 0.455263705
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11608554,
+        "container_id": 11634671,
+        "position": {
+            "x": -0.05594292,
+            "y": 0.43482107,
+            "z": -0.25080969
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.19875888,
+            "y": 0.2417472,
+            "z": 0.231619545
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11608554,
+        "container_id": 13250435,
+        "position": {
+            "x": -0.05530391,
+            "y": 0.43482107,
+            "z": 0.24662629
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.199400565,
+            "y": 0.2417472,
+            "z": 0.23386109
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "pot_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/pot_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.3299166637256368,
+            "y": 0.87677783,
+            "z": 0.8454986469978045
+        },
+        "category": "pot",
+        "id": 8828061,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 288.80843143585685,
+            "z": 0
+        },
+        "id": 8828061
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 8828061,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 25.7195185,
+        "id": 8828061
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 8828061
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 8828061,
+        "container_id": 9905386,
+        "position": {
+            "x": 0,
+            "y": 0.0960656,
+            "z": 0
+        },
+        "tag": "inside",
+        "radius": 0.11656705,
+        "height": 0.18211107,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "pan04",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/pan04",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.3298123375153947,
+            "y": 0.87677783,
+            "z": 1.2958032165692883
+        },
+        "category": "pan",
+        "id": 14592831,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 143.68601037743235,
+            "z": 0
+        },
+        "id": 14592831
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 14592831,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 32.72544853389263,
+        "id": 14592831
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.619,
+        "id": 14592831
+    },
+    {
+        "$type": "add_object",
+        "name": "b03_696615_object001",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b03_696615_object001",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.2714149757595863,
+            "y": 0.19307386999999998,
+            "z": 0.8422460225559002
+        },
+        "category": "pan",
+        "id": 10066248,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 102.47188657202892,
+            "z": 0
+        },
+        "id": 10066248
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 10066248,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 7.7296004456002265,
+        "id": 10066248
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.619,
+        "id": 10066248
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 10066248,
+        "container_id": 895060,
+        "position": {
+            "x": -4.357e-05,
+            "y": 0.04131872,
+            "z": -0.00067601
+        },
+        "tag": "inside",
+        "radius": 0.115856825,
+        "height": 0.07749642,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b03_696615_object001",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b03_696615_object001",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.2665520952250857,
+            "y": 0.19307386999999998,
+            "z": 1.3636746627964513
+        },
+        "category": "pan",
+        "id": 15144900,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 223.75562795310742,
+            "z": 0
+        },
+        "id": 15144900
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 15144900,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 7.7296004456002265,
+        "id": 15144900
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.619,
+        "id": 15144900
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 15144900,
+        "container_id": 4728981,
+        "position": {
+            "x": -4.357e-05,
+            "y": 0.04131872,
+            "z": -0.00067601
+        },
+        "tag": "inside",
+        "radius": 0.115856825,
+        "height": 0.07749642,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 8828061,
+        "parent_id": 11608554
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 14592831,
+        "parent_id": 11608554
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 10066248,
+        "parent_id": 11608554
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 15144900,
+        "parent_id": 11608554
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 180,
+        "id": 11608554,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 8828061
+    },
+    {
+        "$type": "unparent_object",
+        "id": 14592831
+    },
+    {
+        "$type": "unparent_object",
+        "id": 10066248
+    },
+    {
+        "$type": "unparent_object",
+        "id": 15144900
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_two_door_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_24_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.3333625880950928,
+            "y": 0,
+            "z": 0.3053594421569823
+        },
+        "category": "cabinet",
+        "id": 10255725,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 10255725,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 10255725,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 71.20617,
+        "id": 10255725
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 10255725
+    },
+    {
+        "$type": "add_box_container",
+        "id": 10255725,
+        "container_id": 13238062,
+        "position": {
+            "x": 0.00039721,
+            "y": 0.92740173,
+            "z": 0.00150564
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.306132585,
+            "y": 0.005,
+            "z": 0.319348125
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 10255725,
+        "container_id": 10217748,
+        "position": {
+            "x": 0.00082399,
+            "y": 0.28498729,
+            "z": -0.01887377
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.293332145,
+            "y": 0.18441785,
+            "z": 0.28164695
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b03_morphy_2013__vray",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b03_morphy_2013__vray",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4778550714350738,
+            "y": 0.92240173,
+            "z": 0.1510089589734991
+        },
+        "category": "teakettle",
+        "id": 13770970,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 114.45312056019492,
+            "z": 0
+        },
+        "id": 13770970
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13770970,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.6,
+        "id": 13770970
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 13770970
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 13770970,
+        "parent_id": 10255725
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 10255725,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 13770970
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_wall_wood_beech_honey_composite",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.3/cabinet_24_wall_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4570505880950928,
+            "y": 1.289581,
+            "z": 0.3061676421569821
+        },
+        "category": "cabinet",
+        "id": 12037009,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12037009,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 12037009,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 21.341894,
+        "id": 12037009
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 12037009
+    },
+    {
+        "$type": "add_box_container",
+        "id": 12037009,
+        "container_id": 5018651,
+        "position": {
+            "x": -0.00221835,
+            "y": 0.77717001,
+            "z": 0.01261972
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30464034,
+            "y": 0.005,
+            "z": 0.18041368
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 12037009,
+        "container_id": 8962246,
+        "position": {
+            "x": -0.00056393,
+            "y": 0.3822588,
+            "z": 0.01207337
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.29507263,
+            "y": 0.369993895,
+            "z": 0.16248736
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate06",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate06",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.301845905,
+            "z": 0.3182410121569821
+        },
+        "category": "plate",
+        "id": 4816551,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 4816551,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.801538816653192,
+        "id": 4816551
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 4816551
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 4816551,
+        "container_id": 15785950,
+        "position": {
+            "x": 2.733e-05,
+            "y": 0.01210938,
+            "z": 3.13e-06
+        },
+        "tag": "on",
+        "radius": 0.08634067,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate06",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate06",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.324494735,
+            "z": 0.3182410121569821
+        },
+        "category": "plate",
+        "id": 5829210,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5829210,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.801538816653192,
+        "id": 5829210
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 5829210
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 5829210,
+        "container_id": 1740101,
+        "position": {
+            "x": 2.733e-05,
+            "y": 0.01210938,
+            "z": 3.13e-06
+        },
+        "tag": "on",
+        "radius": 0.08634067,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate06",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate06",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.347143565,
+            "z": 0.3182410121569821
+        },
+        "category": "plate",
+        "id": 2398954,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 2398954,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.801538816653192,
+        "id": 2398954
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 2398954
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 2398954,
+        "container_id": 13468881,
+        "position": {
+            "x": 2.733e-05,
+            "y": 0.01210938,
+            "z": 3.13e-06
+        },
+        "tag": "on",
+        "radius": 0.08634067,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate06",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate06",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.3697923950000002,
+            "z": 0.3182410121569821
+        },
+        "category": "plate",
+        "id": 4378475,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 4378475,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.801538816653192,
+        "id": 4378475
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 4378475
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 4378475,
+        "container_id": 6886587,
+        "position": {
+            "x": 2.733e-05,
+            "y": 0.01210938,
+            "z": 3.13e-06
+        },
+        "tag": "on",
+        "radius": 0.08634067,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 4816551,
+        "parent_id": 12037009
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 5829210,
+        "parent_id": 12037009
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 2398954,
+        "parent_id": 12037009
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 4378475,
+        "parent_id": 12037009
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 12037009,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 4816551
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5829210
+    },
+    {
+        "$type": "unparent_object",
+        "id": 2398954
+    },
+    {
+        "$type": "unparent_object",
+        "id": 4378475
+    },
+    {
+        "$type": "add_object",
+        "name": "mater_high_stool_al_69",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/mater_high_stool_al_69",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.3929895380950927,
+            "y": 0,
+            "z": -0.336257157843018
+        },
+        "category": "stool",
+        "id": 4796905,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 4796905,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 32.41243660449982,
+        "id": 4796905
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.2,
+        "id": 4796905
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 4796905,
+        "container_id": 15742909,
+        "position": {
+            "x": -0.00067162,
+            "y": 0.65032465,
+            "z": 0.00021665
+        },
+        "tag": "on",
+        "radius": 0.212488135,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 241.45629050629316,
+        "id": 4796905,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "its_about_time_painting",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2019.2/its_about_time_painting",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.575824488095093,
+            "y": 1.2120108781810786,
+            "z": -1.4903739578430173
+        },
+        "category": "painting",
+        "id": 6611370,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6611370,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 6611370,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.5,
+        "id": 6611370
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.6,
+        "id": 6611370
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 6611370,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_backpack",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_backpack",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4197183880950928,
+            "y": 0,
+            "z": -2.513713857843018
+        },
+        "category": "backpack",
+        "id": 7940932,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7940932,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.0,
+        "id": 7940932
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.4,
+        "static_friction": 0.43,
+        "bounciness": 0.5,
+        "id": 7940932
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 7940932,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_backpack",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_backpack",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4197183880950928,
+            "y": 0,
+            "z": -2.9237766578430184
+        },
+        "category": "backpack",
+        "id": 6471568,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6471568,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.0,
+        "id": 6471568
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.4,
+        "static_friction": 0.43,
+        "bounciness": 0.5,
+        "id": 6471568
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 6471568,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "b03_restoration_hardware_pedestal_salvaged_round_tables",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b03_restoration_hardware_pedestal_salvaged_round_tables",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.017754852965381415,
+            "y": 0,
+            "z": -0.08180920056202888
+        },
+        "category": "dining table",
+        "id": 14418990,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 14418990,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 14418990,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 52.97445058822632,
+        "id": 14418990
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.58,
+        "id": 14418990
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 14418990,
+        "container_id": 4820857,
+        "position": {
+            "x": -0.00088453,
+            "y": 0.76810182,
+            "z": -0.00041577
+        },
+        "tag": "on",
+        "radius": 0.60775113,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "yellow_side_chair",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/yellow_side_chair",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.01775459025930388,
+            "y": 0.0,
+            "z": 0.814377881629543
+        },
+        "category": "chair",
+        "id": 11934757,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11934757,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 20.0,
+        "id": 11934757
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.6,
+        "id": 11934757
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11934757,
+        "container_id": 6646569,
+        "position": {
+            "x": 0.00154154,
+            "y": 0.39893967,
+            "z": 0.04486781
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.198444975,
+            "y": 0.005,
+            "z": 0.265286685
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "object_look_at_position",
+        "position": {
+            "x": -0.017754852965381415,
+            "y": 0,
+            "z": -0.08180920056202888
+        },
+        "id": 11934757
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": -6.94560255818897,
+        "id": 11934757,
+        "axis": "yaw"
+    },
+    {
+        "$type": "add_object",
+        "name": "yellow_side_chair",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/yellow_side_chair",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.01775458878117723,
+            "y": 0.0,
+            "z": -0.98303871658442
+        },
+        "category": "chair",
+        "id": 3580842,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3580842,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 20.0,
+        "id": 3580842
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.6,
+        "id": 3580842
+    },
+    {
+        "$type": "add_box_container",
+        "id": 3580842,
+        "container_id": 2828341,
+        "position": {
+            "x": 0.00154154,
+            "y": 0.39893967,
+            "z": 0.04486781
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.198444975,
+            "y": 0.005,
+            "z": 0.265286685
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "object_look_at_position",
+        "position": {
+            "x": -0.017754852965381415,
+            "y": 0,
+            "z": -0.08180920056202888
+        },
+        "id": 3580842
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": -8.405802720945372,
+        "id": 3580842,
+        "axis": "yaw"
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 11934757,
+        "parent_id": 14418990
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3580842,
+        "parent_id": 14418990
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 0.28332774031780916,
+        "id": 14418990,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 11934757
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3580842
+    },
+    {
+        "$type": "add_object",
+        "name": "plate06",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate06",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.020346890426615874,
+            "y": 0.7616107,
+            "z": 0.261296953667693
+        },
+        "category": "plate",
+        "id": 3376884,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3376884,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 3376884,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.801538816653192,
+        "id": 3376884
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 3376884
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 3376884,
+        "container_id": 5670969,
+        "position": {
+            "x": 2.733e-05,
+            "y": 0.01210938,
+            "z": 3.13e-06
+        },
+        "tag": "on",
+        "radius": 0.08634067,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_snickers",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b05_snickers",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.020346890426615874,
+            "y": 0.7842595299999999,
+            "z": 0.261296953667693
+        },
+        "category": "chocolate candy",
+        "id": 11041148,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 225.93885079233462,
+            "z": 0
+        },
+        "id": 11041148
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11041148,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.046225299547586474,
+        "id": 11041148
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 11041148
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0056_tablefork",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vk0056_tablefork",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.1722361404266159,
+            "y": 0.7616107,
+            "z": 0.29129695366769304
+        },
+        "category": "fork",
+        "id": 8534612,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 2.665573050845511,
+            "z": 0
+        },
+        "id": 8534612
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 8534612,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.2,
+        "id": 8534612
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 8534612
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0007_steak_knife",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vk0007_steak_knife",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.13154235957338412,
+            "y": 0.7616107,
+            "z": 0.29129695366769304
+        },
+        "category": "knife",
+        "id": 5207488,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": -0.9764131585974853,
+            "z": 0
+        },
+        "id": 5207488
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5207488,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.1345414983916271,
+        "id": 5207488
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 5207488
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0060_dessertspoon",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vk0060_dessertspoon",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.16154235957338411,
+            "y": 0.7616107,
+            "z": 0.29129695366769304
+        },
+        "category": "spoon",
+        "id": 5233728,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": -0.8568572621887105,
+            "z": 0
+        },
+        "id": 5233728
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5233728,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.2,
+        "id": 5233728
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 5233728
+    },
+    {
+        "$type": "add_object",
+        "name": "square_coaster_001_marble",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.2/square_coaster_001_marble",
+        "scale_factor": 1,
+        "position": {
+            "x": 0.27751943597868756,
+            "y": 0.7616107,
+            "z": 0.40222994006169366
+        },
+        "category": "coaster",
+        "id": 9901731,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 8.0,
+            "z": 0
+        },
+        "id": 9901731
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 9901731,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.4,
+        "id": 9901731
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.7,
+        "static_friction": 0.72,
+        "bounciness": 0.5,
+        "id": 9901731
+    },
+    {
+        "$type": "add_object",
+        "name": "glass2",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/glass2",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.27751943597868756,
+            "y": 0.7761106999999999,
+            "z": 0.40222994006169366
+        },
+        "category": "wineglass",
+        "id": 7742259,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 188.38827957915922,
+            "z": 0
+        },
+        "id": 7742259
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7742259,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.5,
+        "id": 7742259
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.6,
+        "id": 7742259
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 3376884,
+        "id": 11041148
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 3376884,
+        "id": 8534612
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 3376884,
+        "id": 5207488
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 3376884,
+        "id": 5233728
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 3376884,
+        "id": 9901731
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 3376884,
+        "id": 7742259
+    },
+    {
+        "$type": "object_look_at_position",
+        "position": {
+            "x": -0.017754852965381415,
+            "y": 0.7616107,
+            "z": -0.08180920056202888
+        },
+        "id": 3376884
+    },
+    {
+        "$type": "unparent_object",
+        "id": 11041148
+    },
+    {
+        "$type": "unparent_object",
+        "id": 8534612
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5207488
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5233728
+    },
+    {
+        "$type": "unparent_object",
+        "id": 9901731
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7742259
+    },
+    {
+        "$type": "add_object",
+        "name": "plate06",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/plate06",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.050661830489712095,
+            "y": 0.7616107,
+            "z": -0.5457799172169644
+        },
+        "category": "plate",
+        "id": 6069734,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6069734,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 6069734,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.801538816653192,
+        "id": 6069734
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 6069734
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 6069734,
+        "container_id": 16281973,
+        "position": {
+            "x": 2.733e-05,
+            "y": 0.01210938,
+            "z": 3.13e-06
+        },
+        "tag": "on",
+        "radius": 0.08634067,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "apple",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/apple",
+        "scale_factor": 0.08862933,
+        "position": {
+            "x": -0.050661830489712095,
+            "y": 0.7842595299999999,
+            "z": -0.5457799172169644
+        },
+        "category": "apple",
+        "id": 12571654,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 55.060088334734445,
+            "z": 0
+        },
+        "id": 12571654
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12571654,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.30235627386719,
+        "id": 12571654
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.561,
+        "id": 12571654
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0056_tablefork",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vk0056_tablefork",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.2025510804897121,
+            "y": 0.7616107,
+            "z": -0.5157799172169644
+        },
+        "category": "fork",
+        "id": 16741948,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": -0.9502704953865075,
+            "z": 0
+        },
+        "id": 16741948
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 16741948,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.2,
+        "id": 16741948
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 16741948
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0055_tableknife",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vk0055_tableknife",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.10122741951028791,
+            "y": 0.7616107,
+            "z": -0.5157799172169644
+        },
+        "category": "knife",
+        "id": 10380727,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": -1.5284963761266102,
+            "z": 0
+        },
+        "id": 10380727
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 10380727,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.12651837164412427,
+        "id": 10380727
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 10380727
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0002_teaspoon",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vk0002_teaspoon",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.1312274195102879,
+            "y": 0.7616107,
+            "z": -0.5157799172169644
+        },
+        "category": "spoon",
+        "id": 10439833,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": -1.903587645805522,
+            "z": 0
+        },
+        "id": 10439833
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 10439833,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.09108401914090791,
+        "id": 10439833
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 10439833
+    },
+    {
+        "$type": "add_object",
+        "name": "square_coaster_001_wood",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.2/square_coaster_001_wood",
+        "scale_factor": 1,
+        "position": {
+            "x": 0.24209340348326608,
+            "y": 0.7616107,
+            "z": -0.42121939062453717
+        },
+        "category": "coaster",
+        "id": 5626666,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 11.0,
+            "z": 0
+        },
+        "id": 5626666
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5626666,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.3,
+        "id": 5626666
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.5,
+        "id": 5626666
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_wineglass",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_wineglass",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.24209340348326608,
+            "y": 0.7761106999999999,
+            "z": -0.42121939062453717
+        },
+        "category": "wineglass",
+        "id": 1917230,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 317.061628412346,
+            "z": 0
+        },
+        "id": 1917230
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1917230,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.5587749910773709,
+        "id": 1917230
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.6,
+        "id": 1917230
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 6069734,
+        "id": 12571654
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 6069734,
+        "id": 16741948
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 6069734,
+        "id": 10380727
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 6069734,
+        "id": 10439833
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 6069734,
+        "id": 5626666
+    },
+    {
+        "$type": "parent_object_to_object",
+        "parent_id": 6069734,
+        "id": 1917230
+    },
+    {
+        "$type": "object_look_at_position",
+        "position": {
+            "x": -0.017754852965381415,
+            "y": 0.7616107,
+            "z": -0.08180920056202888
+        },
+        "id": 6069734
+    },
+    {
+        "$type": "unparent_object",
+        "id": 12571654
+    },
+    {
+        "$type": "unparent_object",
+        "id": 16741948
+    },
+    {
+        "$type": "unparent_object",
+        "id": 10380727
+    },
+    {
+        "$type": "unparent_object",
+        "id": 10439833
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5626666
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1917230
+    },
+    {
+        "$type": "add_object",
+        "name": "vase_06",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/vase_06",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.0969642168873009,
+            "y": 0.7616107,
+            "z": -0.17300564632593568
+        },
+        "category": "vase",
+        "id": 6162158,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 257.9005585222497,
+            "z": 0
+        },
+        "id": 6162158
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6162158,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.2,
+        "id": 6162158
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 6162158
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 6162158,
+        "container_id": 9041641,
+        "position": {
+            "x": -0.00079384,
+            "y": 0.09686271,
+            "z": 7.012e-05
+        },
+        "tag": "inside",
+        "radius": 0.057613285,
+        "height": 0.18904834,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "kids_luggage_1",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/kids_luggage_1",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.23136432142028807,
+            "y": 0,
+            "z": -3.2911437432653807
+        },
+        "category": "suitcase",
+        "id": 12600812,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12600812,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.0,
+        "id": 12600812
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.67,
+        "bounciness": 0.5,
+        "id": 12600812
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 0,
+        "id": 12600812,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "fredericia_spine_stool_1",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/fredericia_spine_stool_1",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.2878534285797121,
+            "y": 0,
+            "z": -3.194681978265381
+        },
+        "category": "stool",
+        "id": 15134858,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 15134858,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 37.82017156481743,
+        "id": 15134858
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.2,
+        "id": 15134858
+    },
+    {
+        "$type": "add_box_container",
+        "id": 15134858,
+        "container_id": 2097753,
+        "position": {
+            "x": 0.00107983,
+            "y": 0.74863577,
+            "z": 0.00142804
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.158105505,
+            "y": 0.005,
+            "z": 0.12370676
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 118.07379887722388,
+        "id": 15134858,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "step_physics",
+        "frames": 50
+    },
+    {
+        "$type": "send_occupancy_map",
+        "cell_size": 0.25,
+        "ignore_objects": [],
+        "raycast_y": 2.7,
+        "frequency": "always"
+    },
+    {
+        "$type": "send_segmentation_colors"
+    },
+    {
+        "$type": "send_categories"
+    },
+    {
+        "$type": "send_static_rigidbodies"
+    },
+    {
+        "$type": "send_rigidbodies",
+        "frequency": "always"
+    },
+    {
+        "$type": "send_bounds",
+        "frequency": "always"
+    },
+    {
+        "$type": "send_transforms",
+        "frequency": "always"
+    },
+    {
+        "$type": "add_object",
+        "name": "f10_apple_iphone_4",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/f10_apple_iphone_4",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.3001468623498619,
+            "y": 0.8929160833358765,
+            "z": 0.36240837731409425
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "category": "ipod",
+        "id": 2232366,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "tan_purse",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/tan_purse",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.5728609561920166,
+            "y": 0,
+            "z": -1.4536547660827637
+        },
+        "rotation": {
+            "x": 0,
+            "y": 280.4370266428075,
+            "z": 0
+        },
+        "category": "bag, handbag, pocketbook, purse",
+        "id": 10765897,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "tan_purse",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/tan_purse",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.9271390438079834,
+            "y": 0,
+            "z": 0.5463452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 331.5674159382701,
+            "z": 0
+        },
+        "category": "bag, handbag, pocketbook, purse",
+        "id": 14584190,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "key_brass",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2020.2/key_brass",
+        "scale_factor": 1,
+        "position": {
+            "x": -0.1771390438079834,
+            "y": 0,
+            "z": 0.7963452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 343.3786790003052,
+            "z": 0
+        },
+        "category": "key",
+        "id": 3401146,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "apple_ipod_touch_yellow_vray",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/apple_ipod_touch_yellow_vray",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.8228609561920166,
+            "y": 0,
+            "z": 0.7963452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 322.87043224644356,
+            "z": 0
+        },
+        "category": "ipod",
+        "id": 14094187,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "holy_bible",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/holy_bible",
+        "scale_factor": 0.254,
+        "position": {
+            "x": 1.3228609561920166,
+            "y": 0,
+            "z": 2.0463452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 3.1521756027656345,
+            "z": 0
+        },
+        "category": "book",
+        "id": 403809,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_lighter",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_lighter",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.9271390438079834,
+            "y": 0,
+            "z": 2.2963452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 263.3585840899537,
+            "z": 0
+        },
+        "category": "lighter",
+        "id": 8345793,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "holy_bible",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/holy_bible",
+        "scale_factor": 0.254,
+        "position": {
+            "x": -1.4271390438079834,
+            "y": 0,
+            "z": 2.7963452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 354.785718285641,
+            "z": 0
+        },
+        "category": "book",
+        "id": 12983192,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bowl_smooth",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_bowl_smooth",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4271390438079834,
+            "y": 0,
+            "z": 3.0463452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 259.9412185651509,
+            "z": 0
+        },
+        "category": "bowl",
+        "id": 10970617,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bowl_smooth",
+        "url": "https://tdw-public.s3.amazonaws.com/models/windows/2018-2019.1/b04_bowl_smooth",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.0728609561920166,
+            "y": 0,
+            "z": 3.2963452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 72.81215720006296,
+            "z": 0
+        },
+        "category": "bowl",
+        "id": 596702,
+        "affordance_points": []
+    },
+    {
+        "$type": "step_physics",
+        "frames": 100
+    },
+    {
+        "$type": "create_avatar",
+        "type": "A_Img_Caps_Kinematic",
+        "id": "a"
+    },
+    {
+        "$type": "set_pass_masks",
+        "pass_masks": [
+            "_img"
+        ],
+        "avatar_id": "a"
+    },
+    {
+        "$type": "set_render_order",
+        "render_order": 100,
+        "avatar_id": "a"
+    },
+    {
+        "$type": "teleport_avatar_to",
+        "position": {
+            "x": -1.5,
+            "y": 3,
+            "z": -1.5
+        },
+        "avatar_id": "a"
+    },
+    {
+        "$type": "look_at_position",
+        "position": {
+            "x": 2.5,
+            "y": 0,
+            "z": 2.5
+        },
+        "avatar_id": "a"
+    }
+]

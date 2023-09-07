@@ -1,4 +1,4 @@
-import random
+import rule_based
 
 
 class RecordAgent:

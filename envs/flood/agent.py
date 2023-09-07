@@ -1,7 +1,12 @@
-from typing import Union, List
+from typing import Optional, Union, List
 from tdw.add_ons.replicant import *
 from envs.flood.utils import *
 from tdw.quaternion_utils import QuaternionUtils
+from tdw.replicant.actions.action import Action, ActionStatus
+from tdw.replicant.actions.look_at import LookAt
+from tdw.replicant.actions.grasp import Grasp
+from tdw.replicant.image_frequency import ImageFrequency
+
 
 import numpy as np
 

@@ -5,8 +5,8 @@ from envs.flood.agent import *
 import numpy as np
 import os
 PATH = os.path.dirname(os.path.abspath(__file__))
-# go to parent directory until it contains envs folder
-while not os.path.exists(os.path.join(PATH, "envs")):
+# go to parent directory until the folder name is embodied-strategy
+while os.path.basename(PATH) != "embodied-strategy":
     PATH = os.path.dirname(PATH)
 
 from policy.env_actions import visualize_obs, agent_drop, agent_pickup, agent_walk_to, agent_explore, agent_walk_to_single_step
@@ -23,13 +23,13 @@ class ActionSpace(IntEnum):
 class FloodEnv(gym.Env):
     def __init__(self, port: int = 1071, check_version: bool = True, launch_build: bool = False,
                  use_local_resources: bool = False, seed = 0, screen_size = 512, 
-                 image_capture_path = None, log_path: str = None,
+                 image_capture_path = None, log_path: str = None, use_gt = False,
                  map_size_h = 128, map_size_v = 128, grid_size = 0.25):
         self.controller_args = dict(use_local_resources=use_local_resources, launch_build=launch_build,
-                                               port=port, check_version=check_version, screen_size=screen_size,
-                                               image_capture_path=image_capture_path, log_path=log_path, 
-                                               map_size_h=map_size_h,
-                                               map_size_v=map_size_v, grid_size=grid_size)
+                                    port=port, check_version=check_version, screen_size=screen_size,
+                                    image_capture_path=image_capture_path, log_path=log_path,
+                                    map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
+                                    use_gt=use_gt)
         self.controller = None
         self.RNG = np.random.RandomState(0)
 
@@ -60,7 +60,7 @@ class FloodEnv(gym.Env):
     def reset(self, data_dir=None):
         if data_dir == None:
             data_dirs = os.listdir(os.path.join(PATH, "data", "room_setup_fire"))
-            data_dirs = [d for d in data_dirs if "test" not in d]
+            data_dirs = [d for d in data_dirs if ("kitchen" in d or "craftroom" in d)]
             data_dir = os.path.join(PATH, "data", "room_setup_fire", data_dirs[self.RNG.randint(len(data_dirs))])
             # data_dir = os.path.join(PATH, "data", "room_setup", "1a-0-0")
         self.setup = SceneSetup(data_dir=data_dir, is_flood=True)
@@ -182,7 +182,7 @@ class FloodEnv(gym.Env):
         elif action == ActionSpace.PICK_UP_NEAREST:
             targets = [idx for idx in self.controller.target_ids if idx not in self.controller.finished]
             target = self.controller.find_nearest_object(agent_idx=0, objects=targets)
-            ret = "walk_to_single", self.controller.manager.get_renumbered_id(target)
+            ret = "pick_up", self.controller.manager.get_renumbered_id(target)
         elif action == ActionSpace.DROP:
             target = None
             ret = "drop", None

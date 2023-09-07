@@ -160,13 +160,13 @@ def get_args():
     parser.add_argument(
         '--map-size-h',
         type=int,
-        default=512,
-        help='map size horizontal (default: 512)')
+        default=256,
+        help='map size horizontal (default: 256)')
     parser.add_argument(
         '--map-size-v',
         type=int,
-        default=512,
-        help='map size vertical (default: 512)')
+        default=256,
+        help='map size vertical (default: 256)')
     parser.add_argument(
         '--grid-size',
         type=float,

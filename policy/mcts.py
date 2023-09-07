@@ -1,10 +1,14 @@
-import random
+import pdb
+
+import rule_based
 import numpy as np
 import copy
 from tqdm import tqdm
 
 class mcts_state:
-    def __init__(self, target_list: list = None, container_list: list = None, agent_pos: list = None, holding_objects: list = None, last_action: tuple = None, last_action_success: bool = True, task = None, last_cost = 10000):
+    def __init__(self, object_info, target_list: list = None, container_list: list = None, agent_pos: list = None,
+                 holding_objects: list = None, last_action: tuple = None, last_action_success: bool = True,
+                 task = None, last_cost = 10000, status_history = None):
         self.target_list = target_list
         self.container_list = container_list
         self.agent_pos = agent_pos
@@ -12,6 +16,7 @@ class mcts_state:
         self.last_action = last_action
         self.task = task
         self.c = 5e-2 if self.task in ['fire', 'flood'] else 5e-2
+        self.status_history = status_history
         if self.last_action is None: self.last_action = ('None', None)
         self.last_action_success = last_action_success
         self.is_expanded = False
@@ -20,6 +25,7 @@ class mcts_state:
         self.children = None
         self.children_cost = None
         self.last_cost = last_cost
+        self.objects_info = object_info
     def __str__(self):
         return f"target_list: {self.target_list}, container_list: {self.container_list}, agent_pos: {self.agent_pos}, holding_objects: {self.holding_objects}, last_action: {self.last_action}, last_action_success: {self.last_action_success}"
 
@@ -72,6 +78,34 @@ class mcts_state:
             for obj in self.target_list:
                 mcts_trans.append({'action': ("walk_to", obj['id']), 'cost': self.get_distance(self.agent_pos, obj['pos'])})
 
+        # consider value
+        for action in mcts_trans:
+            if action['action'][1] == None or action['cost'] == 0:
+                continue
+            value = 1
+            for object in self.target_list:
+                if action['action'][1] == object['id']:
+                    value = self.objects_info[object['category']]['value']
+            if self.task in ['fire', 'flood']:
+                vulnerable = 1e5
+                for object in self.target_list:
+                    if action['action'][1] == object['id']:
+                        value = self.objects_info[object['category']]['value']
+                        if 'waterproof' in self.objects_info[object['category']]:
+                            vulnerable = 1e5 if self.objects_info[object['category']]['waterproof'] == 1 else 0.01
+                        elif 'fireproof' in self.objects_info[object['category']]:
+                            vulnerable = 1000 if self.objects_info[object['category']]['fireproof'] == 1 else 100
+                if int(action['action'][1]) not in self.status_history:
+                    pass
+                elif len(self.status_history[int(action['action'][1])]) == 1:
+                    vulnerable -= self.status_history[int(action['action'][1])][-1]
+                else:
+                    delta = self.status_history[int(action['action'][1])][-1] - self.status_history[int(action['action'][1])][-2]
+                    status_prediction = self.status_history[int(action['action'][1])][-1] + delta
+                    vulnerable -= status_prediction
+                if vulnerable < 0:
+                    value /= 2
+            action['cost'] /= value
         return mcts_trans
 
     def apply_trans(self, action):
@@ -134,6 +168,7 @@ class MCTS:
         self.discount = 0.95
         self.max_rollout_step = 20
         self.last_cost = 10000
+        self.status_history = {}
         #DWH: constant from wah code, maybe change later
 
     def goal2description(self, goal_objects):
@@ -154,8 +189,37 @@ class MCTS:
         self.need_to_go = None
         self.last_action = None
         self.last_action_result = True
+        self.objects_info = objects_info
+
+    def save_object_history_info(self, state, obj_id):
+        if self.task in ["fire", "flood"]:
+            obj_mask = (state["raw"]["seg_mask"] == obj_id)
+            if type(obj_mask) != np.ndarray:
+                temp = state["raw"]["log_temp"] * obj_mask.cpu().numpy()
+                avg_temp = (temp.sum() / obj_mask.sum()).item()
+            else:
+                temp = state["raw"]["log_temp"] * obj_mask
+                avg_temp = temp.sum() / obj_mask.sum()
+            if obj_id not in self.status_history:
+                self.status_history[obj_id] = [avg_temp]
+            else:
+                self.status_history[obj_id].append(avg_temp)
+        else:
+            id_map = state['sem_map']['explored'] * state['sem_map']['id']
+            object_points = (id_map == obj_id).nonzero()
+            if type(object_points[0]) == np.ndarray:
+                object_center = (object_points[0].astype(float).mean(), object_points[1].astype(float).mean())
+            else:
+                object_center = (object_points[:, 0].float().mean().item(), object_points[:, 1].float().mean().item())
+            if obj_id not in self.status_history:
+                self.status_history[obj_id] = [object_center]
+            else:
+                self.status_history[obj_id].append(object_center)
 
     def choose_target(self, state, processed_input):
+        current_objects_ids = set(state["raw"]['seg_mask'].flatten())
+        for obj_id in current_objects_ids:
+            self.save_object_history_info(state, obj_id)
         if self.debug:
             print(processed_input)
         self.object_list = copy.deepcopy(processed_input['explored_object_name_list'])
@@ -203,6 +267,7 @@ class MCTS:
                 self.containers.append(self.object_list[i])
 
         mcts_root = mcts_state(
+                object_info=self.objects_info,
                 target_list = copy.deepcopy(self.need_to_go), 
                 container_list = copy.deepcopy(self.containers), 
                 agent_pos = copy.deepcopy(agent_pos), 
@@ -210,7 +275,8 @@ class MCTS:
                 last_action = copy.deepcopy(self.last_action), 
                 last_action_success = self.last_action_result,
                 last_cost = self.last_cost,
-                task = self.task)
+                status_history = self.status_history,
+                task = self.task,)
         print(mcts_root.get_available_trans())
         
         plan, action = self.mcts(mcts_root)

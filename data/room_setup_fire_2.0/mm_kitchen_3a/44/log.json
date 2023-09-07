@@ -1,0 +1,5140 @@
+[
+    {
+        "$type": "set_screen_size",
+        "width": 1280,
+        "height": 720
+    },
+    {
+        "$type": "add_scene",
+        "name": "mm_kitchen_3a",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/scenes/mm_kitchen_3a"
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_36_two_door_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_36_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.327985421420288,
+            "y": 0,
+            "z": 2.9888702421569824
+        },
+        "category": "cabinet",
+        "id": 11354016,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11354016,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 11354016,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 91.3241,
+        "id": 11354016
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 11354016
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11354016,
+        "container_id": 13195858,
+        "position": {
+            "x": 0.00021029,
+            "y": 0.92760003,
+            "z": -0.00253588
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.458042355,
+            "y": 0.005,
+            "z": 0.319138555
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11354016,
+        "container_id": 5424908,
+        "position": {
+            "x": 0.00072876,
+            "y": 0.48571201,
+            "z": -0.02190749
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.445793835,
+            "y": 0.385041155,
+            "z": 0.280881865
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b03_morphy_2013__vray",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b03_morphy_2013__vray",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.0968318538886936,
+            "y": 0.100670855,
+            "z": 2.850363233163904
+        },
+        "category": "teakettle",
+        "id": 300096,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 262.36787661770563,
+            "z": 0
+        },
+        "id": 300096
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 300096,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.6,
+        "id": 300096
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 300096
+    },
+    {
+        "$type": "add_object",
+        "name": "vray_041",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/vray_041",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.456700789452496,
+            "y": 0.100670855,
+            "z": 3.050684369276456
+        },
+        "category": "teakettle",
+        "id": 8650339,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 59.489951073923336,
+            "z": 0
+        },
+        "id": 8650339
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 8650339,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 47.02392143663019,
+        "id": 8650339
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 8650339
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 300096,
+        "parent_id": 11354016
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 8650339,
+        "parent_id": 11354016
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 11354016,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 300096
+    },
+    {
+        "$type": "unparent_object",
+        "id": 8650339
+    },
+    {
+        "$type": "add_object",
+        "name": "appliance-ge-profile-microwave_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/appliance-ge-profile-microwave_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.327985421420288,
+            "y": 0.92142,
+            "z": 2.9888702421569824
+        },
+        "category": "microwave",
+        "id": 328122,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 328122,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 328122,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 114.066719,
+        "id": 328122
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 328122
+    },
+    {
+        "$type": "add_box_container",
+        "id": 328122,
+        "container_id": 7559110,
+        "position": {
+            "x": -0.25995726,
+            "y": 0.42499829,
+            "z": -0.01405447
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.185157265,
+            "y": 0.005,
+            "z": 0.18544265
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 328122,
+        "container_id": 5740602,
+        "position": {
+            "x": -0.0660259,
+            "y": 0.20992671,
+            "z": -0.02134468
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.37272723,
+            "y": 0.209173395,
+            "z": 0.177155455
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_new",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_new",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.0200638475305157,
+            "y": 1.34141829,
+            "z": 2.9265489570024514
+        },
+        "category": "vase",
+        "id": 16117936,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 307.4482450814731,
+            "z": 0
+        },
+        "id": 16117936
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 16117936,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.849745385348797,
+        "id": 16117936
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.48,
+        "id": 16117936
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 16117936,
+        "container_id": 6468760,
+        "position": {
+            "x": -0.00148072,
+            "y": 0.1269104,
+            "z": -0.00332384
+        },
+        "tag": "inside",
+        "radius": 0.0720311,
+        "height": 0.231524,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 16117936,
+        "parent_id": 328122
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 328122,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 16117936
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_db_apps_tech_08_09_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b05_db_apps_tech_08_09_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.3441376714202882,
+            "y": 0,
+            "z": 2.1783566921569824
+        },
+        "category": "dishwasher",
+        "id": 2786566,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 2786566,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 2786566,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 994.73738,
+        "id": 2786566
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.35,
+        "id": 2786566
+    },
+    {
+        "$type": "add_box_container",
+        "id": 2786566,
+        "container_id": 3884260,
+        "position": {
+            "x": 0.00010002,
+            "y": 0.88070184,
+            "z": -0.00599992
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.318100095,
+            "y": 0.005,
+            "z": 0.29610002
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 2786566,
+        "container_id": 593508,
+        "position": {
+            "x": 0.00058357,
+            "y": 0.46788983,
+            "z": -0.00599432
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.296761555,
+            "y": 0.338410035,
+            "z": 0.268405675
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_db_apps_tech_08_09_counter_top",
+        "url": "https://tdw-public.s3.amazonaws.com/models/linux/2020.3/b05_db_apps_tech_08_09_counter_top",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.3441376714202882,
+            "y": 0,
+            "z": 2.1783566921569824
+        },
+        "category": "cabinet",
+        "id": 656652,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 270,
+            "z": 0
+        },
+        "id": 656652
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 656652,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 656652,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 11.392212999999998,
+        "id": 656652
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 656652
+    },
+    {
+        "$type": "add_box_container",
+        "id": 656652,
+        "container_id": 1631093,
+        "position": {
+            "x": 0,
+            "y": 0.9713115,
+            "z": 0
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.3071053,
+            "y": 0.01,
+            "z": 0.34711605
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "square_coaster_stone",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/square_coaster_stone",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.3212668394482452,
+            "y": 0.9213207,
+            "z": 2.144565800496
+        },
+        "category": "coaster",
+        "id": 6113629,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 105.67091813182032,
+            "z": 0
+        },
+        "id": 6113629
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6113629,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.4,
+        "id": 6113629
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.7,
+        "static_friction": 0.72,
+        "bounciness": 0.5,
+        "id": 6113629
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 656652,
+        "parent_id": 2786566
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 6113629,
+        "parent_id": 2786566
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 2786566,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 656652
+    },
+    {
+        "$type": "unparent_object",
+        "id": 6113629
+    },
+    {
+        "$type": "add_object",
+        "name": "sink_cabinet_unit_wood_beech_honey_porcelain_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/sink_cabinet_unit_wood_beech_honey_porcelain_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.3277219714202881,
+            "y": 0,
+            "z": 1.0754906921569822
+        },
+        "category": "cabinet",
+        "id": 7004558,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7004558,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 7004558,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 148.00373000000002,
+        "id": 7004558
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 7004558
+    },
+    {
+        "$type": "add_box_container",
+        "id": 7004558,
+        "container_id": 14714666,
+        "position": {
+            "x": 0,
+            "y": 0.86054379,
+            "z": 0
+        },
+        "tag": "inside",
+        "half_extents": {
+            "x": 0.29709223,
+            "y": 0.07024521,
+            "z": 0.14246927
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 7004558,
+        "container_id": 14585070,
+        "position": {
+            "x": 0.57651665,
+            "y": 0.930789,
+            "z": 0
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.185852485,
+            "y": 0.005,
+            "z": 0.323521
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 7004558,
+        "container_id": 9455558,
+        "position": {
+            "x": -0.56117231,
+            "y": 0.930789,
+            "z": 0
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.185852485,
+            "y": 0.005,
+            "z": 0.323521
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 7004558,
+        "container_id": 11834777,
+        "position": {
+            "x": -0.00040993,
+            "y": 0.43727697,
+            "z": -0.03987658
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.74448368,
+            "y": 0.334023105,
+            "z": 0.262476565
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "jug04",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/jug04",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.8556381419050443,
+            "y": 0.925789,
+            "z": 0.9165065563214295
+        },
+        "category": "jug",
+        "id": 8748914,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 11.14126744811394,
+            "z": 0
+        },
+        "id": 8748914
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 8748914,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 3.0,
+        "id": 8748914
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 8748914
+    },
+    {
+        "$type": "add_object",
+        "name": "filler_2010",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/filler_2010",
+        "scale_factor": 0.1215766,
+        "position": {
+            "x": 1.905643780668518,
+            "y": 0.925789,
+            "z": 1.2166207476095638
+        },
+        "category": "soap dispenser",
+        "id": 1071821,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 357.79306234524563,
+            "z": 0
+        },
+        "id": 1071821
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1071821,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.531815953552723,
+        "id": 1071821
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.471,
+        "id": 1071821
+    },
+    {
+        "$type": "add_object",
+        "name": "vase_05",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/vase_05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.7180780227396967,
+            "y": 0.925789,
+            "z": 1.2170044470775196
+        },
+        "category": "vase",
+        "id": 9534528,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 69.74594639303481,
+            "z": 0
+        },
+        "id": 9534528
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 9534528,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.25,
+        "id": 9534528
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 9534528
+    },
+    {
+        "$type": "add_sphere_container",
+        "id": 9534528,
+        "container_id": 14657483,
+        "position": {
+            "x": 0,
+            "y": 0.06593105,
+            "z": 0
+        },
+        "tag": "inside",
+        "radius": 0.08187927678227425
+    },
+    {
+        "$type": "add_object",
+        "name": "apple",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/apple",
+        "scale_factor": 0.08862933,
+        "position": {
+            "x": 0.7674554426203272,
+            "y": 0.925789,
+            "z": 0.9167138719276795
+        },
+        "category": "apple",
+        "id": 13949657,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 303.89397989039145,
+            "z": 0
+        },
+        "id": 13949657
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13949657,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.30235627386719,
+        "id": 13949657
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.561,
+        "id": 13949657
+    },
+    {
+        "$type": "add_object",
+        "name": "kosmos_black_soap_dispenser",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/kosmos_black_soap_dispenser",
+        "scale_factor": 0.5904899,
+        "position": {
+            "x": 0.8861008096845058,
+            "y": 0.103253865,
+            "z": 0.9315933902193811
+        },
+        "category": "soap dispenser",
+        "id": 182326,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 151.8276342917357,
+            "z": 0
+        },
+        "id": 182326
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 182326,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 4.16148453950882,
+        "id": 182326
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.478,
+        "id": 182326
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bottle-2014-2018",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_bottle-2014-2018",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.0859415789323144,
+            "y": 0.103253865,
+            "z": 1.1316335450721806
+        },
+        "category": "bottle",
+        "id": 5855438,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 224.81399625345492,
+            "z": 0
+        },
+        "id": 5855438
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5855438,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.8,
+        "id": 5855438
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 5855438
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bottle-2014-2018",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_bottle-2014-2018",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.2861419000414476,
+            "y": 0.103253865,
+            "z": 0.9319739314996767
+        },
+        "category": "bottle",
+        "id": 5922401,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 4.135546661095382,
+            "z": 0
+        },
+        "id": 5922401
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5922401,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.8,
+        "id": 5922401
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 5922401
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_bathroom_dispenser",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b05_bathroom_dispenser",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.4859935494541574,
+            "y": 0.103253865,
+            "z": 1.131807605223578
+        },
+        "category": "soap dispenser",
+        "id": 9636572,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 264.74686883521326,
+            "z": 0
+        },
+        "id": 9636572
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 9636572,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.370617349515669,
+        "id": 9636572
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.575,
+        "id": 9636572
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bottle-2014-2018",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_bottle-2014-2018",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.6858129591719293,
+            "y": 0.103253865,
+            "z": 0.9319390342904722
+        },
+        "category": "bottle",
+        "id": 15343202,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 281.8484295838507,
+            "z": 0
+        },
+        "id": 15343202
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 15343202,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.8,
+        "id": 15343202
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 15343202
+    },
+    {
+        "$type": "add_object",
+        "name": "brizo_solna",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/brizo_solna",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.3277219714202881,
+            "y": 0.930789,
+            "z": 0.8887301921569822
+        },
+        "category": "water faucet",
+        "id": 9767397,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "id": 9767397
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 9767397,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 9767397,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.7615067665465176,
+        "id": 9767397
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 9767397
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 8748914,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1071821,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 9534528,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 13949657,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 182326,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 5855438,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 5922401,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 9636572,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 15343202,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 9767397,
+        "parent_id": 7004558
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 7004558,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 8748914
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1071821
+    },
+    {
+        "$type": "unparent_object",
+        "id": 9534528
+    },
+    {
+        "$type": "unparent_object",
+        "id": 13949657
+    },
+    {
+        "$type": "unparent_object",
+        "id": 182326
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5855438
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5922401
+    },
+    {
+        "$type": "unparent_object",
+        "id": 9636572
+    },
+    {
+        "$type": "unparent_object",
+        "id": 15343202
+    },
+    {
+        "$type": "unparent_object",
+        "id": 9767397
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_two_door_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_24_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.328374871420288,
+            "y": 0,
+            "z": 0.0076824421569821055
+        },
+        "category": "cabinet",
+        "id": 1662269,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1662269,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 1662269,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 71.20617,
+        "id": 1662269
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 1662269
+    },
+    {
+        "$type": "add_box_container",
+        "id": 1662269,
+        "container_id": 11547059,
+        "position": {
+            "x": 0.00039721,
+            "y": 0.92740173,
+            "z": 0.00150564
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.306132585,
+            "y": 0.005,
+            "z": 0.319348125
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 1662269,
+        "container_id": 6172123,
+        "position": {
+            "x": 0.00082399,
+            "y": 0.28498729,
+            "z": -0.01887377
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.293332145,
+            "y": 0.18441785,
+            "z": 0.28164695
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "scissors",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/scissors",
+        "scale_factor": 0.1,
+        "position": {
+            "x": 1.18359108509414,
+            "y": 0.92240173,
+            "z": -0.14662069798672162
+        },
+        "category": "scissors",
+        "id": 10542193,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 150.24743766615933,
+            "z": 0
+        },
+        "id": 10542193
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 10542193,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 10542193
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 10542193
+    },
+    {
+        "$type": "add_object",
+        "name": "vray_041",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/vray_041",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.203937314615724,
+            "y": 0.10056944000000001,
+            "z": -0.12859046399022908
+        },
+        "category": "teakettle",
+        "id": 858848,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 350.7763072443426,
+            "z": 0
+        },
+        "id": 858848
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 858848,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 47.02392143663019,
+        "id": 858848
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 858848
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 10542193,
+        "parent_id": 1662269
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 858848,
+        "parent_id": 1662269
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 1662269,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 10542193
+    },
+    {
+        "$type": "unparent_object",
+        "id": 858848
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_single_door_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_24_single_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.329046471420288,
+            "y": 0,
+            "z": -0.6034206078430184
+        },
+        "category": "cabinet",
+        "id": 13677486,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13677486,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 13677486,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 62.719657,
+        "id": 13677486
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 13677486
+    },
+    {
+        "$type": "add_box_container",
+        "id": 13677486,
+        "container_id": 11217925,
+        "position": {
+            "x": 0.00092754,
+            "y": 0.92720306,
+            "z": 0.00266671
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30556023,
+            "y": 0.005,
+            "z": 0.31819868
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 13677486,
+        "container_id": 12651082,
+        "position": {
+            "x": -0.00010885,
+            "y": 0.48690215,
+            "z": -0.02265313
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.2961338,
+            "y": 0.38508281,
+            "z": 0.280144095
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0067_fishfork",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/vk0067_fishfork",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.1858867732527805,
+            "y": 0.92220306,
+            "z": -0.5553974985413128
+        },
+        "category": "fork",
+        "id": 14437349,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 208.95304102872797,
+            "z": 0
+        },
+        "id": 14437349
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 14437349,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.12115548734072945,
+        "id": 14437349
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 14437349
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bowl_smooth",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_bowl_smooth",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.201452244301065,
+            "y": 0.10181933999999998,
+            "z": -0.7424969144961047
+        },
+        "category": "bowl",
+        "id": 10459898,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 176.33969149893977,
+            "z": 0
+        },
+        "id": 10459898
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 10459898,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.5,
+        "id": 10459898
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 10459898
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 10459898,
+        "container_id": 4248433,
+        "position": {
+            "x": 9.649e-05,
+            "y": 0.04461811,
+            "z": 0.00034404
+        },
+        "tag": "inside",
+        "radius": 0.09662219,
+        "height": 0.07422157,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 14437349,
+        "parent_id": 13677486
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 10459898,
+        "parent_id": 13677486
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 13677486,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 14437349
+    },
+    {
+        "$type": "unparent_object",
+        "id": 10459898
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_castironradiator",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b05_castironradiator",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.561345266420288,
+            "y": 0,
+            "z": -1.2411836353430186
+        },
+        "category": "radiator",
+        "id": 2213682,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 2213682,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 2213682,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 30.07778860628605,
+        "id": 2213682
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.489,
+        "id": 2213682
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 270,
+        "id": 2213682,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "tolix_bar_stool",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/tolix_bar_stool",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 1.393445396420288,
+            "y": 0,
+            "z": -1.8557060628430175
+        },
+        "category": "stool",
+        "id": 7317565,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7317565,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 6.250231713056564,
+        "id": 7317565
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.2,
+        "id": 7317565
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 7317565,
+        "container_id": 326387,
+        "position": {
+            "x": -7.37e-05,
+            "y": 0.62078137,
+            "z": -0.01402863
+        },
+        "tag": "on",
+        "radius": 0.137051595,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 183.50864121891428,
+        "id": 7317565,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "radiator_pub_2015",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/radiator_pub_2015",
+        "scale_factor": 0.254,
+        "position": {
+            "x": 1.5016132214202882,
+            "y": 0,
+            "z": -2.491105877843018
+        },
+        "category": "radiator",
+        "id": 15326952,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 15326952,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 15326952,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 18.942256271839142,
+        "id": 15326952
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.499,
+        "id": 15326952
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 180,
+        "id": 15326952,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "basket_18inx18inx12iin_wicker",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/basket_18inx18inx12iin_wicker",
+        "scale_factor": 1,
+        "position": {
+            "x": 1.382375115892608,
+            "y": 0,
+            "z": -3.122951542843018
+        },
+        "category": "basket",
+        "id": 8147808,
+        "affordance_points": [
+            {
+                "x": -0.2285,
+                "y": 0.305,
+                "z": 0.0
+            },
+            {
+                "x": 0.2285,
+                "y": 0.305,
+                "z": 0.0
+            },
+            {
+                "x": 0,
+                "y": 0.305,
+                "z": 0.2285
+            },
+            {
+                "x": 0,
+                "y": 0.305,
+                "z": -0.2285
+            }
+        ]
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 8147808,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.0,
+        "id": 8147808
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.45,
+        "static_friction": 0.48,
+        "bounciness": 0.5,
+        "id": 8147808
+    },
+    {
+        "$type": "add_box_container",
+        "id": 8147808,
+        "container_id": 9076924,
+        "position": {
+            "x": 0,
+            "y": 0.15855946,
+            "z": 0
+        },
+        "tag": "inside",
+        "half_extents": {
+            "x": 0.21984584,
+            "y": 0.14644054,
+            "z": 0.2198887
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "scissors",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/scissors",
+        "scale_factor": 0.1,
+        "position": {
+            "x": 1.4758587031739945,
+            "y": 0.30500000000000027,
+            "z": -3.0960280431095155
+        },
+        "category": "scissors",
+        "id": 13717699,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 229.01998509343306,
+            "y": 140.81860298765235,
+            "z": 136.89807126334443
+        },
+        "id": 13717699
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13717699,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 13717699
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 13717699
+    },
+    {
+        "$type": "add_object",
+        "name": "scissors",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/scissors",
+        "scale_factor": 0.1,
+        "position": {
+            "x": 1.419373256596011,
+            "y": 0.5550000000000003,
+            "z": -3.149994382269384
+        },
+        "category": "scissors",
+        "id": 7859601,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 208.94650608734784,
+            "y": 205.46009224312542,
+            "z": 64.13629484064404
+        },
+        "id": 7859601
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7859601,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 7859601
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 7859601
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": -1.546707419356256,
+        "id": 8147808,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_two_door_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_24_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.3333625880950928,
+            "y": 0,
+            "z": 3.1402094421569826
+        },
+        "category": "cabinet",
+        "id": 3307379,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3307379,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 3307379,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 71.20617,
+        "id": 3307379
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 3307379
+    },
+    {
+        "$type": "add_box_container",
+        "id": 3307379,
+        "container_id": 1573762,
+        "position": {
+            "x": 0.00039721,
+            "y": 0.92740173,
+            "z": 0.00150564
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.306132585,
+            "y": 0.005,
+            "z": 0.319348125
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 3307379,
+        "container_id": 10400758,
+        "position": {
+            "x": 0.00082399,
+            "y": 0.28498729,
+            "z": -0.01887377
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.293332145,
+            "y": 0.18441785,
+            "z": 0.28164695
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "cork_plastic",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cork_plastic",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4782674402668228,
+            "y": 0.92240173,
+            "z": 2.9857609129497353
+        },
+        "category": "bottle cork",
+        "id": 1151081,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 69.51358793342882,
+            "z": 0
+        },
+        "id": 1151081
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1151081,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.1,
+        "id": 1151081
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.45,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 1151081
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bottle-2014-2018",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_bottle-2014-2018",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4579885980561875,
+            "y": 0.10056944000000001,
+            "z": 3.0039471069933414
+        },
+        "category": "bottle",
+        "id": 13227930,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 227.8846245108312,
+            "z": 0
+        },
+        "id": 13227930
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13227930,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.8,
+        "id": 13227930
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 13227930
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1151081,
+        "parent_id": 3307379
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 13227930,
+        "parent_id": 3307379
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 3307379,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1151081
+    },
+    {
+        "$type": "unparent_object",
+        "id": 13227930
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_wall_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_24_wall_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4570505880950928,
+            "y": 1.289581,
+            "z": 3.1410176421569824
+        },
+        "category": "cabinet",
+        "id": 8284852,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 8284852,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 8284852,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 21.341894,
+        "id": 8284852
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 8284852
+    },
+    {
+        "$type": "add_box_container",
+        "id": 8284852,
+        "container_id": 5246643,
+        "position": {
+            "x": -0.00221835,
+            "y": 0.77717001,
+            "z": 0.01261972
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30464034,
+            "y": 0.005,
+            "z": 0.18041368
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 8284852,
+        "container_id": 6174369,
+        "position": {
+            "x": -0.00056393,
+            "y": 0.3822588,
+            "z": 0.01207337
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.29507263,
+            "y": 0.369993895,
+            "z": 0.16248736
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate07",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/plate07",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.301845905,
+            "z": 3.1530910121569824
+        },
+        "category": "plate",
+        "id": 1685972,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1685972,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.770479092025198,
+        "id": 1685972
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 1685972
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 1685972,
+        "container_id": 11995913,
+        "position": {
+            "x": 1.57e-05,
+            "y": 0.01140402,
+            "z": 0.00026305
+        },
+        "tag": "on",
+        "radius": 0.057004165,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate07",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/plate07",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.321681825,
+            "z": 3.1530910121569824
+        },
+        "category": "plate",
+        "id": 14385168,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 14385168,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.770479092025198,
+        "id": 14385168
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 14385168
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 14385168,
+        "container_id": 16583825,
+        "position": {
+            "x": 1.57e-05,
+            "y": 0.01140402,
+            "z": 0.00026305
+        },
+        "tag": "on",
+        "radius": 0.057004165,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate07",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/plate07",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.341517745,
+            "z": 3.1530910121569824
+        },
+        "category": "plate",
+        "id": 10273543,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 10273543,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.770479092025198,
+        "id": 10273543
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 10273543
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 10273543,
+        "container_id": 93347,
+        "position": {
+            "x": 1.57e-05,
+            "y": 0.01140402,
+            "z": 0.00026305
+        },
+        "tag": "on",
+        "radius": 0.057004165,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate07",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/plate07",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.361353665,
+            "z": 3.1530910121569824
+        },
+        "category": "plate",
+        "id": 262503,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 262503,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.770479092025198,
+        "id": 262503
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 262503
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 262503,
+        "container_id": 6058554,
+        "position": {
+            "x": 1.57e-05,
+            "y": 0.01140402,
+            "z": 0.00026305
+        },
+        "tag": "on",
+        "radius": 0.057004165,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "plate07",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/plate07",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4576145180950928,
+            "y": 1.381189585,
+            "z": 3.1530910121569824
+        },
+        "category": "plate",
+        "id": 5477364,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 5477364,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.770479092025198,
+        "id": 5477364
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 5477364
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 5477364,
+        "container_id": 5968373,
+        "position": {
+            "x": 1.57e-05,
+            "y": 0.01140402,
+            "z": 0.00026305
+        },
+        "tag": "on",
+        "radius": 0.057004165,
+        "height": 0.01,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1685972,
+        "parent_id": 8284852
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 14385168,
+        "parent_id": 8284852
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 10273543,
+        "parent_id": 8284852
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 262503,
+        "parent_id": 8284852
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 5477364,
+        "parent_id": 8284852
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 8284852,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1685972
+    },
+    {
+        "$type": "unparent_object",
+        "id": 14385168
+    },
+    {
+        "$type": "unparent_object",
+        "id": 10273543
+    },
+    {
+        "$type": "unparent_object",
+        "id": 262503
+    },
+    {
+        "$type": "unparent_object",
+        "id": 5477364
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_single_door_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_24_single_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.3340341880950928,
+            "y": 0,
+            "z": 2.529106392156982
+        },
+        "category": "cabinet",
+        "id": 16107386,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 16107386,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 16107386,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 62.719657,
+        "id": 16107386
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 16107386
+    },
+    {
+        "$type": "add_box_container",
+        "id": 16107386,
+        "container_id": 6236926,
+        "position": {
+            "x": 0.00092754,
+            "y": 0.92720306,
+            "z": 0.00266671
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30556023,
+            "y": 0.005,
+            "z": 0.31819868
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 16107386,
+        "container_id": 15018610,
+        "position": {
+            "x": -0.00010885,
+            "y": 0.48690215,
+            "z": -0.02265313
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.2961338,
+            "y": 0.38508281,
+            "z": 0.280144095
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0010_dinner_fork_subd0",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/vk0010_dinner_fork_subd0",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4776032119335158,
+            "y": 0.92220306,
+            "z": 2.3771782599603903
+        },
+        "category": "fork",
+        "id": 14860194,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 355.651694649484,
+            "z": 0
+        },
+        "id": 14860194
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 14860194,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.17961008625206887,
+        "id": 14860194
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 14860194
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_coffee_grinder",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b05_coffee_grinder",
+        "scale_factor": 0.254,
+        "position": {
+            "x": -1.4611433289848275,
+            "y": 0.10181933999999998,
+            "z": 2.390134532763443
+        },
+        "category": "coffee grinder",
+        "id": 3121514,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 117.2643897449406,
+            "z": 0
+        },
+        "id": 3121514
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3121514,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 7.8230846440419555,
+        "id": 3121514
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.3,
+        "static_friction": 0.35,
+        "bounciness": 0.2,
+        "id": 3121514
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 14860194,
+        "parent_id": 16107386
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3121514,
+        "parent_id": 16107386
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 16107386,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 14860194
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3121514
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_24_wall_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_24_wall_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4570505880950928,
+            "y": 1.289581,
+            "z": 2.5294010421569824
+        },
+        "category": "cabinet",
+        "id": 11518931,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11518931,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 11518931,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 21.341894,
+        "id": 11518931
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 11518931
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11518931,
+        "container_id": 16218876,
+        "position": {
+            "x": -0.00221835,
+            "y": 0.77717001,
+            "z": 0.01261972
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30464034,
+            "y": 0.005,
+            "z": 0.18041368
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11518931,
+        "container_id": 4203817,
+        "position": {
+            "x": -0.00056393,
+            "y": 0.3822588,
+            "z": 0.01207337
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.29507263,
+            "y": 0.369993895,
+            "z": 0.16248736
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "coffeemug",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/coffeemug",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.6139379725402194,
+            "y": 1.301845905,
+            "z": 2.4918770966050428
+        },
+        "category": "cup",
+        "id": 7275145,
+        "affordance_points": [
+            {
+                "x": -0.06425713002681732,
+                "y": 0.090508371591568,
+                "z": 0.0005330045241862535
+            },
+            {
+                "x": -0.06828507035970688,
+                "y": 0.06490053236484528,
+                "z": 0.001608158927410841
+            },
+            {
+                "x": -0.06527069956064224,
+                "y": 0.039572518318891525,
+                "z": -0.00039653570274822414
+            }
+        ]
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 256.4006857075935,
+            "z": 0
+        },
+        "id": 7275145
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7275145,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.5,
+        "id": 7275145
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 7275145
+    },
+    {
+        "$type": "add_object",
+        "name": "vase_05",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/vase_05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.3333641716540097,
+            "y": 1.301845905,
+            "z": 2.5713293301154203
+        },
+        "category": "vase",
+        "id": 3195259,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 69.72774192643837,
+            "z": 0
+        },
+        "id": 3195259
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3195259,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.25,
+        "id": 3195259
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 3195259
+    },
+    {
+        "$type": "add_sphere_container",
+        "id": 3195259,
+        "container_id": 3880503,
+        "position": {
+            "x": 0,
+            "y": 0.06593105,
+            "z": 0
+        },
+        "tag": "inside",
+        "radius": 0.08187927678227425
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7275145,
+        "parent_id": 11518931
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3195259,
+        "parent_id": 11518931
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7275145,
+        "parent_id": 11518931
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3195259,
+        "parent_id": 11518931
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 11518931,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7275145
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3195259
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7275145
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3195259
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_36_two_door_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_36_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.3329731380950927,
+            "y": 0,
+            "z": 1.7666641421569822
+        },
+        "category": "cabinet",
+        "id": 8034321,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 8034321,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 8034321,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 91.3241,
+        "id": 8034321
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 8034321
+    },
+    {
+        "$type": "add_box_container",
+        "id": 8034321,
+        "container_id": 12238593,
+        "position": {
+            "x": 0.00021029,
+            "y": 0.92760003,
+            "z": -0.00253588
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.458042355,
+            "y": 0.005,
+            "z": 0.319138555
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 8034321,
+        "container_id": 3614102,
+        "position": {
+            "x": 0.00072876,
+            "y": 0.48571201,
+            "z": -0.02190749
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.445793835,
+            "y": 0.385041155,
+            "z": 0.280881865
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_ball-point_pen-obj",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b05_ball-point_pen-obj",
+        "scale_factor": 0.0254,
+        "position": {
+            "x": -1.5989425277111953,
+            "y": 0.92260003,
+            "z": 1.608827480683067
+        },
+        "category": "pen",
+        "id": 7800486,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 123.86261651968911,
+            "z": 0
+        },
+        "id": 7800486
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7800486,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.0560861147050673,
+        "id": 7800486
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.65,
+        "id": 7800486
+    },
+    {
+        "$type": "add_object",
+        "name": "candlestick1",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/candlestick1",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.0996403013813203,
+            "y": 0.92260003,
+            "z": 1.859263471609585
+        },
+        "category": "candle",
+        "id": 1141790,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 149.73442469217386,
+            "z": 0
+        },
+        "id": 1141790
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1141790,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.0,
+        "id": 1141790
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 1141790
+    },
+    {
+        "$type": "add_object",
+        "name": "cgaxis_models_61_17_vray",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cgaxis_models_61_17_vray",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.5641673067033846,
+            "y": 0.100670855,
+            "z": 1.6282854512461662
+        },
+        "category": "coffee grinder",
+        "id": 1135825,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 101.72587522528856,
+            "z": 0
+        },
+        "id": 1135825
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1135825,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 4.2577436892315745,
+        "id": 1135825
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.3,
+        "static_friction": 0.35,
+        "bounciness": 0.2,
+        "id": 1135825
+    },
+    {
+        "$type": "add_object",
+        "name": "tea_kettle_model",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/tea_kettle_model",
+        "scale_factor": 0.7217099,
+        "position": {
+            "x": -1.2042857725965985,
+            "y": 0.100670855,
+            "z": 1.8281488769662566
+        },
+        "category": "teakettle",
+        "id": 6021476,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 327.9686282619839,
+            "z": 0
+        },
+        "id": 6021476
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 6021476,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 13.837621739367023,
+        "id": 6021476
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.5,
+        "id": 6021476
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7800486,
+        "parent_id": 8034321
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1141790,
+        "parent_id": 8034321
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1135825,
+        "parent_id": 8034321
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 6021476,
+        "parent_id": 8034321
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 8034321,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7800486
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1141790
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1135825
+    },
+    {
+        "$type": "unparent_object",
+        "id": 6021476
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_36_wall_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_36_wall_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4523721880950928,
+            "y": 1.289581,
+            "z": 1.7667934921569821
+        },
+        "category": "cabinet",
+        "id": 14812035,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 14812035,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 14812035,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 32.200168,
+        "id": 14812035
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 14812035
+    },
+    {
+        "$type": "add_box_container",
+        "id": 14812035,
+        "container_id": 6144662,
+        "position": {
+            "x": -0.00043385,
+            "y": 0.77166439,
+            "z": -0.00122118
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.456737175,
+            "y": 0.005,
+            "z": 0.173077555
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 14812035,
+        "container_id": 10105385,
+        "position": {
+            "x": -2.198e-05,
+            "y": 0.38338382,
+            "z": 0.01782134
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.446592135,
+            "y": 0.370885305,
+            "z": 0.17371008
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "cup",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cup",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.7293910221121818,
+            "y": 1.302079515,
+            "z": 1.7659625844172806
+        },
+        "category": "cup",
+        "id": 7858352,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 263.33912147418266,
+            "z": 0
+        },
+        "id": 7858352
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7858352,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.8737049717456102,
+        "id": 7858352
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 7858352
+    },
+    {
+        "$type": "add_object",
+        "name": "glass3",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/glass3",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.5698344404948266,
+            "y": 1.302079515,
+            "z": 1.7257115623952626
+        },
+        "category": "wineglass",
+        "id": 2533985,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 303.951772695833,
+            "z": 0
+        },
+        "id": 2533985
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 2533985,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.0,
+        "id": 2533985
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.6,
+        "id": 2533985
+    },
+    {
+        "$type": "add_object",
+        "name": "cup",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cup",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.4094549065247053,
+            "y": 1.302079515,
+            "z": 1.766005656384219
+        },
+        "category": "cup",
+        "id": 14720240,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 39.327971935247646,
+            "z": 0
+        },
+        "id": 14720240
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 14720240,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.8737049717456102,
+        "id": 14720240
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 14720240
+    },
+    {
+        "$type": "add_object",
+        "name": "glass1",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/glass1",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.2497720012886488,
+            "y": 1.302079515,
+            "z": 1.726044722247815
+        },
+        "category": "wineglass",
+        "id": 7019080,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 125.52209105486571,
+            "z": 0
+        },
+        "id": 7019080
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 7019080,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.4,
+        "id": 7019080
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.6,
+        "id": 7019080
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7858352,
+        "parent_id": 14812035
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 2533985,
+        "parent_id": 14812035
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 14720240,
+        "parent_id": 14812035
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7019080,
+        "parent_id": 14812035
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7858352,
+        "parent_id": 14812035
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 2533985,
+        "parent_id": 14812035
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 14720240,
+        "parent_id": 14812035
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 7019080,
+        "parent_id": 14812035
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 14812035,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7858352
+    },
+    {
+        "$type": "unparent_object",
+        "id": 2533985
+    },
+    {
+        "$type": "unparent_object",
+        "id": 14720240
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7019080
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7858352
+    },
+    {
+        "$type": "unparent_object",
+        "id": 2533985
+    },
+    {
+        "$type": "unparent_object",
+        "id": 14720240
+    },
+    {
+        "$type": "unparent_object",
+        "id": 7019080
+    },
+    {
+        "$type": "add_object",
+        "name": "gas_stove_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/gas_stove_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.2417812380950928,
+            "y": 0,
+            "z": 0.8095165421569823
+        },
+        "category": "gas cooker",
+        "id": 3172469,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3172469,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 3172469,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2404.3891949999997,
+        "id": 3172469
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.35,
+        "id": 3172469
+    },
+    {
+        "$type": "add_box_container",
+        "id": 3172469,
+        "container_id": 10199263,
+        "position": {
+            "x": 0.01628575,
+            "y": 0.88177783,
+            "z": -0.00160444
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.255564215,
+            "y": 0.005,
+            "z": 0.455263705
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 3172469,
+        "container_id": 13302694,
+        "position": {
+            "x": -0.05594292,
+            "y": 0.43482107,
+            "z": -0.25080969
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.19875888,
+            "y": 0.2417472,
+            "z": 0.231619545
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 3172469,
+        "container_id": 6339849,
+        "position": {
+            "x": -0.05530391,
+            "y": 0.43482107,
+            "z": 0.24662629
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.199400565,
+            "y": 0.2417472,
+            "z": 0.23386109
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "pan1",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/pan1",
+        "scale_factor": 2.54,
+        "position": {
+            "x": -1.3299286812645104,
+            "y": 0.87677783,
+            "z": 0.5937851196422911
+        },
+        "category": "pot",
+        "id": 3017234,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 352.0503124633007,
+            "z": 0
+        },
+        "id": 3017234
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3017234,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 110.19000373780727,
+        "id": 3017234
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 3017234
+    },
+    {
+        "$type": "add_object",
+        "name": "pan04",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/pan04",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.2802992101839767,
+            "y": 0.87677783,
+            "z": 1.0435482327880532
+        },
+        "category": "pan",
+        "id": 1128592,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 251.23704076468016,
+            "z": 0
+        },
+        "id": 1128592
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1128592,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 32.72544853389263,
+        "id": 1128592
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.619,
+        "id": 1128592
+    },
+    {
+        "$type": "add_object",
+        "name": "measuring_pan",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/measuring_pan",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.2626668817226039,
+            "y": 0.19307386999999998,
+            "z": 0.5433908467442253
+        },
+        "category": "pan",
+        "id": 12468297,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 351.04812553416616,
+            "z": 0
+        },
+        "id": 12468297
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12468297,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.907833688892424,
+        "id": 12468297
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.619,
+        "id": 12468297
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 12468297,
+        "container_id": 4926302,
+        "position": {
+            "x": -0.00775012,
+            "y": 0.03090363,
+            "z": -4.316e-05
+        },
+        "tag": "inside",
+        "radius": 0.06716662,
+        "height": 0.05885534,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b03_696615_object001",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b03_696615_object001",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.3164776054589722,
+            "y": 0.19307386999999998,
+            "z": 1.0603585070644548
+        },
+        "category": "pan",
+        "id": 1636745,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 213.07244986865837,
+            "z": 0
+        },
+        "id": 1636745
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1636745,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 7.7296004456002265,
+        "id": 1636745
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.619,
+        "id": 1636745
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 1636745,
+        "container_id": 15768427,
+        "position": {
+            "x": -4.357e-05,
+            "y": 0.04131872,
+            "z": -0.00067601
+        },
+        "tag": "inside",
+        "radius": 0.115856825,
+        "height": 0.07749642,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3017234,
+        "parent_id": 3172469
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1128592,
+        "parent_id": 3172469
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 12468297,
+        "parent_id": 3172469
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1636745,
+        "parent_id": 3172469
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 180,
+        "id": 3172469,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3017234
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1128592
+    },
+    {
+        "$type": "unparent_object",
+        "id": 12468297
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1636745
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_36_two_door_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_36_two_door_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.3329731380950927,
+            "y": 0,
+            "z": -0.14763105784301755
+        },
+        "category": "cabinet",
+        "id": 13949024,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 13949024,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 13949024,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 91.3241,
+        "id": 13949024
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 13949024
+    },
+    {
+        "$type": "add_box_container",
+        "id": 13949024,
+        "container_id": 10389634,
+        "position": {
+            "x": 0.00021029,
+            "y": 0.92760003,
+            "z": -0.00253588
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.458042355,
+            "y": 0.005,
+            "z": 0.319138555
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 13949024,
+        "container_id": 3085051,
+        "position": {
+            "x": 0.00072876,
+            "y": 0.48571201,
+            "z": -0.02190749
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.445793835,
+            "y": 0.385041155,
+            "z": 0.280881865
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_honey_jar",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_honey_jar",
+        "scale_factor": 0.3874204,
+        "position": {
+            "x": -1.5994822961576554,
+            "y": 0.92260003,
+            "z": -0.3059080061354792
+        },
+        "category": "jar",
+        "id": 3549617,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 165.01599371453472,
+            "z": 0
+        },
+        "id": 3549617
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3549617,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 3.5595279769040644,
+        "id": 3549617
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.1,
+        "id": 3549617
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_cantate_crystal_wine_glass",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_cantate_crystal_wine_glass",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.0989225208840776,
+            "y": 0.92260003,
+            "z": -0.005874338990754624
+        },
+        "category": "wineglass",
+        "id": 15897049,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 337.94142411035494,
+            "z": 0
+        },
+        "id": 15897049
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 15897049,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.3731986109632999,
+        "id": 15897049
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.6,
+        "id": 15897049
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_3d_jar_180_gr_01",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_3d_jar_180_gr_01",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.5641547159124156,
+            "y": 0.100670855,
+            "z": -0.2862807608738546
+        },
+        "category": "jar",
+        "id": 3020238,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 138.78133752186318,
+            "z": 0
+        },
+        "id": 3020238
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3020238,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 4.242588183842599,
+        "id": 3020238
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.1,
+        "id": 3020238
+    },
+    {
+        "$type": "add_object",
+        "name": "juicer",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/juicer",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.2042321397637914,
+            "y": 0.100670855,
+            "z": -0.08620361666007828
+        },
+        "category": "coffee grinder",
+        "id": 9334842,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 182.10947425551382,
+            "z": 0
+        },
+        "id": 9334842
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 9334842,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 1.0,
+        "id": 9334842
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.3,
+        "static_friction": 0.35,
+        "bounciness": 0.2,
+        "id": 9334842
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3549617,
+        "parent_id": 13949024
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 15897049,
+        "parent_id": 13949024
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 3020238,
+        "parent_id": 13949024
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 9334842,
+        "parent_id": 13949024
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 13949024,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3549617
+    },
+    {
+        "$type": "unparent_object",
+        "id": 15897049
+    },
+    {
+        "$type": "unparent_object",
+        "id": 3020238
+    },
+    {
+        "$type": "unparent_object",
+        "id": 9334842
+    },
+    {
+        "$type": "add_object",
+        "name": "cabinet_36_wall_wood_beech_honey_composite",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/cabinet_36_wall_wood_beech_honey_composite",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4523721880950928,
+            "y": 1.289581,
+            "z": -0.14750170784301764
+        },
+        "category": "cabinet",
+        "id": 9785812,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 9785812,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 9785812,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 32.200168,
+        "id": 9785812
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.566,
+        "id": 9785812
+    },
+    {
+        "$type": "add_box_container",
+        "id": 9785812,
+        "container_id": 11388423,
+        "position": {
+            "x": -0.00043385,
+            "y": 0.77166439,
+            "z": -0.00122118
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.456737175,
+            "y": 0.005,
+            "z": 0.173077555
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_box_container",
+        "id": 9785812,
+        "container_id": 5499540,
+        "position": {
+            "x": -2.198e-05,
+            "y": 0.38338382,
+            "z": 0.01782134
+        },
+        "tag": "enclosed",
+        "half_extents": {
+            "x": 0.446592135,
+            "y": 0.370885305,
+            "z": 0.17371008
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "vase_05",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/vase_05",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.729480946499885,
+            "y": 1.302079515,
+            "z": -0.188512574832858
+        },
+        "category": "vase",
+        "id": 16248467,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 315.140575601703,
+            "z": 0
+        },
+        "id": 16248467
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 16248467,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 2.25,
+        "id": 16248467
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.4,
+        "id": 16248467
+    },
+    {
+        "$type": "add_sphere_container",
+        "id": 16248467,
+        "container_id": 14613978,
+        "position": {
+            "x": 0,
+            "y": 0.06593105,
+            "z": 0
+        },
+        "tag": "inside",
+        "radius": 0.08187927678227425
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bottle-2014-2018",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_bottle-2014-2018",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.449465390566779,
+            "y": 1.302079515,
+            "z": -0.1486559344476318
+        },
+        "category": "bottle",
+        "id": 4443906,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 294.4448806143584,
+            "z": 0
+        },
+        "id": 4443906
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 4443906,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.8,
+        "id": 4443906
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.5,
+        "id": 4443906
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 16248467,
+        "parent_id": 9785812
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 4443906,
+        "parent_id": 9785812
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 16248467,
+        "parent_id": 9785812
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 4443906,
+        "parent_id": 9785812
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 9785812,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 16248467
+    },
+    {
+        "$type": "unparent_object",
+        "id": 4443906
+    },
+    {
+        "$type": "unparent_object",
+        "id": 16248467
+    },
+    {
+        "$type": "unparent_object",
+        "id": 4443906
+    },
+    {
+        "$type": "add_object",
+        "name": "elf_painting",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/elf_painting",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.575824488095093,
+            "y": 1.3417046518930698,
+            "z": -1.4230870578430173
+        },
+        "category": "painting",
+        "id": 321280,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 321280,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 321280,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.5,
+        "id": 321280
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.6,
+        "id": 321280
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 90,
+        "id": 321280,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "basket_18inx18inx12iin_bamboo",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/basket_18inx18inx12iin_bamboo",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.384335191881908,
+            "y": 0,
+            "z": -2.519895557843018
+        },
+        "category": "basket",
+        "id": 11344726,
+        "affordance_points": [
+            {
+                "x": -0.2285,
+                "y": 0.305,
+                "z": 0.0
+            },
+            {
+                "x": 0.2285,
+                "y": 0.305,
+                "z": 0.0
+            },
+            {
+                "x": 0,
+                "y": 0.305,
+                "z": 0.2285
+            },
+            {
+                "x": 0,
+                "y": 0.305,
+                "z": -0.2285
+            }
+        ]
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11344726,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.0,
+        "id": 11344726
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.45,
+        "static_friction": 0.48,
+        "bounciness": 0.5,
+        "id": 11344726
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11344726,
+        "container_id": 14497022,
+        "position": {
+            "x": 0,
+            "y": 0.15855943,
+            "z": 0
+        },
+        "tag": "inside",
+        "half_extents": {
+            "x": 0.21984615,
+            "y": 0.146440565,
+            "z": 0.21988902
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b03_pen",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b03_pen",
+        "scale_factor": 0.01642319,
+        "position": {
+            "x": -1.418837314390753,
+            "y": 0.30500000000000027,
+            "z": -2.6252492493188684
+        },
+        "category": "pen",
+        "id": 846,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 224.3790982004644,
+            "y": 41.44613141355634,
+            "z": 42.862566078540304
+        },
+        "id": 846
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 846,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.10741072974269628,
+        "id": 846
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.65,
+        "id": 846
+    },
+    {
+        "$type": "add_object",
+        "name": "vk0060_dessertspoon",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/vk0060_dessertspoon",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -1.2629861699857143,
+            "y": 0.5550000000000003,
+            "z": -2.5573522939481594
+        },
+        "category": "spoon",
+        "id": 2138698,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 67.4858836217404,
+            "y": 82.80287560707234,
+            "z": 299.46141979171034
+        },
+        "id": 2138698
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 2138698,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 0.2,
+        "id": 2138698
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.43,
+        "static_friction": 0.47,
+        "bounciness": 0.6,
+        "id": 2138698
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 3.0908662528871744,
+        "id": 11344726,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "small_table_green_marble",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/small_table_green_marble",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.056030226664089605,
+            "y": 0,
+            "z": 0.06170316397293954
+        },
+        "category": "table",
+        "id": 11423008,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 11423008,
+        "is_kinematic": true,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_object_collision_detection_mode",
+        "id": 11423008,
+        "mode": "continuous_speculative"
+    },
+    {
+        "$type": "set_mass",
+        "mass": 130.0,
+        "id": 11423008
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.7,
+        "static_friction": 0.72,
+        "bounciness": 0.625,
+        "id": 11423008
+    },
+    {
+        "$type": "add_box_container",
+        "id": 11423008,
+        "container_id": 4126299,
+        "position": {
+            "x": -0.00035968,
+            "y": 0.90492154,
+            "z": 0.00092316
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.575870365,
+            "y": 0.005,
+            "z": 0.383913695
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": -1.3706498249948025,
+        "id": 11423008,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "add_object",
+        "name": "lg_table_marble_green",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/lg_table_marble_green",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.05704290892028796,
+            "y": 0,
+            "z": -3.142376003265381
+        },
+        "category": "table",
+        "id": 12629905,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 12629905,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 4.013844579458237,
+        "id": 12629905
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.598,
+        "id": 12629905
+    },
+    {
+        "$type": "add_box_container",
+        "id": 12629905,
+        "container_id": 8247679,
+        "position": {
+            "x": -1.189e-05,
+            "y": 0.35573313,
+            "z": -2.53e-06
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.30213639,
+            "y": 0.005,
+            "z": 0.302208095
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_sugerjar_a001_2015",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b05_sugerjar_a001_2015",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.08492253459779144,
+            "y": 0.35073313,
+            "z": -3.284547325301077
+        },
+        "category": "jar",
+        "id": 4882982,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 31.91567781731061,
+            "z": 0
+        },
+        "id": 4882982
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 4882982,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 6.208017584867775,
+        "id": 4882982
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.65,
+        "static_friction": 0.68,
+        "bounciness": 0.1,
+        "id": 4882982
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 4882982,
+        "parent_id": 12629905
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 180,
+        "id": 12629905,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 4882982
+    },
+    {
+        "$type": "add_object",
+        "name": "side_table_wood",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/side_table_wood",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.6029426535797118,
+            "y": 0,
+            "z": -3.137138183265381
+        },
+        "category": "table",
+        "id": 3496621,
+        "affordance_points": []
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 3496621,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 150.0,
+        "id": 3496621
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.35,
+        "static_friction": 0.37,
+        "bounciness": 0.6,
+        "id": 3496621
+    },
+    {
+        "$type": "add_box_container",
+        "id": 3496621,
+        "container_id": 8073058,
+        "position": {
+            "x": 5.1e-07,
+            "y": 0.61923236,
+            "z": -0.00076046
+        },
+        "tag": "on",
+        "half_extents": {
+            "x": 0.286174775,
+            "y": 0.005,
+            "z": 0.212241555
+        },
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_bowl_smooth",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_bowl_smooth",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.7316952284157692,
+            "y": 0.61423236,
+            "z": -3.107200708678057
+        },
+        "category": "bowl",
+        "id": 1711215,
+        "affordance_points": []
+    },
+    {
+        "$type": "rotate_object_to_euler_angles",
+        "euler_angles": {
+            "x": 0,
+            "y": 228.51871075547075,
+            "z": 0
+        },
+        "id": 1711215
+    },
+    {
+        "$type": "set_kinematic_state",
+        "id": 1711215,
+        "is_kinematic": false,
+        "use_gravity": true
+    },
+    {
+        "$type": "set_mass",
+        "mass": 5.5,
+        "id": 1711215
+    },
+    {
+        "$type": "set_physic_material",
+        "dynamic_friction": 0.47,
+        "static_friction": 0.47,
+        "bounciness": 0.625,
+        "id": 1711215
+    },
+    {
+        "$type": "add_cylinder_container",
+        "id": 1711215,
+        "container_id": 16122211,
+        "position": {
+            "x": 9.649e-05,
+            "y": 0.04461811,
+            "z": 0.00034404
+        },
+        "tag": "inside",
+        "radius": 0.09662219,
+        "height": 0.07422157,
+        "rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    {
+        "$type": "parent_object_to_object",
+        "id": 1711215,
+        "parent_id": 3496621
+    },
+    {
+        "$type": "rotate_object_by",
+        "angle": 180,
+        "id": 3496621,
+        "axis": "yaw",
+        "is_world": true,
+        "use_centroid": false
+    },
+    {
+        "$type": "unparent_object",
+        "id": 1711215
+    },
+    {
+        "$type": "step_physics",
+        "frames": 50
+    },
+    {
+        "$type": "send_occupancy_map",
+        "cell_size": 0.25,
+        "ignore_objects": [],
+        "raycast_y": 2.7,
+        "frequency": "always"
+    },
+    {
+        "$type": "send_segmentation_colors"
+    },
+    {
+        "$type": "send_categories"
+    },
+    {
+        "$type": "send_static_rigidbodies"
+    },
+    {
+        "$type": "send_rigidbodies",
+        "frequency": "always"
+    },
+    {
+        "$type": "send_bounds",
+        "frequency": "always"
+    },
+    {
+        "$type": "send_transforms",
+        "frequency": "always"
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_executive_pen",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b05_executive_pen",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.4787669750478848,
+            "y": 0.8929160833358765,
+            "z": 0.010711386404043788
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "category": "pen",
+        "id": 15000927,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "toothbrush",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/toothbrush",
+        "scale_factor": 0.5904899,
+        "position": {
+            "x": -0.1771390438079834,
+            "y": 0,
+            "z": -2.7036547660827637
+        },
+        "rotation": {
+            "x": 0,
+            "y": 229.2595249704621,
+            "z": 0
+        },
+        "category": "toothbrush",
+        "id": 564649,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "plate06",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/plate06",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.6771390438079834,
+            "y": 0,
+            "z": -1.4536547660827637
+        },
+        "rotation": {
+            "x": 0,
+            "y": 176.2833720685409,
+            "z": 0
+        },
+        "category": "plate",
+        "id": 7381049,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "key_brass",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/key_brass",
+        "scale_factor": 1,
+        "position": {
+            "x": -1.4271390438079834,
+            "y": 0,
+            "z": -1.2036547660827637
+        },
+        "rotation": {
+            "x": 0,
+            "y": 39.1988143045587,
+            "z": 0
+        },
+        "category": "key",
+        "id": 7801302,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "bag_14",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/bag_14",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.6771390438079834,
+            "y": 0,
+            "z": -1.2036547660827637
+        },
+        "rotation": {
+            "x": 0,
+            "y": 302.59629637423717,
+            "z": 0
+        },
+        "category": "bag, handbag, pocketbook, purse",
+        "id": 12608820,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "b05_executive_pen",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b05_executive_pen",
+        "scale_factor": 1.0,
+        "position": {
+            "x": -0.6771390438079834,
+            "y": 0,
+            "z": -0.7036547660827637
+        },
+        "rotation": {
+            "x": 0,
+            "y": 325.3638848279937,
+            "z": 0
+        },
+        "category": "pen",
+        "id": 998093,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "measuring_pan",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/measuring_pan",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.8228609561920166,
+            "y": 0,
+            "z": -0.20365476608276367
+        },
+        "rotation": {
+            "x": 0,
+            "y": 174.28483623809484,
+            "z": 0
+        },
+        "category": "pan",
+        "id": 13481593,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "apple_ipod_touch_yellow_vray",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/apple_ipod_touch_yellow_vray",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.8228609561920166,
+            "y": 0,
+            "z": 2.2963452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 247.91111763186694,
+            "z": 0
+        },
+        "category": "ipod",
+        "id": 1504672,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "b04_banana",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/b04_banana",
+        "scale_factor": 0.254,
+        "position": {
+            "x": -0.4271390438079834,
+            "y": 0,
+            "z": 2.5463452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 10.276080460487007,
+            "z": 0
+        },
+        "category": "banana",
+        "id": 655536,
+        "affordance_points": []
+    },
+    {
+        "$type": "add_object",
+        "name": "plate06",
+        "url": "file:////data/private/zqh/embodied/yisong/local_asset_linux/models/plate06",
+        "scale_factor": 1.0,
+        "position": {
+            "x": 0.8228609561920166,
+            "y": 0,
+            "z": 3.2963452339172363
+        },
+        "rotation": {
+            "x": 0,
+            "y": 257.7057552740513,
+            "z": 0
+        },
+        "category": "plate",
+        "id": 13360126,
+        "affordance_points": []
+    },
+    {
+        "$type": "step_physics",
+        "frames": 100
+    },
+    {
+        "$type": "create_avatar",
+        "type": "A_Img_Caps_Kinematic",
+        "id": "a"
+    },
+    {
+        "$type": "set_pass_masks",
+        "pass_masks": [
+            "_img"
+        ],
+        "avatar_id": "a"
+    },
+    {
+        "$type": "set_render_order",
+        "render_order": 100,
+        "avatar_id": "a"
+    },
+    {
+        "$type": "teleport_avatar_to",
+        "position": {
+            "x": -1.5,
+            "y": 3,
+            "z": -1.5
+        },
+        "avatar_id": "a"
+    },
+    {
+        "$type": "look_at_position",
+        "position": {
+            "x": 2.5,
+            "y": 0,
+            "z": 2.5
+        },
+        "avatar_id": "a"
+    }
+]

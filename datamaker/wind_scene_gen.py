@@ -100,8 +100,8 @@ def load_config():
         object_list = json.load(f)
 
 PATH = os.path.dirname(os.path.abspath(__file__))
-# go to parent directory until it contains envs folder
-while not os.path.exists(os.path.join(PATH, "envs")):
+# go to parent directory until the folder name is embodied-strategy
+while os.path.basename(PATH) != "embodied-strategy":
     PATH = os.path.dirname(PATH)
 
 available_scenes = ["suburb_scene_2023"]

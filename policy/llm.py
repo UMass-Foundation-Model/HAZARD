@@ -1,5 +1,5 @@
 import pdb
-import random
+import rule_based
 
 import openai
 import json
@@ -127,6 +127,7 @@ class LLM:
 		self.holding_objects = None
 		self.action_history = []
 		self.action_history_result = []
+		self.action_info_history = []
 		self.agent_pos = None
 		self.nearest_object = None
 		self.objects_info = None
@@ -146,10 +147,11 @@ class LLM:
 	def update_history(self, action):
 		self.action_history.append(action)
 
-	def update_history_action_result(self, result):
+	def update_history_action_result(self, result, info):
 		if len(self.action_history) == 0:
 			return
 		self.action_history_result.append(result)
+		self.action_info_history.append(info)
 
 	def reset(self, goal_objects, objects_info):
 		self.target_objects = goal_objects
@@ -323,11 +325,16 @@ class LLM:
 				available_plans.append(f"go pick up object <{obj['category']}> ({obj['id']})")
 				actions.append(action)
 		else:
-			for obj in self.object_list:
-				if obj['category'] != 'shopping cart':
-					continue
-				action = ("walk_to", obj['id'])
-				available_plans.append(f"go put object into <{obj['category']}> ({obj['id']})")
+			if self.task == "wind":
+				for obj in self.object_list:
+					if obj['category'] != 'shopping cart':
+						continue
+					action = ("walk_to", obj['id'])
+					available_plans.append(f"go put object into <{obj['category']}> ({obj['id']})")
+					actions.append(action)
+			else:
+				action = ("drop", None)
+				available_plans.append(f"put the holding object in my bag")
 				actions.append(action)
 
 		if len(self.action_history) == 0 or self.action_history[-1] != 'look around':
@@ -340,6 +347,9 @@ class LLM:
 				action = ("walk_to", obj['id'])
 				available_plans.append(f"go to object <{obj['category']}> ({obj['id']})")
 				actions.append(action)
+		if len(actions) > 10:
+			actions = actions[:10]
+			available_plans = available_plans[:10]
 		if len(actions) == 0:
 			action = ("explore", None)
 			available_plans.append("look around")
@@ -367,13 +377,14 @@ class LLM:
 			print(f"current seen objects id: {self.current_seen_objects_id}")
 		nearest_object = processed_input['nearest_object']
 		action_result = processed_input['action_result']
+		action_info = processed_input['action_info']
 		self.update_object_status()
 		if self.task == 'wind':
 			if len(processed_input['holding_objects']) == 0 and \
 					len(processed_input['nearest_object']) > 0 and \
 					processed_input['nearest_object'][0]['category'] in self.target_objects:
 				return "pick_up", processed_input['nearest_object'][0]['id']
-			if len(processed_input['holding_objects']) > 0 and len(self.action_history) > 0 and \
+			if len(processed_input['holding_objects']) > 0 and \
 					self.action_history[-1].startswith('go put object into <shopping cart>') and \
 					processed_input['action_result']:
 				return "drop", self.action_history[-1].split('(')[1].split(')')[0]
@@ -385,9 +396,9 @@ class LLM:
 					processed_input['nearest_object'][0]['category'] in self.target_objects:
 				return "pick_up", processed_input['nearest_object'][0]['id']
 
-		self.update_history_action_result(action_result)
-		action_history = [f"{action} (success)" if result else f"{action} (fail)" for action, result in
-						  zip(self.action_history, self.action_history_result)]
+		self.update_history_action_result(action_result, action_info)
+		action_history = [f"{action} (success)" if result else f"{action} (fail, because {info})" for action, result, info in
+						  zip(self.action_history, self.action_history_result, self.action_info_history)]
 		action, info = self.run(self.current_step, holding_objects, nearest_object, object_list, action_history, agent_pos)
 		import json
 		with open(os.path.join(self.save_dir, f'{self.current_step:04d}_info.json'), 'w') as f:

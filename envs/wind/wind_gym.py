@@ -9,8 +9,8 @@ from enum import IntEnum
 
 import os
 PATH = os.path.dirname(os.path.abspath(__file__))
-# go to parent directory until it contains envs folder
-while not os.path.exists(os.path.join(PATH, "envs")):
+# go to parent directory until the folder name is embodied-strategy
+while os.path.basename(PATH) != "embodied-strategy":
     PATH = os.path.dirname(PATH)
 
 class ActionSpace(IntEnum):
@@ -24,11 +24,12 @@ class ActionSpace(IntEnum):
 class WindEnv(gym.Env):
     def __init__(self, port: int = 1071, check_version: bool = True, launch_build: bool = False, seed = 0,
                  screen_size = 512, use_local_resources = False, map_size_h=256, map_size_v=256, grid_size=0.25,
-                 image_capture_path = None, **kwargs):
+                 image_capture_path: str = None, log_path: str = None, use_gt = False, **kwargs):
         self.controller_args = dict(launch_build=launch_build, port=port, check_version=check_version,
                                     screen_size=screen_size, use_local_resources=use_local_resources,
                                     map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
-                                    image_capture_path=image_capture_path)
+                                    image_capture_path=image_capture_path, log_path=log_path,
+                                    use_gt=use_gt)
         self.controller = None
         self.RNG = np.random.RandomState(0)
 
@@ -60,7 +61,7 @@ class WindEnv(gym.Env):
     def reset(self, data_dir = None):
         if data_dir == None:
             data_dirs = os.listdir(os.path.join(PATH, "data", "room_setup_wind"))
-            data_dirs = [d for d in data_dirs if "test" not in d]
+            data_dirs = [d for d in data_dirs if "suburb" in d]
             data_dir = os.path.join(PATH, "data", "room_setup_wind", data_dirs[self.RNG.randint(len(data_dirs))])
         self.setup = SceneSetup(data_dir=data_dir)
         if self.controller is not None:

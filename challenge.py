@@ -40,7 +40,7 @@ def init_logs(output_dir, name = 'simple_example'):
 
 class Challenge:
     def __init__(self, env_name, data_dir, output_dir, logger, launch_build=True, port=1071, screen_size=512,
-                 map_size_h=512, map_size_v=512, grid_size=0.25, debug=False, max_steps=1500):
+                 map_size_h=512, map_size_v=512, grid_size=0.1, debug=False, max_steps=1500, use_gt=False):
         if env_name == "fire":
             env = FireEnv
             max_steps = 1500
@@ -54,15 +54,15 @@ class Challenge:
             assert False
         self.env_name = env_name
         if debug:
-            self.env = env(launch_build=False, screen_size=screen_size, port=port, use_local_resources=True,
+            self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=False,
                            map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
-                           image_capture_path=f"{os.getcwd()}/outputs/screenshots/challenge", 
-                           log_path = f"{os.getcwd()}/outputs/logs/challenge_log.txt", 
-                           check_version=False)
+                           image_capture_path=os.path.join(output_dir, "images"), 
+                           log_path = os.path.join(output_dir, "log.txt"),
+                           check_version=False, use_gt=use_gt)
         else:
             self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=False,
                            map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
-                           image_capture_path=None)
+                           image_capture_path=None, check_version=False, use_gt=use_gt)
         self.logger = logger
         self.logger.debug(port)
         self.logger.info("Environment Created")
@@ -110,7 +110,7 @@ class Challenge:
                 return id
         return -1
 
-    def process_input(self, state, action_result):
+    def process_input(self, state, action_result, action_info):
         processed_input = {}
         explored_sem_id_map = state['sem_map']['explored']*state['sem_map']['id']
         explored_object_id_list = [int(idx) for idx in set(explored_sem_id_map.flatten()) if int(idx) != 0]
@@ -127,14 +127,19 @@ class Challenge:
         ]
         processed_input['holding_objects'] = self.holding_object
         if self.nearest_object != None:
-            processed_input['nearest_object'] = [{'name': self.env.controller.manager.segm.names[self.id_reverse_renumbering(self.nearest_object)],
-                                                  'category': self.env.controller.manager.segm.categories[
-                                                      self.id_reverse_renumbering(self.nearest_object)],
-                                                  'id': str(self.nearest_object)}]
+            try:
+                processed_input['nearest_object'] = [
+                    {'name': self.env.controller.manager.segm.names[self.id_reverse_renumbering(self.nearest_object)],
+                     'category': self.env.controller.manager.segm.categories[
+                         self.id_reverse_renumbering(self.nearest_object)],
+                     'id': str(self.nearest_object)}]
+            except:
+                pdb.set_trace()
         else:
             processed_input['nearest_object'] = []
         processed_input['step'] = self.env.controller.frame_count
         processed_input['action_result'] = action_result
+        processed_input['action_info'] = action_info
         # visualize_obs(self.env, None, str(self.step_num), "output")
         return processed_input
 
@@ -147,14 +152,14 @@ class Challenge:
     def drop_object(self):
         obj_id = int(self.holding_object[0]['id'])
         reversed_id = self.id_reverse_renumbering(obj_id)
-        print(reversed_id)
+        # print(reversed_id)
         if reversed_id in self.target_status:
-            print('ok')
+            # print('ok')
             # Can not pick up again, because this target is finished
             self.target_status[reversed_id] = self.env.controller.frame_count
             self.have_finished_list.append(obj_id)
         else:
-            print('not ok')
+            # print('not ok')
             self.nearest_object = obj_id
         self.holding_object = []
 
@@ -179,6 +184,8 @@ class Challenge:
                     if self.env_name == "fire":
                         if self.env.controller.manager.objects[target].state == FireObjectState.NORMAL:
                             total_score += value
+                        else:
+                            total_score += value * 0.5
                         self.final_states[target] = self.env.controller.manager.objects[target].state.value
                     elif self.env_name == "flood":
                         if name in waterproof_dict:
@@ -189,6 +196,8 @@ class Challenge:
                                 self.env.controller.manager.objects[target].state == FloodObjectState.NORMAL or \
                                 self.env.controller.manager.objects[target].state == FloodObjectState.FLOATING:
                             total_score += value
+                        else:
+                            total_score += value * 0.5
                         self.final_states[target] = self.env.controller.manager.objects[target].state.value
                     else:
                         total_score += value
@@ -224,22 +233,8 @@ class Challenge:
             target_info = self.get_target_info(get_target_description(self.env))
             self.holding_object = []
             if target_description is not None:
-                if agent.agent_type == 'h_agent':
-                    agent.reset(goal_objects=target_description,
-                                objects_info=target_info)
-                elif agent.agent_type == 'llm':
-                    agent.reset(goal_objects=target_description,
-                                objects_info=target_info)
-                elif agent.agent_type == 'mcts':
-                    agent.reset(goal_objects=target_description,
-                                objects_info=target_info)
-                elif agent.agent_type == 'human':
-                    agent.reset(goal_objects=target_description,
-                                objects_info=target_info)
-                elif agent.agent_type == 'record':
-                    agent.reset(goal_objects=target_description,
-                                objects_info=target_info)
-                elif agent.agent_type == 'rl':
+                if agent.agent_type in ['greedy', 'llm', 'llmv2', 'mcts', 'human', 'record', 'rl', 'rule', 'true_random',
+                                        'custom']:
                     agent.reset(goal_objects=target_description,
                                 objects_info=target_info)
                 else:
@@ -255,9 +250,18 @@ class Challenge:
             self.step_num = 0
             local_reward = 0.0
             action_result = False
+            action_info = ""
+            self.env.controller.communicate([])
+            if "demo" in self.output_dir:
+                for i in range(1500):
+                    self.env.controller.communicate([])
+                return
+
+            action_logger = open(os.path.join(self.output_dir, "actions.txt"), "w")
             while not done:
                 # self.env.controller._done()
                 if self.env_name in ["fire", "flood"]:
+                   print("Target status:")
                    for target in self.target_status:
                         print(target, self.target_status[target], self.env.controller.manager.objects[target].state, self.env.controller.manager.objects[target].position)
                 state = self.env.controller._obs()
@@ -266,19 +270,21 @@ class Challenge:
                     state['sem_map']['id'][state['sem_map']['id'] == finished_id] = 0
                     state['raw']['seg_mask'][state['raw']['seg_mask'] == finished_id] = 0
                 self.step_num += 1
-                processed_input = self.process_input(state, action_result)
+                processed_input = self.process_input(state, action_result, action_info)
                 processed_input['save_dir'] = str(os.path.join(self.output_dir, str(i)))
                 
-                if agent.agent_type == "llm":
+                if agent.agent_type == "llm" or agent.agent_type == "llmv2":
                     import json
                     with open(os.path.join(self.output_dir, str(i), f"input{self.env.controller.frame_count}.json"), "w") as f:
                         json.dump(processed_input, f, indent=4)
                     visualize_obs(self.env, state, suffix=str(self.env.controller.frame_count), save_dir=os.path.join(self.output_dir, str(i)))
                 
                 current_action = agent.choose_target(state, processed_input)
-                if isinstance(current_action, int) and agent.agent_type == "rl":
+                if isinstance(current_action, int) and agent.agent_type in ["rl", "true_random"]:
                     current_action = self.env.get_challenge_action(current_action)
                 print(current_action)
+                print(f"step {self.env.controller.comm_counter} action {current_action}", file=action_logger)
+
                 if current_action[0] == "walk_to":
                     if self.env_name in ["fire", "flood"]:
                         action_result, action_info = agent_walk_to(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
@@ -291,9 +297,13 @@ class Challenge:
                     else:
                         self.nearest_object = None
                 elif current_action[0] == "walk_to_single":
-                    action_result, action_info = agent_walk_to_single_step(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
-                                                                            reset_arms=False, arrived_at=1.0)
-                    if action_result == True and action_info == "success":
+                    if self.env_name in ["fire", "flood"]:
+                        action_result, action_info = agent_walk_to_single_step(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
+                                                               reset_arms=False, arrived_at=1.25)
+                    else:
+                        action_result, action_info = agent_walk_to_single_step(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
+                                                               reset_arms=False, arrived_at=2)
+                    if action_result and action_info == "success":
                         self.nearest_object = int(current_action[1])
                     else:
                         self.nearest_object = None
@@ -305,7 +315,8 @@ class Challenge:
                         else:
                             action_result, action_info = agent_pickup(self.env, self.id_reverse_renumbering(self.nearest_object), env_type=self.env_name)
                     else:
-                        action_result, action_info = agent_pickup(self.env, self.id_reverse_renumbering(int(current_action[1])), env_type=self.env_name)
+                        self.nearest_object = int(current_action[1])
+                        action_result, action_info = agent_pickup(self.env, self.id_reverse_renumbering(self.nearest_object), env_type=self.env_name)
                     if action_result:
                         self.hold_object()
                 elif current_action[0] == "drop":
@@ -343,7 +354,7 @@ class Challenge:
                     done = True
                 if done:
                     break
-
+            action_logger.close()
             score, max_score = self.get_score()
             total_score += score
             total_max_score += max_score
@@ -356,8 +367,8 @@ class Challenge:
                 "max_score": max_score,
                 "steps": step
             }
-            with open(os.path.join(self.output_dir, str(i), 'result_episode.json'), 'w') as f:
-                json.dump(result, f)
+            # with open(os.path.join(self.output_dir, str(i), 'result_episode.json'), 'w') as f:
+            #     json.dump(result, f)
         avg_score = total_score / num_eval_episodes
         avg_steps = total_steps / num_eval_episodes
         avg_max_score = total_max_score / num_eval_episodes
@@ -369,6 +380,7 @@ class Challenge:
             "target_status": self.target_status,
             "final_states": self.final_states,
         }
+        import json
         with open(os.path.join(self.output_dir, 'eval_result.json'), 'w') as f:
             json.dump(results, f)
         self.logger.info(f'eval done, avg score {avg_score}, max score {avg_max_score}, avg steps {avg_steps}')

@@ -5,6 +5,7 @@ from envs.fire.fire_utils import *
 from envs.fire.object import ObjectStatus, FireStatus, AgentStatus
 from envs.fire.agent import *
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
+from tdw.librarian import HumanoidLibrarian
 from tdw.add_ons.image_capture import ImageCapture
 from tdw.add_ons.logger import Logger
 from tdw.add_ons.log_playback import LogPlayback
@@ -20,13 +21,13 @@ import os
 import cv2
 import copy
 import os
-# from vision import Detector
+from vision import Detector
 from utils.local_asset import get_local_url
 from utils.scene_setup import SceneSetup
 
 PATH = os.path.dirname(os.path.abspath(__file__))
-# go to parent directory until it contains envs folder
-while not os.path.exists(os.path.join(PATH, "envs")):
+# go to parent directory until the folder name is embodied-strategy
+while os.path.basename(PATH) != "embodied-strategy":
     PATH = os.path.dirname(PATH)
 
 import torch
@@ -51,8 +52,8 @@ class FireAgentController(FireController):
         self.extinguishers = []
         self.comm_counter = 0
         self.use_gt = kwargs.get("use_gt", True)
-        # if not self.use_gt:
-        #     self.detector = Detector(**kwargs)
+        if not self.use_gt:
+            self.detector = Detector(**kwargs)
         # self.init_seg(vocab_path=f"{os.getcwd()}/seg/vocab.txt")
         if use_local_resources:
             self.update_replicant_url()
@@ -171,7 +172,7 @@ class FireAgentController(FireController):
             self.agents:List[FireAgent] = []
             for agent_pos in setup.agent_positions:
                 idx = self.get_unique_id()
-                self.agents.append(FireAgent(replicant_id=idx, position=agent_pos, image_frequency = ImageFrequency.always))
+                self.agents.append(FireAgent(replicant_id=idx, position=agent_pos, image_frequency = ImageFrequency.always, name="fireman"))
                 self.add_agent(idx, agent_pos)
                 self.add_ons.append(self.agents[-1])
         else:
@@ -208,7 +209,22 @@ class FireAgentController(FireController):
         for obj in self.target_ids:
             commands.append({"$type": "set_kinematic_state", "id": obj, "is_kinematic": False, "use_gravity": True})
         self.communicate(commands)
-        self.communicate({"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)})
+        
+        commands = [{"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)}]
+        """add a backpack or similar to the agent's left hand"""
+        self.container_name = "backpack" if "container" not in setup.other else setup.other["container"]
+        self.container_id = self.get_unique_id()
+        self.manager.add_object(ObjectStatus(idx=self.container_id, inflammable=False, temperature_threshold=3000))
+        
+        agent_pos = self.agents[0].dynamic.transform.position
+        commands.append(self.get_add_object(model_name=self.container_name, object_id=self.container_id, position=TDWUtils.array_to_vector3(agent_pos)))
+        self.communicate(commands)
+        self.agents[0].grasp(target=self.container_id, arm=Arm.left, axis=None, angle=None)
+        self.next_key_frame()
+        self.agents[0].reach_for(target=TDWUtils.array_to_vector3([-0.3, 1.0, 0.3]), absolute=False, arrived_at=0.1, arm=Arm.left)
+        self.next_key_frame()
+        self.agents[0].reset_arm(arm=Arm.left)
+        self.next_key_frame()
 
     def set_scene_bounds(self, resp=None):
         self.scene_bounds = SceneBounds(resp=resp)
@@ -358,6 +374,7 @@ class FireAgentController(FireController):
                     agent.fail_grasp()
         if self.use_local_resources:
             commands = self.replace_with_local_path(commands)
+            # self.commands = self.replace_with_local_path(self.commands)
         resp = super().communicate(commands)
         if self.initialized:
             # for i, agent in enumerate(self.agents):
@@ -413,8 +430,10 @@ class FireAgentController(FireController):
         if self.use_gt:
             seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")))
         else:
-            raise NotImplementedError
-            # seg_mask = self.detector.get_seg_mask(rgb)
+            rcnn_mask = self.detector.inference(np.array(rgb))
+            seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")),
+                                                        rcnn=rcnn_mask,
+                                                        id_list=self.manager.id_list)
         depth = TDWUtils.get_depth_values(self.agents[agent_idx].dynamic.images["depth"], width=self.screen_size, height=self.screen_size)
         depth = np.flip(depth, axis=0)
         

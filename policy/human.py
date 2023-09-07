@@ -2,7 +2,7 @@ import pdb
 import pandas as pd
 import numpy as np
 import streamlit as st
-import random
+import rule_based
 from PIL import Image, ImageDraw, ImageFont
 
 class SamplingParameters:
@@ -184,7 +184,14 @@ class HumanAgent:
         # done = False
         st.text(prompt)
         st.text("\n".join([f"{str(i)}. {plan}" for i, plan in enumerate(available_plan_list)]))
-        inp = input("Select plan id")
+        while True:
+            inp = input("Select plan id")
+            try:
+                inp = int(inp)
+            except:
+                continue
+            if isinstance(inp, int) and int(inp) >= 0 and int(inp) < len(available_plan_list):
+                break
         return int(inp)
 
     def rgb_to_hex(self, rgb):

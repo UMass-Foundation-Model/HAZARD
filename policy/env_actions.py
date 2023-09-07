@@ -1,15 +1,15 @@
 import sys
 import os
 PATH = os.path.dirname(os.path.abspath(__file__))
-# go to parent directory until it contains envs folder
-while not os.path.exists(os.path.join(PATH, "envs")):
+# go to parent directory until the folder name is embodied-strategy
+while os.path.basename(PATH) != "embodied-strategy":
     PATH = os.path.dirname(PATH)
 sys.path.append(PATH)
 
 import pyastar2d
 from typing import List, Union, Optional
 import numpy as np
-import random
+import rule_based
 from tdw.replicant.ik_plans.ik_plan_type import IkPlanType
 from tdw.replicant.action_status import ActionStatus
 from policy.astar import get_astar_path, get_astar_weight
@@ -130,13 +130,19 @@ def agent_walk_to_single_step(env, target: Union[int, np.ndarray, List], reset_a
 def agent_pickup(env, target: int, env_type: str = "what?"):
     arm = [Arm.left, Arm.right] if env_type == "wind" else Arm.right
     
-    env.controller.do_action(agent_idx=0, action="turn_to", params={"target": target})
-    env.controller.next_key_frame()
+    target_pos = env.controller.manager.objects[target].top()
+    target_pos[1] += 0.2
     
-    env.controller.do_action(agent_idx=0, action="reach_for", params={"target": target, 
+    env.controller.do_action(agent_idx=0, action="turn_to", params={"target": target})
+    status = env.controller.next_key_frame()[0][0]
+    if status != ActionStatus.success:
+        print("failed to turn to target")
+        input()
+
+    env.controller.do_action(agent_idx=0, action="reach_for", params={"target": TDWUtils.array_to_vector3(target_pos),
                                                                         "arm": [Arm.left, Arm.right] if env_type == "wind" else Arm.right,
-                                                                        "arrived_at": 1.0,
-                                                                        "max_distance": 2.5,
+                                                                        "arrived_at": 0.5,
+                                                                        "max_distance": 1.0,
                                                                         "plan": IkPlanType.vertical_horizontal})
     status = env.controller.next_key_frame()[0][0]
     reach_success = (status == ActionStatus.success)
@@ -148,7 +154,7 @@ def agent_pickup(env, target: int, env_type: str = "what?"):
                                                                     "axis": None,})
     status = env.controller.next_key_frame()[0][0]
     
-    env.controller.do_action(agent_idx=0, action="reset_arm", params={"arm": [Arm.left, Arm.right]})
+    env.controller.do_action(agent_idx=0, action="reset_arm", params={"arm": [Arm.left, Arm.right] if env_type == "wind" else Arm.right})
     env.controller.next_key_frame()
     
     if status == ActionStatus.success:
@@ -160,8 +166,9 @@ def agent_pickup(env, target: int, env_type: str = "what?"):
 
 """turn around to find new targets"""
 def agent_explore(env):
-    for i in range(6):
-        env.controller.do_action(agent_idx=0, action="turn_by", params={"angle": 60})
+    TURN_TIMES = 12
+    for i in range(TURN_TIMES):
+        env.controller.do_action(agent_idx=0, action="turn_by", params={"angle": 360.0 / TURN_TIMES})
         status = env.controller.next_key_frame()[0][0]
         env.controller._obs()
         if status != ActionStatus.success:
@@ -175,7 +182,24 @@ def agent_drop(env, container: Optional[int]=None, env_type: str = "what?"):
     except:
         return False, "not holding an object"
 
-    if (env_type == "flood" or env_type == "fire") and container is None:
+    if hasattr(env.controller, "container_id"):
+        assert Arm.left in env.controller.agents[0].dynamic.held_objects and env.controller.agents[0].dynamic.held_objects[Arm.left] == env.controller.container_id
+        container = env.controller.container_id
+
+    if (env_type == "flood" or env_type == "fire"):
+        top = env.controller.manager.objects[container].top()
+        top = top + np.array([0, 0.2, 0])
+        env.controller.do_action(agent_idx=0, action="reach_for", params={"target": TDWUtils.array_to_vector3(top),
+                                                                        "absolute": True,
+                                                                        "offhand_follows": False,
+                                                                        "arm": Arm.right,
+                                                                        "from_held": True,
+                                                                        "held_point": "top",
+                                                                        "max_distance": 1.0,
+                                                                        "arrived_at": 0.2,
+                                                                        "plan": IkPlanType.vertical_horizontal})
+        status = env.controller.next_key_frame()[0][0]
+        
         env.controller.do_action(agent_idx=0, action="drop", params={"arm": arm, "max_num_frames": 20})
         status = env.controller.next_key_frame()[0][0]
         # env.controller.communicate([{"$type": "destroy_object", "id": grasp_id}])
@@ -228,7 +252,7 @@ def agent_drop(env, container: Optional[int]=None, env_type: str = "what?"):
     env.controller.do_action(agent_idx=0, action="drop", params={"arm": arm, "max_num_frames": 20})
     status = env.controller.next_key_frame()[0][0]
 
-    env.controller.do_action(agent_idx=0, action="reset_arm", params={"arm": [Arm.left, Arm.right]})
+    env.controller.do_action(agent_idx=0, action="reset_arm", params={"arm": [Arm.left, Arm.right] if env_type == "wind" else Arm.right})
     env.controller.next_key_frame()
 
     if status == ActionStatus.success:

@@ -35,6 +35,7 @@ class SceneSetup:
             if self.task == "wind":
                 for target in self.target_ids:
                     for obj in log_objects:
+                        # if target == 14415226 and obj['id'] == 14415226: print(obj['id'], target, obj['category'])
                         if obj['id'] == target and obj['category'] not in self.targets:
                             self.targets.append(obj['category'])
                         if obj['id'] == target and obj['name'] not in self.target_names:

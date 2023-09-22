@@ -1,9 +1,11 @@
+## Common utils
+
 ### Video recording
 
 * command for running experiment with recording:
 
 ```bash
-python .\run_experiments.py --data_dir ./data/room_setup_fire/mm_craftroom_2a-1/ --api_key_file ~/api-key.txt --port 1073 --screen_size 1024 --debug --agent_name h_agent --env_name flood
+python run_experiments.py --data_dir ./data/room_setup_fire/mm_craftroom_2a-1/ --api_key_file ~/api-key.txt --port 1073 --screen_size 1024 --debug --agent_name h_agent --env_name flood
 ```
 
 * command of generating video:

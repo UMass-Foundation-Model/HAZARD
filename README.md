@@ -1,7 +1,7 @@
 # Official Repo for HAZARD Challenge: Embodied Decision Making in Dynamically Changing Environments
 
 ![Overview of HAZARD](pics/overview.png)
-An overview of HAZARD task.
+An overview of three scenarios in the HAZARD challenge.
 
 ## Detailed documentations
 

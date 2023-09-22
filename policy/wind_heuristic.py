@@ -6,18 +6,12 @@ while os.path.basename(PATH) != "embodied-strategy":
     PATH = os.path.dirname(PATH)
 sys.path.append(PATH)
 
-from typing import List
-import numpy as np
-import rule_based
 from envs.wind.wind_gym import WindEnv
 from envs.wind.agent import *
-from tdw.add_ons.nav_mesh import NavMesh
 from tdw.output_data import OutputData, NavMeshPath, Raycast
-from tdw.replicant.ik_plans.ik_plan_type import IkPlanType
 from tdw.add_ons.image_capture import ImageCapture
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
 from tdw.replicant.ik_plans.ik_plan_type import IkPlanType
-from tdw.replicant.replicant_dynamic import ReplicantDynamic
 from tdw.output_data import Replicants, OutputData
 from policy.astar import get_astar_path
 

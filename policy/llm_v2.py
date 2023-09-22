@@ -1,23 +1,25 @@
-import pdb
-import rule_based
 import numpy as np
-import openai
-import json
-import os
 import pandas as pd
-from openai.error import OpenAIError
-import backoff
 import inflect
 from policy.llm import LLM
 
 class LLMv2(LLM):
-    def __init__(self, reasoner_prompt_path = "llm/prompt_v2.csv", **kwargs):
+    def __init__(self, reasoner_prompt_path = "llm_configs/prompt_v2.csv", **kwargs):
         super().__init__(**kwargs)
         self.env_change_record = {}
         self.last_seen_object = {}
         df = pd.read_csv(reasoner_prompt_path)
         self.reasoner_prompt_template = df['prompt'][0]
         self.inflect_engine = inflect.engine()
+
+    def reset(self, goal_objects, objects_info):
+        self.target_objects = goal_objects
+        self.objects_info = objects_info
+        self.env_change_record = {}
+        self.action_history = []
+        self.action_history_result = []
+        self.env_change_record = {}
+        self.last_seen_object = {}
 
     def save_object_history_info(self, obj_id):
         if self.task in ["fire", "flood"]:
@@ -32,11 +34,6 @@ class LLMv2(LLM):
                 self.env_change_record[obj_id] = [avg_temp]
             else:
                 self.env_change_record[obj_id].append(avg_temp)
-            # if self.task == "fire":
-            #     avg_temp = np.exp(avg_temp)
-            #     text = f"object temperature is {str(round(avg_temp, 2))} Celsius"
-            # else:
-            #     text = f"water level at this object is {str(round(avg_temp, 2))} m"
         else:
             id_map = self.current_state['sem_map']['explored'] * self.current_state['sem_map']['id']
             object_points = (id_map == obj_id).nonzero()
@@ -60,21 +57,26 @@ class LLMv2(LLM):
         else:
             center = (object_points[:, 0].float().mean().item(),
                       object_points[:, 1].float().mean().item())
+        distance = np.array((self.agent_pos[0] - center[0], self.agent_pos[1] - center[1]))
+        distance = np.linalg.norm(distance)
+        dist_description = f"{round(distance, 2)}"
         if self.task == "fire":
             record_str = ", ".join([f"{str(round(np.exp(temp), 2))} Celsius at step {str(i)}" for
                                     i, temp in zip(steps, record)])
             record_str = f"object location: x {str(round(center[0], 2))}, y {str(round(center[1], 2))}, " \
+                         f"object distance from me is {dist_description} m, " \
                          f"object temperature is {record_str}."
             return record_str
         elif self.task == "flood":
             record_str = ", ".join([f"{str(round(temp, 2))} m at step {str(i)}" for i, temp in zip(steps, record)])
             record_str = f"object location: x {str(round(center[0], 2))}, y {str(round(center[1], 2))}, " \
+                         f"object distance from me is {dist_description} m, " \
                          f"water level at this object is {record_str}."
             return record_str
         else:
-            record_str = ", ".join([f"[{str(round(center[0], 2))}, {str(round(center[1], 2))}] at step {str(i)}"
-                                    for i, temp in zip(steps, record)])
-            record_str = f"object location is {record_str}."
+            record_str = f"object distance from me is {dist_description} m, "
+            record_str += f"object location is {', '.join([f'[{str(round(center[0], 2))}, {str(round(center[1], 2))} ] at step {str(i)}' for i, temp in zip(steps, record)])}."
+            record_str = record_str
             return record_str
 
     def get_current_observation(self):
@@ -145,8 +147,8 @@ class LLMv2(LLM):
         progress_desc = self.progress2text()
         action_history_desc = ", ".join(action_history[-10:] if len(action_history) > 10 else action_history)
         prompt = self.prompt_template.replace('$STATE$', progress_desc)
-        prompt = prompt.replace('$ACTION_HISTORY$', action_history_desc)
-        prompt = prompt.replace('$TARGET_OBJECTS$', self.objects_list2text())
+        prompt = prompt.replace('$ACTION_HISTORY$', action_history_desc + "\n")
+        prompt = prompt.replace('$TARGET_OBJECTS$', self.objects_list2text() + "\n")
 
         available_plans, num, available_plan_list, actions = self.get_available_plans()
         action_target_idx_list = [int(act[1]) for act in actions if act[1] != None]
@@ -159,7 +161,7 @@ class LLMv2(LLM):
             elif idx in action_target_idx_list:
                 history_list_selected.append(history)
 
-        prompt = prompt.replace('$OBJECT_HISTORY$', "\n".join(history_list_selected))
+        prompt = prompt.replace('$OBJECT_HISTORY$', "\n".join(history_list_selected) + "\n")
         # if num == 0:
         # 	print("Warning! No available plans! only explore")
         # 	plan = None

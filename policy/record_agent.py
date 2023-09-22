@@ -1,5 +1,3 @@
-import rule_based
-
 
 class RecordAgent:
     def __init__(self, task):

@@ -1,23 +1,18 @@
-from typing import List, Union, Optional, Dict, Any, Tuple
-from tdw.controller import Controller
-from envs.wind.wind_utils import *
-from envs.wind.object import ObjectStatus, AgentStatus
+from typing import Any, Tuple
+from envs.wind.object import ObjectStatus
 from envs.wind.agent import *
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
-from tdw.add_ons.image_capture import ImageCapture
 from tdw.add_ons.logger import Logger
-from tdw.add_ons.log_playback import LogPlayback
 from tdw.replicant.arm import Arm
 from tdw.replicant.image_frequency import ImageFrequency
-from model import Semantic_Mapping
+from utils.model import Semantic_Mapping
 from envs.wind import WindController
 from tdw.tdw_utils import TDWUtils
 from tdw.librarian import HumanoidLibrarian
 import numpy as np
-import cv2
 import copy
 import os
-from vision import Detector
+from utils.vision import Detector
 from utils.local_asset import get_local_url
 from utils.scene_setup import SceneSetup
 from tdw.output_data import OutputData, Images

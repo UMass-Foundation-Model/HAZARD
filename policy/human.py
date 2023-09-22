@@ -2,7 +2,6 @@ import pdb
 import pandas as pd
 import numpy as np
 import streamlit as st
-import rule_based
 from PIL import Image, ImageDraw, ImageFont
 
 class SamplingParameters:
@@ -19,7 +18,7 @@ class HumanAgent:
     def __init__(self, prompt_template_path, task,):
         self.rooms_explored = None
         self.goal_desc = None
-        self.agent_type = "llm"
+        self.agent_type = "human"
         self.agent_name = "Bob"
         self.prompt_template_path = prompt_template_path
         df = pd.read_csv(self.prompt_template_path)
@@ -32,11 +31,11 @@ class HumanAgent:
         self.holding_objects = None
         self.action_history = []
         self.action_history_result = []
-        color_file = open("llm/colors.txt")
+        color_file = open("llm_configs/colors.txt")
         colors = color_file.readlines()
         colors = [color.strip()[1:-1] for color in colors]
         self.colors = [[int(c) for c in color.split(",")] for color in colors]
-        self.font = ImageFont.truetype(font='llm/GEMELLI.TTF',
+        self.font = ImageFont.truetype(font='llm_configs/GEMELLI.TTF',
                                   size=np.floor(1.5e-2 * 512 + 5).astype('int32'))
 
     def update_history(self, action):

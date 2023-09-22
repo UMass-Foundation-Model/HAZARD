@@ -20,12 +20,15 @@ def get_args():
     parser.add_argument("--output_dir", type=str, default="outputs")
     parser.add_argument("--env_name", type=str, choices=["fire", "flood", "wind"], default="flood")
     parser.add_argument("--agent_name", type=str, choices=["rule", "llm", "llmv2", "mcts", "llm+change", "greedy", "human",
-                                                           "record", "rl", "random", "custom"], default="llm")
+                                                           "record", "rl", "random", "custom"], default="llmv2")
     parser.add_argument("--data_dir", type=str, default="data/room_setup_fire/mm_craftroom_2a-1")
     parser.add_argument("--port", type=int, default=1071)
+    parser.add_argument("--max_test_episode", type=int, default=10)
     parser.add_argument("--max_tokens", type=int, default=64)
-    parser.add_argument("--prompt_path", type=str, default="llm/prompt.csv")
+    parser.add_argument("--prompt_path", type=str, default="llm_configs/prompt.csv")
     parser.add_argument("--lm_id", type=str, default="gpt-3.5-turbo")
+    parser.add_argument("--lm_source", type=str, choices=['openai', 'huggingface'], default="openai")
+    parser.add_argument("--model_and_tokenizer_path", type=str, default="meta-llama/Llama-2-7b-chat-hf")
     parser.add_argument("--debug", action='store_true', default=False)
     parser.add_argument("--grid_size", type=float, default=0.1)
     parser.add_argument("--use_gt", action='store_true', default=False)
@@ -38,22 +41,22 @@ def get_agent(args):
             api_key_file = open(args.api_key_file)
             api_key_list = api_key_file.readlines()
             api_key_list = [api_key.strip() for api_key in api_key_list]
-            return LLM(source="openai", lm_id=args.lm_id, prompt_template_path=args.prompt_path, cot=True,
-                       sampling_parameters=sampling_parameters, task=args.env_name, api_key=api_key_list)
         else:
-            return LLM(source="openai", lm_id=args.lm_id, prompt_template_path=args.prompt_path, cot=True,
-                       sampling_parameters=sampling_parameters, task=args.env_name, api_key=args.api_key)
+            api_key_list = args.api_key
+        return LLM(source=args.lm_source, lm_id=args.lm_id, prompt_template_path=args.prompt_path, cot=True,
+                   sampling_parameters=sampling_parameters, task=args.env_name, api_key=api_key_list,
+                   model_and_tokenizer_path=args.model_and_tokenizer_path)
     if args.agent_name == "llmv2":
         sampling_parameters = SamplingParameters(debug=args.debug, max_tokens=args.max_tokens)
         if args.api_key_file != "":
             api_key_file = open(args.api_key_file)
             api_key_list = api_key_file.readlines()
             api_key_list = [api_key.strip() for api_key in api_key_list]
-            return LLMv2(source="openai", lm_id=args.lm_id, prompt_template_path=args.prompt_path, cot=True,
-                       sampling_parameters=sampling_parameters, task=args.env_name, api_key=api_key_list)
         else:
-            return LLMv2(source="openai", lm_id=args.lm_id, prompt_template_path=args.prompt_path, cot=True,
-                       sampling_parameters=sampling_parameters, task=args.env_name, api_key=args.api_key)
+            api_key_list = args.api_key
+        return LLMv2(source=args.lm_source, lm_id=args.lm_id, prompt_template_path=args.prompt_path, cot=True,
+                     sampling_parameters=sampling_parameters, task=args.env_name, api_key=api_key_list,
+                     model_and_tokenizer_path=args.model_and_tokenizer_path)
     elif args.agent_name == "llm+change":
         sampling_parameters = SamplingParameters(debug=args.debug)
         if args.api_key_file != "":
@@ -114,7 +117,8 @@ if __name__ == "__main__":
             if 'craftroom' not in task and 'kitchen' not in task and 'suburb' not in task:
                 continue
             count += 1
-            if count > 10: break
+            if count > args.max_test_episode:
+                break
             now_data_dir = os.path.join(args.data_dir, task)
             now_output_dir = os.path.join(args.output_dir, task)
             if not os.path.exists(now_output_dir):

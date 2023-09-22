@@ -2,7 +2,7 @@ import json
 from random import choice
 import os
 
-with open('value_name.json', 'r') as f:
+with open('scene_configs/value_name.json', 'r') as f:
     v = json.load(f)
 
 with open('../../local_asset_linux/models.json', 'r') as f:
@@ -17,5 +17,5 @@ for key, value in v.items():
         category[cate] = value
     # category[cate].append(value)
 print(category)
-with open('value.json', 'w') as f:
+with open('scene_configs/value.json', 'w') as f:
     json.dump(category, f, indent=4)

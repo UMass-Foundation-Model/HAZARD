@@ -1,27 +1,21 @@
-import pdb
-from typing import List, Union, Optional, Dict, Any, Tuple
-from tdw.controller import Controller
-from envs.fire.fire_utils import *
-from envs.fire.object import ObjectStatus, FireStatus, AgentStatus
+from typing import Any, Tuple
+from envs.fire.object import ObjectStatus
 from envs.fire.agent import *
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
 from tdw.librarian import HumanoidLibrarian
-from tdw.add_ons.image_capture import ImageCapture
 from tdw.add_ons.logger import Logger
-from tdw.add_ons.log_playback import LogPlayback
 from tdw.replicant.arm import Arm
 from tdw.replicant.image_frequency import ImageFrequency
-from model import Semantic_Mapping
+from utils.model import Semantic_Mapping
 from envs.fire import FireController
 from tdw.tdw_utils import TDWUtils
 from tdw.output_data import OutputData, Images
 from tdw.scene_data.scene_bounds import SceneBounds
 import numpy as np
-import os
 import cv2
 import copy
 import os
-from vision import Detector
+from utils.vision import Detector
 from utils.local_asset import get_local_url
 from utils.scene_setup import SceneSetup
 
@@ -74,11 +68,12 @@ class FireAgentController(FireController):
             return
         LOCAL_PATH_PREFIX = f"file://{os.getcwd()}/data/assets"
         Controller.HUMANOID_LIBRARIANS[Replicant.LIBRARY_NAME] = HumanoidLibrarian(Replicant.LIBRARY_NAME)
-        record = Controller.HUMANOID_LIBRARIANS[Replicant.LIBRARY_NAME].get_record("replicant_0")
         import platform
-        new_url = record.urls[platform.system()].split("/")[-1]
-        record.urls[platform.system()] = f"{LOCAL_PATH_PREFIX}/{new_url}"
-        Controller.HUMANOID_LIBRARIANS[Replicant.LIBRARY_NAME].add_or_update_record(record, overwrite=True)
+        for repli in ["replicant_0", "fireman"]:
+            record = Controller.HUMANOID_LIBRARIANS[Replicant.LIBRARY_NAME].get_record(repli)
+            new_url = record.urls[platform.system()].split("/")[-1]
+            record.urls[platform.system()] = f"{LOCAL_PATH_PREFIX}/{new_url}"
+            Controller.HUMANOID_LIBRARIANS[Replicant.LIBRARY_NAME].add_or_update_record(record, overwrite=True)
 
     def grid_to_real(self, grid_pos):
         return self.sem_map.grid_to_real(grid_pos)
@@ -134,7 +129,7 @@ class FireAgentController(FireController):
         
         import json
         temperature_record = dict()
-        with open(os.path.join(PATH, "data", "temperature.json"), "r") as f:
+        with open(os.path.join(PATH, "data", "meta_data", "temperature.json"), "r") as f:
             L = json.load(f)
             for data in L:
                 temperature_record[data["name"]] = data["temp"]

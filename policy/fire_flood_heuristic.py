@@ -1,9 +1,8 @@
 import pdb
 
-import rule_based
 import numpy as np
 import copy
-from tqdm import tqdm
+import random
 
 class mcts_state_H:
     def __init__(self, object_info, target_list: list = None, container_list: list = None, agent_pos: list = None,

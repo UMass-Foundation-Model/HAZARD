@@ -2,7 +2,7 @@ import json
 from random import choice
 import os
 
-with open('value.json', 'r') as f:
+with open('scene_configs/value.json', 'r') as f:
     v = json.load(f)
 
 

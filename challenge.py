@@ -54,13 +54,13 @@ class Challenge:
             assert False
         self.env_name = env_name
         if debug:
-            self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=False,
+            self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=True,
                            map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
                            image_capture_path=os.path.join(output_dir, "images"), 
                            log_path = os.path.join(output_dir, "log.txt"),
                            check_version=False, use_gt=use_gt)
         else:
-            self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=False,
+            self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=True,
                            map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
                            image_capture_path=None, check_version=False, use_gt=use_gt)
         self.logger = logger
@@ -78,8 +78,13 @@ class Challenge:
         self.low_value = 1
         self.max_steps = max_steps
 
+    def reset(self):
+        self.holding_object = []
+        self.nearest_object = None
+        self.have_finished_list = []
+
     def get_target_info(self, target_list):
-        value_dict = json.load(open("scenes/value.json"))
+        value_dict = json.load(open("scenes/scene_configs/value.json"))
         object_attribute_dict = {}
         for target_category in target_list:
             object_attribute_dict[target_category] = {}
@@ -89,11 +94,11 @@ class Challenge:
             else:
                 object_attribute_dict[target_category]['value'] = self.low_value
         if self.env_name == 'fire':
-            fireproof_dict = json.load(open("scenes/fire.json"))
+            fireproof_dict = json.load(open("scenes/scene_configs/fire.json"))
             for target_category in target_list:
                 object_attribute_dict[target_category]['fireproof'] = fireproof_dict[target_category]
         elif self.env_name == 'flood':
-            waterproof_dict = json.load(open("scenes/fluid.json"))
+            waterproof_dict = json.load(open("scenes/scene_configs/fluid.json"))
             for target_category in target_list:
                 if target_category in waterproof_dict:
                     object_attribute_dict[target_category]['waterproof'] = waterproof_dict[target_category]
@@ -166,10 +171,10 @@ class Challenge:
     def get_score(self):
         total_score = 0
         max_score = 0
-        value_dict = json.load(open("data/value.json"))
+        value_dict = json.load(open("data/meta_data/value.json"))
         self.final_states = dict()
         if self.env_name in ["fire", "flood"]:
-            waterproof_dict = json.load(open("scenes/fluid.json"))
+            waterproof_dict = json.load(open("scenes/scene_configs/fluid.json"))
             print("finally:", self.target_status)
             for target in self.target_status:
                 name = self.env.controller.target_id2name[target]
@@ -218,11 +223,11 @@ class Challenge:
         start = time.time()
         for i in range(num_eval_episodes):
             start_time = time.time()
-            self.have_finished_list = []
             if not os.path.exists(os.path.join(self.output_dir, str(i))):
                 os.makedirs(os.path.join(self.output_dir, str(i)))
             self.logger.info('Episode: {}/{}'.format(i + 1, num_eval_episodes))
             self.logger.info(f"Resetting Environment ... data is {self.data_dir}")
+            self.reset()
             self.env.reset(data_dir=self.data_dir)
         #    camera = ThirdPersonCamera(avatar_id="a", position={"x": -0.9, "y": 2.0, "z": 2.3}, look_at=1194112)
         #    self.env.controller.add_ons.append(camera)
@@ -231,7 +236,6 @@ class Challenge:
             self.target_status = {target_id: False for target_id in target_ids}
             print('init:', self.target_status)
             target_info = self.get_target_info(get_target_description(self.env))
-            self.holding_object = []
             if target_description is not None:
                 if agent.agent_type in ['greedy', 'llm', 'llmv2', 'mcts', 'human', 'record', 'rl', 'rule', 'true_random',
                                         'custom']:

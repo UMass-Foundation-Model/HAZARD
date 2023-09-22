@@ -204,7 +204,7 @@ fire_position = [grid_to_real(fire, origin, grid_size) for fire in fire_position
 import json
 values = []
 t_val = 0
-with open('./value_name.json', 'r') as f:
+with open('./scene_configs/value_name.json', 'r') as f:
     d = json.load(f)
 i = 0
 for index, obj in enumerate(candidate_targets):

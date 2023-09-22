@@ -2,6 +2,8 @@
 
 ### Overview
 
+### [Observations](observations.md)
+
 ### [Action space](action_space.md)
 
 ### Default agents

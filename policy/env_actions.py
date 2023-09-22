@@ -6,10 +6,8 @@ while os.path.basename(PATH) != "embodied-strategy":
     PATH = os.path.dirname(PATH)
 sys.path.append(PATH)
 
-import pyastar2d
 from typing import List, Union, Optional
 import numpy as np
-import rule_based
 from tdw.replicant.ik_plans.ik_plan_type import IkPlanType
 from tdw.replicant.action_status import ActionStatus
 from policy.astar import get_astar_path, get_astar_weight

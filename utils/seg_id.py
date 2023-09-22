@@ -3,7 +3,7 @@ import numpy as np
 from tdw.output_data import SegmentationColors
 from tdw.output_data import ReplicantSegmentationColors
 from typing import Union
-from vision import Detector
+from utils.vision import Detector
 
 import os
 PATH = os.path.dirname(os.path.abspath(__file__))
@@ -22,7 +22,7 @@ class SegmentationID:
         self.reverse_id = dict()
         self.reverse_id[0] = 0
 
-        category_file = os.path.join(PATH, 'data', 'categories.txt')
+        category_file = os.path.join(PATH, 'data', 'meta_data', 'categories.txt')
         with open(category_file, 'r') as f:
             self.global_categories = eval(f.read())
     

@@ -24,12 +24,14 @@ class FloodEnv(gym.Env):
     def __init__(self, port: int = 1071, check_version: bool = True, launch_build: bool = False,
                  use_local_resources: bool = False, seed = 0, screen_size = 512, 
                  image_capture_path = None, log_path: str = None, use_gt = False,
-                 map_size_h = 128, map_size_v = 128, grid_size = 0.25):
+                 map_size_h = 128, map_size_v = 128, grid_size = 0.25, reverse_observation = False,
+                 record_only: bool = False):
         self.controller_args = dict(use_local_resources=use_local_resources, launch_build=launch_build,
                                     port=port, check_version=check_version, screen_size=screen_size,
                                     image_capture_path=image_capture_path, log_path=log_path,
                                     map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
-                                    use_gt=use_gt)
+                                    use_gt=use_gt, reverse_observation=reverse_observation,
+                                    record_only=record_only)
         self.controller = None
         self.RNG = np.random.RandomState(0)
 
@@ -42,6 +44,7 @@ class FloodEnv(gym.Env):
             "seg_color": gym.spaces.Box(0, 256, (3,), dtype=np.int32),
         })
         self.done = False
+        self.record_only = record_only
 
         self.observation_space = gym.spaces.Box(0, 20, (5, map_size_h, map_size_v), dtype=np.float32)
         # self.observation_space = gym.spaces.Dict({
@@ -71,12 +74,15 @@ class FloodEnv(gym.Env):
         self.controller.seed(self.RNG.randint(1000000))
         print("Controller connected")
         self.controller.init_scene(self.setup)
-        self.controller.do_action(0, "turn_by", {"angle": 90})
-        self.controller.next_key_frame()
-
         self.num_step = 0
         self.last_action = None
         self.last_target = None
+        if self.record_only:
+            return
+
+        self.controller.do_action(0, "turn_by", {"angle": 90})
+        self.controller.next_key_frame()
+
         return self.controller._obs()["RL"]
     
     # def action2command(self, action, agent_idx: int = 0):

@@ -13,7 +13,7 @@ import torch
 class RandomAgent:
     def __init__(self, task):
         self.task = task
-        self.agent_type = "true_random"
+        self.agent_type = "random"
     
     def reset(self, goal_objects, objects_info):
         pass

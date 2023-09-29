@@ -6,8 +6,8 @@ from tdw.output_data import OutputData, SegmentationColors
 import os
 
 ## this is only available for non-wind scenes
-DATA_PATH = "/home/winnie/csl/embodied-strategy/data/room_setup_wind"
-IMAGE_PATH = "/home/winnie/csl/images2/wind"
+DATA_PATH = "data/room_setup_wind"
+IMAGE_PATH = "../images2/wind"
 
 def generate_images(config):
     os.system(f"rm -rf {os.path.join(IMAGE_PATH, config)}")

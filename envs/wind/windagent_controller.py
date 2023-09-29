@@ -1,4 +1,5 @@
-from typing import Any, Tuple
+import pdb
+from typing import Any, Tuple, Dict
 from envs.wind.object import ObjectStatus
 from envs.wind.agent import *
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
@@ -32,16 +33,19 @@ class WindAgentController(WindController):
     """
     Never ever use self.commands in here! For safety uses, self.commands can only be used in parent class
     """
-    def __init__(self, use_local_resources: bool = False, image_capture_path: str = None, log_path: str = None, **kwargs) -> None:
+    def __init__(self, use_local_resources: bool = False, image_capture_path: str = None, log_path: str = None,
+                 reverse_observation: bool = False, record_only: bool = False, **kwargs) -> None:
         self.use_local_resources = use_local_resources
         self.image_capture_path = image_capture_path
         self.log_path = log_path
         self.frame_count = 0
+        self.reverse_observation = reverse_observation
         super().__init__(**kwargs)
         self.screen_size = kwargs.get("screen_size", 512)
         self.agents: List[WindAgent] = []
         self.comm_counter = 0
         self.use_gt = kwargs.get("use_gt", True)
+        self.record_only = record_only
         if not self.use_gt:
             self.detector = Detector(**kwargs)
         if use_local_resources:
@@ -120,21 +124,24 @@ class WindAgentController(WindController):
                     self.manager.add_object(ObjectStatus(idx=idx, position=pos, resistence=resistence))
                 filtered_commands.append(command)
             self.communicate(filtered_commands)
-        
-        if len(self.agents) == 0:
-            self.agents:List[WindAgent] = []
-            for agent_pos in setup.agent_positions:
-                idx = self.get_unique_id()
-                self.agents.append(WindAgent(replicant_id=idx, position=agent_pos, image_frequency = ImageFrequency.always))
-                self.add_agent(idx, agent_pos)
-                self.add_ons.append(self.agents[-1])
-        else:
-            assert(len(self.agents) == len(setup.agent_positions))
-            for i in range(len(self.agents)):
-                idx = self.agents[i].replicant_id
-                self.agents[i].reset(position=setup.agent_positions[i])
-                self.add_ons.append(self.agents[i])
-                self.add_agent(idx, setup.agent_positions[i])
+
+        if not self.record_only:
+            if len(self.agents) == 0:
+                self.agents: List[WindAgent] = []
+                for agent_pos in setup.agent_positions:
+                    idx = self.get_unique_id()
+                    self.agents.append(
+                        WindAgent(replicant_id=idx, position=agent_pos, image_frequency=ImageFrequency.always))
+                    self.add_agent(idx, agent_pos)
+                    self.add_ons.append(self.agents[-1])
+            else:
+                assert (len(self.agents) == len(setup.agent_positions))
+                for i in range(len(self.agents)):
+                    idx = self.agents[i].replicant_id
+                    self.agents[i].reset(position=setup.agent_positions[i])
+                    self.add_ons.append(self.agents[i])
+                    self.add_agent(idx, setup.agent_positions[i])
+
         self.maps = [None] * len(self.agents)
 
         self.add_ons.append(self.manager)
@@ -151,19 +158,37 @@ class WindAgentController(WindController):
         for idx in self.containers:
             self.manager.settled.add(idx)
         self.communicate([])
-        commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
-                    {"$type": "set_target_framerate", "framerate": 30}]
 
         if self.image_capture_path != None:
-            pos = setup.agent_positions[0]
-            pos[1] = 8.0
-            theta = self.RNG.random() * 2 * np.pi
-            pos[0] += np.cos(theta) * 2
-            pos[2] += np.sin(theta) * 2
-            
+            pos = copy.deepcopy(setup.agent_positions[0])
+            pos[1] = 4.0
+            # theta = self.RNG.random() * 2 * np.pi
+            # pos[0] += np.cos(theta) * 2
+            # pos[2] += np.sin(theta) * 2
+            pos[0] += 1.0
+            pos[2] -= 2.0
+
+            if self.record_only:
+                look_at = copy.deepcopy(setup.agent_positions[0])
+                # look_at[1] += 3.0
+                look_at[0] -= 3.0
+                look_at[2] -= 6.0
+                look_at = TDWUtils.array_to_vector3(look_at)
+            else:
+                look_at = self.agents[0].replicant_id
             camera = ThirdPersonCamera(avatar_id="record", position=TDWUtils.array_to_vector3(pos),
-                                       look_at=self.agents[0].replicant_id)
+                                       look_at=look_at)
             self.add_ons.extend([camera])
+            self.communicate([])
+            commands = [{"$type": "set_screen_size", "width": self.screen_size*4, "height": self.screen_size*4},
+                        {"$type": "set_target_framerate", "framerate": 30}]
+        else:
+            commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
+                        {"$type": "set_target_framerate", "framerate": 30}]
+
+        if self.image_capture_path is not None:
+            commands.extend([{"$type": "set_pass_masks", "pass_masks": ["_img"], "avatar_id": "record"},
+                             {"$type": "send_images", "frequency": "always", "ids": ["record"]}])
         # if self.video_path is not None:
         #     self.capture = ImageCapture(path=self.video_path, avatar_ids=["a"])
         #     self.add_ons.append(self.capture)
@@ -172,7 +197,8 @@ class WindAgentController(WindController):
         self.sem_map = Semantic_Mapping(device=None, screen_size=self.screen_size, map_size_h=self.map_size_h, map_size_v=self.map_size_v, grid_size=self.grid_size, origin_pos=self.origin_pos)
         self.initialized = True
         self.communicate(commands)
-        self.communicate({"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)})
+        if not self.record_only:
+            self.communicate({"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)})
     
     def next_key_frame(self) -> Tuple[List[ActionStatus], List[int]]:
         # print("next_key_frame")
@@ -222,7 +248,7 @@ class WindAgentController(WindController):
     
     def get_agent_status(self, idx) -> WindAgent:
         return self.agents[idx]
-    
+
     def find_nearest_object(self, agent_idx: int = 0, objects: List[int] = None):
         current_position = self.agents[agent_idx].dynamic.transform.position
         return self.manager.find_nearest_object(pos=current_position, objects=objects)
@@ -314,13 +340,16 @@ class WindAgentController(WindController):
         raw observation: RGBD, temperature
         """
         rgb = self.agents[agent_idx].dynamic.get_pil_image()
-        # seg_mask = np.zeros((3, self.screen_size, self.screen_size))
-        seg_mask = None
+        id_image = np.array(self.agents[agent_idx].dynamic.get_pil_image("id"))
+        if self.reverse_observation:
+            rgb = np.flip(rgb, axis=0)
+            id_image = np.flip(id_image, axis=0)
+
         if self.use_gt:
-            seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")))
+            seg_mask = self.manager.segm.get_seg_mask(id_image)
         else:
             rcnn_mask = self.detector.inference(np.array(rgb))
-            seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")),
+            seg_mask = self.manager.segm.get_seg_mask(np.array(id_image),
                                                         rcnn=rcnn_mask,
                                                         id_list=self.manager.id_list)
         # print(seg_mask.shape, seg_mask.max())

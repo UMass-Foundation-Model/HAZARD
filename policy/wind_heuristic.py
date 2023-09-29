@@ -179,7 +179,7 @@ def find_path(env: WindEnv, target: int, reset_arms: bool = False):
         env.controller.next_key_frame()
     env.controller.communicate([])
 
-def run(scene_name, image_path = "/home/zfchen/csl/test/images"):
+def run(scene_name, image_path = ""):
     env = WindEnv(launch_build=True, screen_size=512, port=12138)
     # env = WindEnv(launch_build=False, screen_size=512, port=1071, use_local_resources=True)
     data_dir = os.path.join(PATH, "data", "room_setup_wind", scene_name)
@@ -292,13 +292,3 @@ def run(scene_name, image_path = "/home/zfchen/csl/test/images"):
     env.controller.socket.close()
 
     os.system(f"ffmpeg -i {image_path}/{scene_name}/img_%04d.jpg -vcodec libx264 -pix_fmt yuv420p {PATH}/logs/{scene_name}.mp4 < {PATH}/policy/yes 2>/dev/null")
-
-if __name__ == "__main__":
-    base_path = "/home/winnie/dwh/"
-    # base_path = "/data/private/zqh/embodied"
-    dirs = os.listdir(f"{base_path}/embodied-strategy/data/room_setup_wind")
-    dirs = sorted(dirs)
-    dirs = ["suburb_scene_2023-1", "suburb_scene_2023-2"]
-    for scene_name in dirs:
-        print("scene_name: ", scene_name)
-        run(scene_name, image_path=f"{base_path}/images")

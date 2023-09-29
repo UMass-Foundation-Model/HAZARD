@@ -1,4 +1,5 @@
-from typing import Any, Tuple
+import pdb
+from typing import Any, Tuple, Dict
 from envs.flood.object import ObjectStatus
 from envs.flood.agent import *
 from envs.flood.flood import FloorFlood
@@ -25,11 +26,12 @@ class FloodAgentController(FloodController):
     Never ever use self.commands in here! For safety uses, self.commands can only be used in parent class
     """
 
-    def __init__(self, use_local_resources: bool = False, single_room: bool = True, 
-                 image_capture_path: str = None, log_path: str = None, **kwargs) -> None:
+    def __init__(self, use_local_resources: bool = False, single_room: bool = True, reverse_observation: bool = False,
+                 image_capture_path: str = None, log_path: str = None, record_only: bool = False, **kwargs) -> None:
         self.frame_count = 0
         self.use_local_resources = use_local_resources
         self.image_capture_path = image_capture_path
+        self.reverse_observation = reverse_observation
         self.log_path = log_path
         super().__init__(**kwargs)
         self.screen_size = kwargs.get("screen_size", 512)
@@ -37,6 +39,7 @@ class FloodAgentController(FloodController):
         self.comm_counter = 0
         self.use_gt = kwargs.get("use_gt", True)
         self.single_room = single_room
+        self.record_only = record_only
         if not self.use_gt:
             self.detector = Detector(**kwargs)
         # self.init_seg(vocab_path=f"{os.getcwd()}/seg/vocab.txt")
@@ -66,16 +69,9 @@ class FloodAgentController(FloodController):
 
     def grid_to_real(self, grid_pos):
         return self.sem_map.grid_to_real(grid_pos)
+
     def real_to_grid(self, real_pos):
         return self.sem_map.real_to_grid(real_pos)
-
-    def init_seg(self, vocab_path, granularity=0.6):
-        from seg import SAMPredictor, setup_sam_cfg
-        sam_cfg = setup_sam_cfg(config_file="seg/ovseg_swinB_vitL_demo.yaml")
-        self.obj_vocab = open(vocab_path).readlines()
-        self.obj_vocab = [obj.strip() for obj in self.obj_vocab]
-        self.predictor = SAMPredictor(cfg=sam_cfg, granularity=granularity, sam_path='seg/sam_vit_l_0b3195.pth',
-                                 ovsegclip_path='seg/ovseg_clip_l_9a1909.pth')
 
     def reset_scene(self):
         # whatever the agent is holding, drop it
@@ -119,24 +115,24 @@ class FloodAgentController(FloodController):
                 if tp[:4] == "send" or tp.find("avatar") != -1 or "avatar_id" in command:
                     continue
                 filtered_commands.append(command)
-            # json.dump(filtered_commands, open("/data/private/zqh/tmp.json", "w"))
             self.communicate(filtered_commands)
 
-        if len(self.agents) == 0:
-            self.agents: List[FloodAgent] = []
-            for agent_pos in setup.agent_positions:
-                idx = self.get_unique_id()
-                self.agents.append(
-                    FloodAgent(replicant_id=idx, position=agent_pos, image_frequency=ImageFrequency.always))
-                self.add_agent(idx, agent_pos)
-                self.add_ons.append(self.agents[-1])
-        else:
-            assert (len(self.agents) == len(setup.agent_positions))
-            for i in range(len(self.agents)):
-                idx = self.agents[i].replicant_id
-                self.agents[i].reset(position=setup.agent_positions[i])
-                self.add_ons.append(self.agents[i])
-                self.add_agent(idx, setup.agent_positions[i])
+        if not self.record_only:
+            if len(self.agents) == 0:
+                self.agents: List[FloodAgent] = []
+                for agent_pos in setup.agent_positions:
+                    idx = self.get_unique_id()
+                    self.agents.append(
+                        FloodAgent(replicant_id=idx, position=agent_pos, image_frequency=ImageFrequency.always))
+                    self.add_agent(idx, agent_pos)
+                    self.add_ons.append(self.agents[-1])
+            else:
+                assert (len(self.agents) == len(setup.agent_positions))
+                for i in range(len(self.agents)):
+                    idx = self.agents[i].replicant_id
+                    self.agents[i].reset(position=setup.agent_positions[i])
+                    self.add_ons.append(self.agents[i])
+                    self.add_agent(idx, setup.agent_positions[i])
 
         self.maps = [None] * len(self.agents)
         self.target = setup.targets
@@ -146,32 +142,28 @@ class FloodAgentController(FloodController):
         self.target_id2name = setup.target_id2name
         self.finished = []
         self.communicate([])
+        if self.image_capture_path is not None:
+            # camera = ThirdPersonCamera(avatar_id="record", position={"x": -7.78, "y": 7.67, "z": 0.16},
+            #                            look_at=self.agents[0].replicant_id)
+            if not self.record_only:
+                camera = ThirdPersonCamera(avatar_id="record", position={"x": self.manager.flood_manager.x_min + 0.2,
+                                                                         "y": 2.5,
+                                                                         "z": self.manager.flood_manager.z_min + 0.2},
+                                           look_at={"x": self.manager.flood_manager.x_max - 0.2,
+                                                    "y": 0.0, "z": self.manager.flood_manager.z_max - 0.2})
+            else:
+                camera = ThirdPersonCamera(avatar_id="record", position={"x": -1.5, "y": 2.0, "z": -2.0},
+                                           look_at={"x": 0.0, "y": 0.0, "z": 0.0})
+            self.add_ons.extend([camera])
+            commands = [{"$type": "set_screen_size", "width": self.screen_size*4, "height": self.screen_size*4},
+                        {"$type": "set_target_framerate", "framerate": 30}]
+        else:
+            commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
+                        {"$type": "set_target_framerate", "framerate": 30}]
 
-        # commands = []
-        # commands.append(self.get_add_object(model_name="box_18inx18inx12in_cardboard",
-        #                     library="models_core.json",
-        #                     position={"x": 9, "y": 0, "z": -1.25},
-        #                     object_id=self.get_unique_id()))
-        # commands.append(self.get_add_object(model_name="box_18inx18inx12in_cardboard",
-        #                     library="models_core.json",
-        #                     position={"x": 10, "y": 0, "z": -1.25},
-        #                     object_id=self.get_unique_id()))
-        # commands.append(self.get_add_object(model_name="box_18inx18inx12in_cardboard",
-        #                     library="models_core.json",
-        #                     position={"x": 5, "y": 0, "z": -1.25},
-        #                     object_id=self.get_unique_id()))
-        # commands.append(self.get_add_object(model_name="box_18inx18inx12in_cardboard",
-        #                     library="models_core.json",
-        #                     position={"x": 3, "y": 0, "z": -1.25},
-        #                     object_id=self.get_unique_id()))
-        # commands.append(self.get_add_object(model_name="box_18inx18inx12in_cardboard",
-        #                     library="models_core.json",
-        #                     position={"x": 2, "y": 0, "z": -1.25},
-        #                     object_id=self.get_unique_id()))
-        # self.communicate(commands)
-
-        commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
-                    {"$type": "set_target_framerate", "framerate": 30}]
+        if self.image_capture_path is not None:
+            commands.extend([{"$type": "set_pass_masks", "pass_masks": ["_img"], "avatar_id": "record"},
+                             {"$type": "send_images", "frequency": "always", "ids": ["record"]}])
 
         # Get the floors for this floorplan. Create flood objects for each floor.
         # These will be at 0 in Y, and not visible until their height is adjusted.
@@ -182,6 +174,7 @@ class FloodAgentController(FloodController):
             lib = SceneLibrarian()
             record = lib.get_record(setup.scene_name)
             rooms = record.rooms[0].alcoves
+            # rooms = []
             rooms.append(record.rooms[0].main_region)
             effect_name = 'fplan1_floor1'
             original_effect_size = (4.1796417236328125, 2.817157745361328, 5.654577255249023)
@@ -196,8 +189,8 @@ class FloodAgentController(FloodController):
                                                                       library="flood_effects.json"))
                 self.commands.append({"$type": "scale_visual_effect",
                                       "scale_factor": {"x": room.bounds[0]/original_effect_size[0],
-                                                       "y": 1.0,
-                                                       "z": room.bounds[2]/original_effect_size[2]
+                                                       "y": room.bounds[2]/original_effect_size[1],
+                                                       "z": 0.01
                                                        },
                                       "id": floor_id})
                 # Add to dictionary of currently-flooded floors. Position will include current height (flood level).
@@ -227,15 +220,6 @@ class FloodAgentController(FloodController):
         self.manager.flood_manager.set_scene_bounds(resp=resp)
         self.add_ons.append(self.manager)
 
-        if self.image_capture_path is not None:
-            # camera = ThirdPersonCamera(avatar_id="record", position={"x": -7.78, "y": 7.67, "z": 0.16},
-            #                            look_at=self.agents[0].replicant_id)
-            camera = ThirdPersonCamera(avatar_id="record", position={"x": self.manager.flood_manager.x_min+0.2,
-                                                                     "y": 2.5, "z": self.manager.flood_manager.z_min+0.2},
-                                       look_at={"x": self.manager.flood_manager.x_max-0.2,
-                                                                     "y": 0.0, "z": self.manager.flood_manager.z_max-0.2})
-            self.add_ons.extend([camera])
-
         self.manager.prepare_segmentation_data()
         self.initialized = True
         for obj in self.target_ids:
@@ -245,21 +229,25 @@ class FloodAgentController(FloodController):
                 commands.append({"$type": "set_kinematic_state", "id": obj, "is_kinematic": False, "use_gravity": True})
         self.communicate(commands)
 
-        commands = [{"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)}]
-        """add a backpack or similar to the agent's left hand"""
-        self.container_name = "backpack" if "container" not in setup.other else setup.other["container"]
-        self.container_id = self.get_unique_id()
-        self.manager.add_object(ObjectStatus(idx=self.container_id, waterproof=True, has_buoyancy=False))
-        
-        agent_pos = self.agents[0].dynamic.transform.position
-        commands.append(self.get_add_object(model_name=self.container_name, object_id=self.container_id, position=TDWUtils.array_to_vector3(agent_pos)))
-        self.communicate(commands)
-        self.agents[0].grasp(target=self.container_id, arm=Arm.left, axis=None, angle=None)
-        self.next_key_frame()
-        self.agents[0].reach_for(target=TDWUtils.array_to_vector3([-0.3, 1.0, 0.3]), absolute=False, arrived_at=0.1, arm=Arm.left)
-        self.next_key_frame()
-        self.agents[0].reset_arm(arm=Arm.left)
-        self.next_key_frame()
+        if not self.record_only:
+            commands = [
+                {"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)}]
+            """add a backpack or similar to the agent's left hand"""
+            self.container_name = "backpack" if "container" not in setup.other else setup.other["container"]
+            self.container_id = self.get_unique_id()
+            self.manager.add_object(ObjectStatus(idx=self.container_id, waterproof=True, has_buoyancy=False))
+
+            agent_pos = self.agents[0].dynamic.transform.position
+            commands.append(self.get_add_object(model_name=self.container_name, object_id=self.container_id,
+                                                position=TDWUtils.array_to_vector3(agent_pos)))
+            self.communicate(commands)
+            self.agents[0].grasp(target=self.container_id, arm=Arm.left, axis=None, angle=None)
+            self.next_key_frame()
+            self.agents[0].reach_for(target=TDWUtils.array_to_vector3([-0.3, 1.0, 0.3]), absolute=False, arrived_at=0.1,
+                                     arm=Arm.left)
+            self.next_key_frame()
+            self.agents[0].reset_arm(arm=Arm.left)
+            self.next_key_frame()
 
         # TODO add source
         # self.init_obi()
@@ -377,6 +365,7 @@ class FloodAgentController(FloodController):
             for target in self.target_ids:
                 if (np.abs(self.manager.objects[target].position).sum() > 50) and (target not in self.finished):
                     self.finished.append(target)
+
         if self.image_capture_path != None:
             for i in range(len(resp) - 1):
                 r_id = OutputData.get_data_type_id(resp[i])
@@ -433,13 +422,16 @@ class FloodAgentController(FloodController):
         raw observation: RGBD, temperature
         """
         rgb = self.agents[agent_idx].dynamic.get_pil_image()
-        
+        id_image = np.array(self.agents[agent_idx].dynamic.get_pil_image("id"))
+        if self.reverse_observation:
+            rgb = np.flip(rgb, axis=0)
+            id_image = np.flip(id_image, axis=0)
         seg_mask = None
         if self.use_gt:
-            seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")))
+            seg_mask = self.manager.segm.get_seg_mask(id_image)
         else:
             rcnn_mask = self.detector.inference(np.array(rgb))
-            seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")),
+            seg_mask = self.manager.segm.get_seg_mask(np.array(id_image),
                                                         rcnn=rcnn_mask,
                                                         id_list=self.manager.id_list)
 

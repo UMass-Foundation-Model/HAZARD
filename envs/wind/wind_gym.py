@@ -24,12 +24,13 @@ class ActionSpace(IntEnum):
 class WindEnv(gym.Env):
     def __init__(self, port: int = 1071, check_version: bool = True, launch_build: bool = False, seed = 0,
                  screen_size = 512, use_local_resources = False, map_size_h=256, map_size_v=256, grid_size=0.25,
-                 image_capture_path: str = None, log_path: str = None, use_gt = False, **kwargs):
+                 image_capture_path: str = None, log_path: str = None, use_gt = False,
+                 reverse_observation = False, record_only: bool = False, **kwargs):
         self.controller_args = dict(launch_build=launch_build, port=port, check_version=check_version,
                                     screen_size=screen_size, use_local_resources=use_local_resources,
                                     map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
                                     image_capture_path=image_capture_path, log_path=log_path,
-                                    use_gt=use_gt)
+                                    use_gt=use_gt, reverse_observation=reverse_observation, record_only=record_only)
         self.controller = None
         self.RNG = np.random.RandomState(0)
 
@@ -43,6 +44,7 @@ class WindEnv(gym.Env):
         # })
         # temperature_space = gym.spaces.Box(0, 10000, (1, screen_size, screen_size), dtype=np.float64)
         self.done = False
+        self.record_only = record_only
 
         self.observation_space = gym.spaces.Box(0, 20, (4, map_size_h, map_size_v), dtype=np.float64)
         # self.observation_space = gym.spaces.Dict({
@@ -71,13 +73,15 @@ class WindEnv(gym.Env):
         self.controller.seed(self.RNG.randint(1000000))
         print("Controller connected")
         self.controller.init_scene(self.setup)
-        self.controller.do_action(0, "turn_by", {"angle": 0})
-        self.controller.next_key_frame()
 
         self.num_step = 0
         self.last_action = None
         self.last_target = None
-        return self.controller._obs()["RL"]
+
+        if not self.record_only:
+            self.controller.do_action(0, "turn_by", {"angle": 0})
+            self.controller.next_key_frame()
+            return self.controller._obs()["RL"]
     
     # def action2command(self, action, agent_idx: int = 0):
     #     command = None

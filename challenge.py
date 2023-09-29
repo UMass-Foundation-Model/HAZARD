@@ -40,10 +40,11 @@ def init_logs(output_dir, name = 'simple_example'):
 
 class Challenge:
     def __init__(self, env_name, data_dir, output_dir, logger, launch_build=True, port=1071, screen_size=512,
-                 map_size_h=512, map_size_v=512, grid_size=0.1, debug=False, max_steps=1500, use_gt=False):
+                 map_size_h=512, map_size_v=512, grid_size=0.1, debug=False, max_steps=1500, use_gt=False,
+                 reverse_observation=False, record_only=False):
         if env_name == "fire":
             env = FireEnv
-            max_steps = 1500
+            max_steps = 1500 if not record_only else 4500
         elif env_name == "flood":
             env = FloodEnv
             max_steps = 1500
@@ -57,12 +58,13 @@ class Challenge:
             self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=True,
                            map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
                            image_capture_path=os.path.join(output_dir, "images"), 
-                           log_path = os.path.join(output_dir, "log.txt"),
-                           check_version=False, use_gt=use_gt)
+                           log_path = os.path.join(output_dir, "log.txt"), reverse_observation=reverse_observation,
+                           check_version=False, use_gt=use_gt, record_only=record_only)
         else:
             self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=True,
                            map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
-                           image_capture_path=None, check_version=False, use_gt=use_gt)
+                           image_capture_path=None, check_version=False, use_gt=use_gt,
+                           reverse_observation=reverse_observation, record_only=record_only)
         self.logger = logger
         self.logger.debug(port)
         self.logger.info("Environment Created")
@@ -237,7 +239,7 @@ class Challenge:
             print('init:', self.target_status)
             target_info = self.get_target_info(get_target_description(self.env))
             if target_description is not None:
-                if agent.agent_type in ['greedy', 'llm', 'llmv2', 'mcts', 'human', 'record', 'rl', 'rule', 'true_random',
+                if agent.agent_type in ['greedy', 'llm', 'llmv2', 'mcts', 'human', 'record', 'rl', 'rule', 'random',
                                         'custom']:
                     agent.reset(goal_objects=target_description,
                                 objects_info=target_info)
@@ -262,6 +264,12 @@ class Challenge:
                 return
 
             action_logger = open(os.path.join(self.output_dir, "actions.txt"), "w")
+
+            if agent.agent_type == "record":
+                while self.env.controller.frame_count < self.max_steps:
+                    self.env.controller.communicate([])
+                done = True
+
             while not done:
                 # self.env.controller._done()
                 if self.env_name in ["fire", "flood"]:
@@ -282,9 +290,13 @@ class Challenge:
                     with open(os.path.join(self.output_dir, str(i), f"input{self.env.controller.frame_count}.json"), "w") as f:
                         json.dump(processed_input, f, indent=4)
                     visualize_obs(self.env, state, suffix=str(self.env.controller.frame_count), save_dir=os.path.join(self.output_dir, str(i)))
+
+                if agent.agent_type == "mcts":
+                    visualize_obs(self.env, state, suffix=str(self.env.controller.frame_count),
+                                  save_dir=os.path.join(self.output_dir, str(i)))
                 
                 current_action = agent.choose_target(state, processed_input)
-                if isinstance(current_action, int) and agent.agent_type in ["rl", "true_random"]:
+                if isinstance(current_action, int) and agent.agent_type in ["rl", "random"]:
                     current_action = self.env.get_challenge_action(current_action)
                 print(current_action)
                 print(f"step {self.env.controller.comm_counter} action {current_action}", file=action_logger)
@@ -364,13 +376,6 @@ class Challenge:
             total_max_score += max_score
             step = self.env.controller.frame_count
             total_steps += step
-            result = {
-                "finish": local_finish[0],
-                "total": local_finish[1],
-                "score": score,
-                "max_score": max_score,
-                "steps": step
-            }
             # with open(os.path.join(self.output_dir, str(i), 'result_episode.json'), 'w') as f:
             #     json.dump(result, f)
         avg_score = total_score / num_eval_episodes

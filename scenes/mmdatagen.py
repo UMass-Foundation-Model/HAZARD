@@ -7,8 +7,8 @@ from tdw.output_data import OutputData, SegmentationColors
 import os
 
 ## this is only available for non-flood scenes
-DATA_PATH = "/home/winnie/csl/embodied-strategy/data/room_setup_fire"
-IMAGE_PATH = "/home/winnie/csl/images2/flood"
+DATA_PATH = "data/room_setup_fire"
+IMAGE_PATH = "../images2/flood"
 
 def generate_images(config):
     os.system(f"rm -rf {os.path.join(IMAGE_PATH, config)}")

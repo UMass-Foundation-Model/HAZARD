@@ -50,7 +50,7 @@ class Detector:
 if __name__ == "__main__":
     d = {"a": 1, "b": 2}
     detector = Detector(**d)
-    img = '/home/winnie/csl/embodied-strategy/outputs/flood_LLM4/0/rgb_43.png'
+    img = 'outputs/flood_LLM4/0/rgb_43.png'
     img = mmcv.imread(img)
     result = detector.inference(img)
     print(result.pred_instances)

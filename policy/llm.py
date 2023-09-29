@@ -1,5 +1,5 @@
 import pdb
-
+import tiktoken
 import openai
 import json
 import os
@@ -31,7 +31,8 @@ class LLM:
                  sampling_parameters,
                  task,
                  api_key,
-                 model_and_tokenizer_path=""
+                 model_and_tokenizer_path="",
+                 total_max_tokens=4096
                  ):
         self.env_change_record = None
         if type(api_key) == list:
@@ -54,8 +55,11 @@ class LLM:
         self.lm_id = lm_id
         self.chat = 'gpt-3.5-turbo' in lm_id or 'gpt-4' in lm_id
         self.total_cost = 0
+        self.total_max_tokens = total_max_tokens - sampling_parameters.max_tokens
 
         if self.source == 'openai':
+            tiktoken.get_encoding("cl100k_base")
+            self.tokenizer = tiktoken.encoding_for_model(self.lm_id)
             if self.chat:
                 self.sampling_params = {
                     "max_tokens": sampling_parameters.max_tokens,
@@ -96,6 +100,12 @@ class LLM:
             def _generate(prompt, sampling_params):
                 usage = 0
                 if source == 'openai':
+                    base_prompt = prompt[0]["content"]
+                    tokens = self.tokenizer.encode(base_prompt)
+                    while len(tokens) >= self.total_max_tokens:
+                        base_prompt = self.cut_prompt(base_prompt)
+                        tokens = self.tokenizer.encode(base_prompt)
+                    prompt[0]["content"] = base_prompt
                     try:
                         if self.chat:
                             response = openai.ChatCompletion.create(
@@ -135,8 +145,15 @@ class LLM:
                 elif source == 'huggingface':
                     if self.chat:
                         prompt = self.tokenizer.apply_chat_template(prompt, tokenize=False)
-                        model_inputs = self.tokenizer(prompt, return_tensors="pt").to("cuda:0")
-                        output = self.model.generate(**model_inputs, max_length=model_inputs.input_ids.shape[1]+256)
+                        model_inputs = self.tokenizer(prompt, return_tensors="pt")
+                        while model_inputs.input_ids.shape[1] >= self.total_max_tokens:
+                            prompt = self.cut_prompt(prompt)
+                            model_inputs = self.tokenizer(prompt, return_tensors="pt")
+                        model_inputs = model_inputs.to("cuda:0")
+                        output = self.model.generate(**model_inputs, max_length=model_inputs.input_ids.shape[1]
+                                                     + self.sampling_params["max_tokens"],
+                                                     temperature=self.sampling_params['temperature'],
+                                                     top_p=self.sampling_params['top_p'])
                         generated_samples = [self.tokenizer.decode(output[0][model_inputs.input_ids.shape[1]:],
                                                                    skip_special_tokens=True)]
                         if self.debug:
@@ -174,6 +191,37 @@ class LLM:
             self.apikey_idx = 0
         openai.api_key = self.apikey_list[self.apikey_idx]
         time.sleep(sleep_time)
+
+    def cut_prompt_with_given_positions(self, position1, position2, prompt):
+        assert position1 in prompt
+        prompt = prompt.split(position1)
+        if len(prompt) < 2:
+            return False, prompt
+        head, tail = prompt
+        head = head + position1
+        assert position2 in tail
+        tail = tail.split(position2)
+        if len(tail) < 2:
+            return False, prompt
+        mid, tail = tail
+        tail = tail + position2
+        mid = mid.split("\n")
+        if len(mid) > 0:
+            mid = mid[:-1]
+            mid = "\n".join(mid)
+            prompt = head + mid + tail
+            return True, prompt
+        return False, prompt
+
+    def cut_prompt(self, prompt):
+        for pos1, pos2 in [("Objects states history:\n", "\nAvailable actions:"),
+                           ("Target objects:\n", "\nCurrent State:"),
+                           ("Previous actions:\n", "\nObjects states history:")]:
+            success, prompt = self.cut_prompt_with_given_positions(position1=pos1, position2=pos2, prompt=prompt)
+            if success:
+                return prompt
+        prompt = "\n".join(prompt.split("\n")[:-1])
+        return prompt
 
     def update_history(self, action):
         self.action_history.append(action)

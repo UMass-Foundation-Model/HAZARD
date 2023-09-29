@@ -1,7 +1,7 @@
 
 class RecordAgent:
     def __init__(self, task):
-        self.agent_type = "mcts"
+        self.agent_type = "record"
         self.agent_name = "Bob"
         self.task = task
         assert task in ['fire', 'flood', 'wind']

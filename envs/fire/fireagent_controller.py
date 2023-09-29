@@ -1,4 +1,4 @@
-from typing import Any, Tuple
+from typing import Any, Tuple, Dict
 from envs.fire.object import ObjectStatus
 from envs.fire.agent import *
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
@@ -35,17 +35,20 @@ class FireAgentController(FireController):
     """
     Never ever use self.commands in here! For safety uses, self.commands can only be used in parent class
     """
-    def __init__(self, use_local_resources: bool = False, image_capture_path: str = None, log_path: str = None, **kwargs) -> None:
+    def __init__(self, use_local_resources: bool = False, image_capture_path: str = None, log_path: str = None,
+                 reverse_observation: bool = False, record_only: bool = False, **kwargs) -> None:
         self.frame_count = 0
         self.use_local_resources = use_local_resources
         self.image_capture_path = image_capture_path
         self.log_path = log_path
+        self.reverse_observation = reverse_observation
         super().__init__(**kwargs)
         self.screen_size = kwargs.get("screen_size", 512)
         self.agents: List[FireAgent] = []
         self.extinguishers = []
         self.comm_counter = 0
         self.use_gt = kwargs.get("use_gt", True)
+        self.record_only = record_only
         if not self.use_gt:
             self.detector = Detector(**kwargs)
         # self.init_seg(vocab_path=f"{os.getcwd()}/seg/vocab.txt")
@@ -77,6 +80,7 @@ class FireAgentController(FireController):
 
     def grid_to_real(self, grid_pos):
         return self.sem_map.grid_to_real(grid_pos)
+
     def real_to_grid(self, real_pos):
         return self.sem_map.real_to_grid(real_pos)
 
@@ -97,21 +101,11 @@ class FireAgentController(FireController):
         self.fire_candidate = dict()
         self.initialized = False
         self.maps = []
-        objects = self.manager.objects.copy()
         self.add_ons = []
         self.manager.reset()
         self.extinguishers = []
         self.frame_count = 0
         self.communicate([])
-        # self.communicate([
-        #     {'$type': 'send_replicants', 'frequency': 'never'},
-        #     {'$type': 'send_transforms', 'frequency': 'never'},
-        #     {'$type': 'send_bounds', 'frequency': 'never'},
-        #     {'$type': 'send_containment', 'frequency': 'never'},
-        #     {'$type': 'send_framerate', 'frequency': 'never'},
-        #     {'$type': 'send_images', 'frequency': 'never'},
-        #     {'$type': 'send_camera_matrices', 'frequency': 'never'}
-        # ])
         
         self.last_reward = None
         self.communicate([{"$type": "destroy_all_objects"}])
@@ -162,23 +156,26 @@ class FireAgentController(FireController):
                 break
         for fire_pos in setup.other["fire"]:
             self.add_fire_floor(fire_pos)
-        
-        if len(self.agents) == 0:
-            self.agents:List[FireAgent] = []
-            for agent_pos in setup.agent_positions:
-                idx = self.get_unique_id()
-                self.agents.append(FireAgent(replicant_id=idx, position=agent_pos, image_frequency = ImageFrequency.always, name="fireman"))
-                self.add_agent(idx, agent_pos)
-                self.add_ons.append(self.agents[-1])
-        else:
-            assert(len(self.agents) == len(setup.agent_positions))
-            for i in range(len(self.agents)):
-                idx = self.agents[i].replicant_id
-                self.agents[i].reset(position=setup.agent_positions[i])
-                self.add_ons.append(self.agents[i])
-                self.add_agent(idx, setup.agent_positions[i])
-        self.maps = [None] * len(self.agents)
 
+        if not self.record_only:
+            if len(self.agents) == 0:
+                self.agents: List[FireAgent] = []
+                for agent_pos in setup.agent_positions:
+                    idx = self.get_unique_id()
+                    self.agents.append(
+                        FireAgent(replicant_id=idx, position=agent_pos, image_frequency=ImageFrequency.always,
+                                  name="fireman"))
+                    self.add_agent(idx, agent_pos)
+                    self.add_ons.append(self.agents[-1])
+            else:
+                assert (len(self.agents) == len(setup.agent_positions))
+                for i in range(len(self.agents)):
+                    idx = self.agents[i].replicant_id
+                    self.agents[i].reset(position=setup.agent_positions[i])
+                    self.add_ons.append(self.agents[i])
+                    self.add_agent(idx, setup.agent_positions[i])
+
+        self.maps = [None] * len(self.agents)
         self.add_ons.append(self.manager)
         self.target = setup.targets
         self.target_ids = setup.target_ids
@@ -187,39 +184,54 @@ class FireAgentController(FireController):
         self.target_id2name = setup.target_id2name
         self.finished = []
         self.communicate([])
-        commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
-                    {"$type": "set_target_framerate", "framerate": 30}]
+        if self.image_capture_path != None:
+            if not self.record_only:
+                camera = ThirdPersonCamera(avatar_id="record",
+                                           position={"x": self.x_min+0.2, "y": 2.5, "z": self.z_min+0.2},
+                                           look_at=self.agents[0].replicant_id)
+            else:
+                camera = ThirdPersonCamera(avatar_id="record", position={"x": -1.5, "y": 2.0, "z": -2.0},
+                                           look_at={"x": 0.0, "y": 0.0, "z": 0.0})
+            self.add_ons.extend([camera])
+            commands = [{"$type": "set_screen_size", "width": self.screen_size*4, "height": self.screen_size*4},
+                        {"$type": "set_target_framerate", "framerate": 30}]
+        else:
+            commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
+                        {"$type": "set_target_framerate", "framerate": 30}]
+
+        if self.image_capture_path is not None:
+            commands.extend([{"$type": "set_pass_masks", "pass_masks": ["_img"], "avatar_id": "record"},
+                             {"$type": "send_images", "frequency": "always", "ids": ["record"]}])
 
         # Capture when running after init_scene. (Because screen size may be modified)
         resp = self.communicate([{"$type": "send_scene_regions"}])
         self.set_scene_bounds(resp)
-        if self.image_capture_path != None:
-            camera = ThirdPersonCamera(avatar_id="record", position={"x": self.x_min+0.2,
-                                                                     "y": 2.5, "z": self.z_min+0.2},
-                                       look_at=self.agents[0].replicant_id)
-            self.add_ons.extend([camera])
 
         self.manager.prepare_segmentation_data()
         self.initialized = True
         for obj in self.target_ids:
             commands.append({"$type": "set_kinematic_state", "id": obj, "is_kinematic": False, "use_gravity": True})
         self.communicate(commands)
-        
-        commands = [{"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)}]
-        """add a backpack or similar to the agent's left hand"""
-        self.container_name = "backpack" if "container" not in setup.other else setup.other["container"]
-        self.container_id = self.get_unique_id()
-        self.manager.add_object(ObjectStatus(idx=self.container_id, inflammable=False, temperature_threshold=3000))
-        
-        agent_pos = self.agents[0].dynamic.transform.position
-        commands.append(self.get_add_object(model_name=self.container_name, object_id=self.container_id, position=TDWUtils.array_to_vector3(agent_pos)))
-        self.communicate(commands)
-        self.agents[0].grasp(target=self.container_id, arm=Arm.left, axis=None, angle=None)
-        self.next_key_frame()
-        self.agents[0].reach_for(target=TDWUtils.array_to_vector3([-0.3, 1.0, 0.3]), absolute=False, arrived_at=0.1, arm=Arm.left)
-        self.next_key_frame()
-        self.agents[0].reset_arm(arm=Arm.left)
-        self.next_key_frame()
+
+        if not self.record_only:
+            commands = [
+                {"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)}]
+            """add a backpack or similar to the agent's left hand"""
+            self.container_name = "backpack" if "container" not in setup.other else setup.other["container"]
+            self.container_id = self.get_unique_id()
+            self.manager.add_object(ObjectStatus(idx=self.container_id, inflammable=False, temperature_threshold=3000))
+
+            agent_pos = self.agents[0].dynamic.transform.position
+            commands.append(self.get_add_object(model_name=self.container_name, object_id=self.container_id,
+                                                position=TDWUtils.array_to_vector3(agent_pos)))
+            self.communicate(commands)
+            self.agents[0].grasp(target=self.container_id, arm=Arm.left, axis=None, angle=None)
+            self.next_key_frame()
+            self.agents[0].reach_for(target=TDWUtils.array_to_vector3([-0.3, 1.0, 0.3]), absolute=False, arrived_at=0.1,
+                                     arm=Arm.left)
+            self.next_key_frame()
+            self.agents[0].reset_arm(arm=Arm.left)
+            self.next_key_frame()
 
     def set_scene_bounds(self, resp=None):
         self.scene_bounds = SceneBounds(resp=resp)
@@ -398,8 +410,9 @@ class FireAgentController(FireController):
                     # Determine which avatar captured the image.
                     if images.get_avatar_id() == "record":
                         # Save the image.
-                        TDWUtils.save_images(images=images, filename=str(self.comm_counter),
-                                             output_directory=self.image_capture_path)
+                        if self.comm_counter % 10 == 0:
+                            TDWUtils.save_images(images=images, filename=str(self.comm_counter),
+                                                 output_directory=self.image_capture_path)
                         self.comm_counter += 1
         # The ImageCapture addon already saves the image. No need to save again. 
         return resp
@@ -421,12 +434,16 @@ class FireAgentController(FireController):
         raw observation: RGBD, temperature
         """
         rgb = self.agents[agent_idx].dynamic.get_pil_image()
-        seg_mask = None
+        id_image = np.array(self.agents[agent_idx].dynamic.get_pil_image("id"))
+        if self.reverse_observation:
+            rgb = np.flip(rgb, axis=0)
+            id_image = np.flip(id_image, axis=0)
+
         if self.use_gt:
-            seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")))
+            seg_mask = self.manager.segm.get_seg_mask(id_image)
         else:
             rcnn_mask = self.detector.inference(np.array(rgb))
-            seg_mask = self.manager.segm.get_seg_mask(np.array(self.agents[agent_idx].dynamic.get_pil_image("id")),
+            seg_mask = self.manager.segm.get_seg_mask(np.array(id_image),
                                                         rcnn=rcnn_mask,
                                                         id_list=self.manager.id_list)
         depth = TDWUtils.get_depth_values(self.agents[agent_idx].dynamic.images["depth"], width=self.screen_size, height=self.screen_size)

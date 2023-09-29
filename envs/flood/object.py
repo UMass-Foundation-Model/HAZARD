@@ -273,7 +273,8 @@ class FloodManager:
         #     height_diff = height_under_water - object.prev_height_under_water
         #     height_diff = min(0.2*object.size[1], height_diff)
         #     height_under_water = height_diff + object.prev_height_under_water
-        buoyancy_scale = self.flood_density / 1000 * height_under_water * abs(object.area()) * 9.81
+        # buoyancy_scale = self.flood_density / 1000 * height_under_water * abs(object.area()) * 9.81
+        buoyancy_scale = 4.0 * self.flood_density / 1000 * height_under_water * abs(object.area()) * 9.81
         object.prev_height_under_water = height_under_water
         return object, buoyancy_scale
 
@@ -283,7 +284,8 @@ class FloodManager:
         fluid_velocity = np.array([-self.fluid_velocity * self.drag_coefficient, 0, 0])
         velocity_diff = fluid_velocity - object.velocity
         # Drag force 1/2 * fluid density * drag area * drag coefficient * velocity^2
-        drag_force_scale = 0.5 * self.flood_density / 1000 * abs(object.horizontal_area()) * np.linalg.norm(velocity_diff)
+        # drag_force_scale = 0.5 * self.flood_density / 1000 * abs(object.horizontal_area()) * np.linalg.norm(velocity_diff)
+        drag_force_scale = 2.0 * self.flood_density / 1000 * abs(object.horizontal_area()) * np.linalg.norm(velocity_diff)
         drag_force_direction = velocity_diff / np.linalg.norm(velocity_diff)
         drag_force = drag_force_scale * drag_force_direction
 

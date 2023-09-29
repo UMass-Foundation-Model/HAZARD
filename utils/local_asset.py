@@ -1,4 +1,4 @@
-PRE_LOADED_PATH = "/home/winnie/csl/assets"
+PRE_LOADED_PATH = "../assets"
 
 # get system name
 import platform

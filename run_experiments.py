@@ -30,6 +30,7 @@ def get_args():
     parser.add_argument("--lm_source", type=str, choices=['openai', 'huggingface'], default="openai")
     parser.add_argument("--model_and_tokenizer_path", type=str, default="meta-llama/Llama-2-7b-chat-hf")
     parser.add_argument("--debug", action='store_true', default=False)
+    parser.add_argument("--reverse_observation", action='store_true', default=False)
     parser.add_argument("--grid_size", type=float, default=0.1)
     parser.add_argument("--use_gt", action='store_true', default=False)
     return parser.parse_args()
@@ -102,10 +103,14 @@ if __name__ == "__main__":
     logger = init_logs(output_dir=args.output_dir, name=f"{args.env_name}_{args.agent_name}")
     if args.agent_name == "rl":
         challenge = Challenge(env_name=args.env_name, data_dir=args.data_dir, output_dir=args.output_dir, logger=logger,
-                            launch_build=not args.debug, debug=args.debug, port=args.port, screen_size=1024, map_size_h=256, map_size_v=256, grid_size=args.grid_size, use_gt=args.use_gt)
+                              launch_build=not args.debug, debug=args.debug, port=args.port, screen_size=1024,
+                              map_size_h=256, map_size_v=256, grid_size=args.grid_size, use_gt=args.use_gt,
+                              reverse_observation=args.reverse_observation, record_only=(args.agent_name == "record"))
     else:
         challenge = Challenge(env_name=args.env_name, data_dir=args.data_dir, output_dir=args.output_dir, logger=logger,
-                            launch_build=not args.debug, debug=args.debug, port=args.port, screen_size=1024, grid_size=args.grid_size, use_gt=args.use_gt)
+                              launch_build=not args.debug, debug=args.debug, port=args.port, screen_size=1024,
+                              grid_size=args.grid_size, use_gt=args.use_gt, reverse_observation=args.reverse_observation,
+                              record_only=(args.agent_name == "record"))
     agent = get_agent(args)
     if os.path.exists(os.path.join(args.data_dir, "log.txt")): # single episode
         challenge.submit(agent=agent, logger=logger, eval_episodes=1)

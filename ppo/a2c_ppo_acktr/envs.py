@@ -23,7 +23,7 @@ def make_env(env_id, seed, rank, log_dir, allow_early_resets, port, num_processe
             env = gym.make(env_id, check_version=False, launch_build=False,
                        use_local_resources=True, port=port, screen_size=2048,
                        # use_local_resources=True, port=port, screen_size=screen_size,
-                       image_capture_path="/data/private/zqh/embodied/tdw/output/test_fluid/env/",
+                       image_capture_path="outputs/",
                        map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size)
         else:
             env = gym.make(env_id, launch_build=True, port=port, screen_size=screen_size, map_size_h=map_size_h,

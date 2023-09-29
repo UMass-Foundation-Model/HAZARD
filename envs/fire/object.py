@@ -77,7 +77,6 @@ T0 is old temperature
 T1 is average temperature of nearby objects, weighted by exp( - max(1, distance / effective_distance) )
 room temperature has a weight of exp(-1)
 
-(Below experimented by Haozhe Xu)
 T1 is average temperature of nearby objects, weighted by (effective_distance/distance)^2
 room temperature has a weight of 1
 This algorithm is scientific, and a lot more computationally efficient.

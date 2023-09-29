@@ -17,10 +17,6 @@ for s in scenes:
         if os.path.exists(dirname):
             print(f"{dirname} already exists. Skipping. ")
             continue
-        # p = subprocess.Popen('DISPLAY=:4.0 nice -n 19 /data/private/zqh/embodied/tdw/TDW/TDW.x86_64', shell=True)
-        # sleep(1)
-        # q = subprocess.run('nice python ./procgen_object_placement.py -d '+str(d)+' -s '+s, shell=True)
-        # p.wait()
         q = subprocess.run('python ./procgen_object_placement.py -d '+str(d)+' -s '+s, shell=True)
         print(s+f' {d} finished, {cnt} of total {100}')
         cnt+=1

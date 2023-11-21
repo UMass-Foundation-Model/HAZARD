@@ -1,4 +1,5 @@
 import pdb
+import shutil
 
 import os
 import json
@@ -64,7 +65,9 @@ class Challenge:
         else:
             self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=True,
                            map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
-                           image_capture_path=None, check_version=False, use_gt=use_gt,
+                           image_capture_path=os.path.join(output_dir, "images") if record_with_agents else None,
+                           check_version=False, use_gt=use_gt, use_dino=use_dino,
+                           log_path=os.path.join(output_dir, "log.txt"),
                            reverse_observation=reverse_observation, record_only=record_only)
         self.logger = logger
         self.logger.debug(port)
@@ -99,7 +102,10 @@ class Challenge:
         if self.env_name == 'fire':
             fireproof_dict = json.load(open("scenes/scene_configs/fire.json"))
             for target_category in target_list:
-                object_attribute_dict[target_category]['fireproof'] = fireproof_dict[target_category]
+                if target_category in fireproof_dict:
+                    object_attribute_dict[target_category]['fireproof'] = fireproof_dict[target_category]
+                else:
+                    object_attribute_dict[target_category]['fireproof'] = 0
         elif self.env_name == 'flood':
             waterproof_dict = json.load(open("scenes/scene_configs/fluid.json"))
             for target_category in target_list:
@@ -240,10 +246,15 @@ class Challenge:
             print('init:', self.target_status)
             target_info = self.get_target_info(get_target_description(self.env))
             if target_description is not None:
-                if agent.agent_type in ['greedy', 'llm', 'llmv2', 'mcts', 'human', 'record', 'rl', 'rule', 'random',
-                                        'custom']:
+                if agent.agent_type in ['greedy', 'llm', 'llmv2', 'mcts', 'mctsv2', 'human', 'record', 'rl', 'rule',
+                                        'random', 'custom']:
                     agent.reset(goal_objects=target_description,
                                 objects_info=target_info)
+                elif agent.agent_type == 'oracle':
+                    agent.reset(goal_objects=target_description,
+                                objects_info=target_info,
+                                controller=self.env.controller,
+                                step_limit=self.max_steps)
                 else:
                     raise Exception(f"{agent.agent_type} not available")
             else:
@@ -292,7 +303,7 @@ class Challenge:
                         json.dump(processed_input, f, indent=4)
                     visualize_obs(self.env, state, suffix=str(self.env.controller.frame_count), save_dir=os.path.join(self.output_dir, str(i)))
 
-                if agent.agent_type == "mcts":
+                if agent.agent_type == "mcts" or agent.agent_type == "mctsv2":
                     visualize_obs(self.env, state, suffix=str(self.env.controller.frame_count),
                                   save_dir=os.path.join(self.output_dir, str(i)))
                 
@@ -302,10 +313,17 @@ class Challenge:
                 print(current_action)
                 print(f"step {self.env.controller.comm_counter} action {current_action}", file=action_logger)
 
-                if current_action[0] == "walk_to":
+                if agent.agent_type == 'oracle':
+                    while self.env.controller.frame_count < self.max_steps:
+                        print(self.env.controller.frame_count, self.max_steps)
+                        agent.save_info()
+                        self.env.controller.communicate([])
+                    oracle_plan = agent.search_plan()
+                    import json
+                    json.dump(oracle_plan, open(os.path.join(self.output_dir, f"action-{str(i)}.json"), "w"))
+                elif current_action[0] == "walk_to":
                     if self.env_name in ["fire", "flood"]:
                         action_result, action_info = agent_walk_to(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
-                                                               max_steps=100, reset_arms=False, arrived_at=1.25)
                                                                max_steps=100, reset_arms=False, arrived_at=1.25, task=self.env_name,
                                                                    effect_on_agents=self.effect_on_agents)
                     else:

@@ -24,7 +24,7 @@ class Constants:
                     FIRE_SCALE_STEP: float = 0.05,
                     FIRE_FINAL_SCALE: float = 0.8,
                     EXTINGUISH_RADIUS: float = 0.5,
-                    EXTINGUISH_TIME: int = 10
+                    EXTINGUISH_TIME: int = 1000
                  ) -> None:
 
         self.ROOM_TEMPERATURE = ROOM_TEMPERATURE

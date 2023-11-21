@@ -26,10 +26,10 @@ class FireEnv(gym.Env):
                  use_local_resources: bool = False, seed = 0, use_gt = False,
                  image_capture_path = None, log_path: str = None, reverse_observation = False,
                  screen_size = 512, map_size_h = 64, map_size_v = 64, grid_size = 0.25,
-                 record_only: bool = False):
+                 record_only: bool = False, use_dino: bool = False):
         self.controller_args = dict(use_local_resources=use_local_resources, launch_build=launch_build,
                                     port=port, check_version=check_version, screen_size=screen_size,
-                                    image_capture_path=image_capture_path, log_path=log_path,
+                                    image_capture_path=image_capture_path, log_path=log_path, use_dino=use_dino,
                                     map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
                                     use_gt=use_gt, reverse_observation=reverse_observation, record_only=record_only)
         self.controller = None

@@ -85,7 +85,7 @@ class FireObjectManager(AddOn):
                         self.objects[idx].position = repl.get_position(j)
                     else:
                         print("agent {} not recorded, this shouldn't happen".format(idx))
-                        self.add_object(AgentStatus(idx, position=repl.get_position(j)))
+                        self.add_object(AgentStatus(idx, position=repl.get_position(j), size=None))
         for i in range(len(resp)-1):
             r_id = OutputData.get_data_type_id(resp[i])
             if r_id == "segm":

@@ -12,7 +12,7 @@ class ObjectStatus:
                  waterproof: bool = False, has_buoyancy: bool = False, state: int = None,
                  position: np.ndarray = None, rotation: np.ndarray = None,
                  size: np.ndarray = None,
-                 velocity: np.ndarray = None):
+                 velocity: np.ndarray = np.array([0, 0, 0])):
         self.idx: int = idx
         self.waterproof: bool = waterproof
         self.has_buoyancy: bool = has_buoyancy

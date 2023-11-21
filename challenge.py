@@ -1,16 +1,15 @@
 import pdb
 
-import gym
 import os
 import json
-import pickle
 import time
 from envs.flood.flood_gym import FloodEnv
 from envs.fire.fire_gym import FireEnv
 from envs.wind.wind_gym import WindEnv
 from envs.flood.utils import ObjectState as FloodObjectState
 from envs.fire.fire_utils import ObjectState as FireObjectState
-from policy.env_actions import agent_walk_to, agent_pickup, agent_drop, agent_explore, visualize_obs, agent_walk_to_single_step
+from policy.env_actions import (agent_walk_to, agent_pickup, agent_drop, agent_explore, visualize_obs,
+                                agent_walk_to_single_step, low_level_action)
 import logging
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
 
@@ -41,7 +40,8 @@ def init_logs(output_dir, name = 'simple_example'):
 class Challenge:
     def __init__(self, env_name, data_dir, output_dir, logger, launch_build=True, port=1071, screen_size=512,
                  map_size_h=512, map_size_v=512, grid_size=0.1, debug=False, max_steps=1500, use_gt=False,
-                 reverse_observation=False, record_only=False):
+                 reverse_observation=False, record_only=False, record_with_agents=False, use_dino=False,
+                 effect_on_agents=False):
         if env_name == "fire":
             env = FireEnv
             max_steps = 1500 if not record_only else 4500
@@ -54,10 +54,11 @@ class Challenge:
         else:
             assert False
         self.env_name = env_name
+        self.effect_on_agents = effect_on_agents
         if debug:
             self.env = env(launch_build=True, screen_size=screen_size, port=port, use_local_resources=True,
                            map_size_h=map_size_h, map_size_v=map_size_v, grid_size=grid_size,
-                           image_capture_path=os.path.join(output_dir, "images"), 
+                           image_capture_path=os.path.join(output_dir, "images"), use_dino=use_dino,
                            log_path = os.path.join(output_dir, "log.txt"), reverse_observation=reverse_observation,
                            check_version=False, use_gt=use_gt, record_only=record_only)
         else:
@@ -305,20 +306,34 @@ class Challenge:
                     if self.env_name in ["fire", "flood"]:
                         action_result, action_info = agent_walk_to(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
                                                                max_steps=100, reset_arms=False, arrived_at=1.25)
+                                                               max_steps=100, reset_arms=False, arrived_at=1.25, task=self.env_name,
+                                                                   effect_on_agents=self.effect_on_agents)
                     else:
                         action_result, action_info = agent_walk_to(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
-                                                               max_steps=100, reset_arms=False, arrived_at=2)
+                                                               max_steps=100, reset_arms=False, arrived_at=2, task=self.env_name,
+                                                                   effect_on_agents=self.effect_on_agents)
                     if action_result:
                         self.nearest_object = int(current_action[1])
+                    else:
+                        self.nearest_object = None
+                elif current_action[0].startswith("low_level"):
+                    action = current_action[0].split(".")[-1]
+                    kwargs = current_action[1]
+                    action_result, action_info = low_level_action(env, effect_on_agents=self.effect_on_agents,
+                                                                  task=self.env_name, action=action, **kwargs)
+                    if action_result and action == "move_by":
+                        self.nearest_object = self.env.controller.find_nearest_object()
                     else:
                         self.nearest_object = None
                 elif current_action[0] == "walk_to_single":
                     if self.env_name in ["fire", "flood"]:
                         action_result, action_info = agent_walk_to_single_step(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
-                                                               reset_arms=False, arrived_at=1.25)
+                                                               reset_arms=False, arrived_at=1.25, task=self.env_name,
+                                                                               effect_on_agents=self.effect_on_agents)
                     else:
                         action_result, action_info = agent_walk_to_single_step(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
-                                                               reset_arms=False, arrived_at=2)
+                                                               reset_arms=False, arrived_at=2, task=self.env_name,
+                                                                               effect_on_agents=self.effect_on_agents)
                     if action_result and action_info == "success":
                         self.nearest_object = int(current_action[1])
                     else:
@@ -376,6 +391,8 @@ class Challenge:
             total_max_score += max_score
             step = self.env.controller.frame_count
             total_steps += step
+            if os.path.isfile(os.path.join(self.output_dir, "log.txt")):
+                shutil.move(os.path.join(self.output_dir, "log.txt"), os.path.join(self.output_dir, f"log-{str(i)}.txt"))
             # with open(os.path.join(self.output_dir, str(i), 'result_episode.json'), 'w') as f:
             #     json.dump(result, f)
         avg_score = total_score / num_eval_episodes

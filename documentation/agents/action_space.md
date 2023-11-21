@@ -9,9 +9,25 @@ In this page, we introduce all supported actions in the format of `<action_name>
 * `explore`: Agent will simply look round without changing the location of itself.
 
 ### Low-level action set
-* `walk_by`: 
+(Adopted from [TDW replicant](https://github.com/threedworld-mit/tdw/blob/b3db46406a3ee8b679f90479162189bc2e1eeb6f/Python/tdw/add_ons/replicant.py))
+
+Low-level actions can be used in format of ('low_level.<action_name>', <params_dict>). Possible <action_name>s are listed below:
+* `move_by`: 
+  * param distance: The target distance. If less than 0, the Replicant will walk backwards. 
+  * param reset_arms: If True, reset the arms to their neutral positions while beginning the walk cycle. 
+  * param reset_arms_duration: The speed at which the arms are reset in seconds. 
+  * param scale_reset_arms_duration: If True, `reset_arms_duration` will be multiplied by `framerate / 60)`, ensuring smoother motions at faster-than-life simulation speeds. 
 * `turn_by`:
-* ...
+  * param angle: The target angle in degrees. Positive value = clockwise turn.
+* `turn_to`:
+  * param target: The target. If dict: A position as an x, y, z dictionary. If numpy array: A position as an [x, y, z] numpy array.
+* `reach_for`:
+  * param target: The target(s). This can be a list (one target per hand) or a single value (the hand's target). If int: An object ID. If dict: A position as an x, y, z dictionary. If numpy array: A position as an [x, y, z] numpy array. 
+  * param arm: The Arm value(s) that will reach for each target as a single value or a list. Example: `Arm.left` or `[Arm.left, Arm.right]`. 
+  * param absolute: If True, the target position is in world space coordinates. If False, the target position is relative to the Replicant. Ignored if `target` is an int. 
+  * param offhand_follows: If True, the offhand will follow the primary hand, meaning that it will maintain the same relative position. Ignored if `arm` is a list or `target` is an int.
+  * param from_held: If False, the Replicant will try to move its hand to the `target`. If True, the Replicant will try to move its held object to the `target`. This is ignored if the hand isn't holding an object. 
+  * param held_point: The bounds point of the held object from which the offset will be calculated. Can be `"bottom"`, `"top"`, etc. For example, if this is `"bottom"`, the Replicant will move the bottom point of its held object to the `target`. This is ignored if `from_held == False` or ths hand isn't holding an object. 
 
 ### Action execution result
 * `success`: action executed successfully

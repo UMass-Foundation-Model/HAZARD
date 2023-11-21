@@ -5,12 +5,12 @@ from envs.flood.utils import *
 from envs.flood.object import ObjectStatus, AgentStatus
 from envs.flood.agent import FloodAgent
 from tdw.obi_data.fluids.disk_emitter import DiskEmitter
+from tdw.obi_data.fluids.fluid import Fluid
+from tdw.add_ons.obi import Obi
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
 from tdw.add_ons.image_capture import ImageCapture
 from tdw.tdw_utils import TDWUtils
-from tdw.obi_data.fluids.fluid import Fluid
 from tdw.output_data import OutputData, Overlap
-from tdw.add_ons.obi import Obi
 from tdw.add_ons.floorplan_flood import FloorplanFlood
 
 from tdw.backend.paths import EXAMPLE_CONTROLLER_OUTPUT_PATH
@@ -117,7 +117,7 @@ class FloodController(Controller):
                               )
 
     def add_agent(self, idx, pos):
-        self.manager.add_object(AgentStatus(idx, constants=self.constants, position=pos, size=None))
+        self.manager.add_object(AgentStatus(idx, constants=self.constants, position=pos, size=np.array([1.0, 2.0, 1.0])))
 
     def flood_step(self, resp):
         pass

@@ -6,10 +6,12 @@ from policy.rule_based import RuleBasedAgent
 from policy.fire_flood_heuristic import GreedyAgent
 from policy.human import HumanAgent
 from policy.mcts import MCTS
+from policy.mctsv2 import MCTSv2
 from policy.record_agent import RecordAgent
 from policy.rl import RLAgent
 from policy.random import RandomAgent
 from policy.custom import CustomAgent
+from policy.oracal import OracleAgent
 import argparse
 import os
 
@@ -19,7 +21,8 @@ def get_args():
     parser.add_argument("--api_key_file", type=str, default="")
     parser.add_argument("--output_dir", type=str, default="outputs")
     parser.add_argument("--env_name", type=str, choices=["fire", "flood", "wind"], default="flood")
-    parser.add_argument("--agent_name", type=str, choices=["rule", "llm", "llmv2", "mcts", "llm+change", "greedy", "human",
+    parser.add_argument("--agent_name", type=str, choices=["rule", "llm", "llmv2", "mcts",
+                                                           "llm+change", "greedy", "human", "mctsv2", "oracle",
                                                            "record", "rl", "random", "custom"], default="llmv2")
     parser.add_argument("--data_dir", type=str, default="data/room_setup_fire/mm_craftroom_2a-1")
     parser.add_argument("--port", type=int, default=1071)
@@ -31,8 +34,11 @@ def get_args():
     parser.add_argument("--model_and_tokenizer_path", type=str, default="meta-llama/Llama-2-7b-chat-hf")
     parser.add_argument("--debug", action='store_true', default=False)
     parser.add_argument("--reverse_observation", action='store_true', default=False)
+    parser.add_argument("--record_with_agents", action='store_true', default=False)
     parser.add_argument("--grid_size", type=float, default=0.1)
     parser.add_argument("--use_gt", action='store_true', default=False)
+    parser.add_argument("--effect_on_agents", action='store_true', default=False)
+    parser.add_argument("--use_dino", action='store_true', default=False)
     return parser.parse_args()
 
 def get_agent(args):
@@ -73,6 +79,8 @@ def get_agent(args):
                                      api_key=args.api_key)
     elif args.agent_name == 'mcts':
         return MCTS(task=args.env_name)
+    elif args.agent_name == 'mctsv2':
+        return MCTSv2(task=args.env_name)
     elif args.agent_name == 'rule':
         return RuleBasedAgent(task=args.env_name)
     elif args.agent_name == 'human':
@@ -85,6 +93,8 @@ def get_agent(args):
         return GreedyAgent(task=args.env_name)
     elif args.agent_name == "record":
         return RecordAgent(task=args.env_name)
+    elif args.agent_name == "oracle":
+        return OracleAgent(task=args.env_name)
     elif args.agent_name == "rl":
         return RLAgent(task=args.env_name)
     elif args.agent_name == "random":
@@ -105,12 +115,15 @@ if __name__ == "__main__":
         challenge = Challenge(env_name=args.env_name, data_dir=args.data_dir, output_dir=args.output_dir, logger=logger,
                               launch_build=not args.debug, debug=args.debug, port=args.port, screen_size=1024,
                               map_size_h=256, map_size_v=256, grid_size=args.grid_size, use_gt=args.use_gt,
-                              reverse_observation=args.reverse_observation, record_only=(args.agent_name == "record"))
+                              reverse_observation=args.reverse_observation, record_only=(args.agent_name == "record"),
+                              record_with_agents=args.record_with_agents, use_dino=args.use_dino,
+                              effect_on_agents=args.effect_on_agents)
     else:
         challenge = Challenge(env_name=args.env_name, data_dir=args.data_dir, output_dir=args.output_dir, logger=logger,
                               launch_build=not args.debug, debug=args.debug, port=args.port, screen_size=1024,
                               grid_size=args.grid_size, use_gt=args.use_gt, reverse_observation=args.reverse_observation,
-                              record_only=(args.agent_name == "record"))
+                              record_only=(args.agent_name == "record"), record_with_agents=args.record_with_agents,
+                              use_dino=args.use_dino, effect_on_agents=args.effect_on_agents)
     agent = get_agent(args)
     if os.path.exists(os.path.join(args.data_dir, "log.txt")): # single episode
         challenge.submit(agent=agent, logger=logger, eval_episodes=1)

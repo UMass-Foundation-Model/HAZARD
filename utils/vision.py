@@ -1,3 +1,5 @@
+import pdb
+
 import cv2
 import mmcv
 import torch
@@ -23,7 +25,7 @@ class Detector:
                  device=None,
                  **kwargs):
         if device == None:
-            device = torch.device('cuda:1') if torch.cuda.is_available() else torch.device('cpu')
+            device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
         device = str(device)
         self.model = init_detector(config_file, checkpoint_file, device=device)
         self.categories = []
@@ -53,4 +55,4 @@ if __name__ == "__main__":
     img = 'outputs/flood_LLM4/0/rgb_43.png'
     img = mmcv.imread(img)
     result = detector.inference(img)
-    print(result.pred_instances)
+    print(result.pred_instances)    print(result.pred_instances)

@@ -1,3 +1,5 @@
+import pdb
+
 from tdw.controller import Controller
 from tdw.add_ons.proc_gen_kitchen import ProcGenKitchen
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
@@ -21,7 +23,8 @@ from tdw.tdw_utils import TDWUtils
 
 parser = ArgumentParser()
 parser.add_argument('-d', "--seed", type=int, default=1)
-parser.add_argument('-s', "--scene", type=str, default='mm_craftroom_2a')
+parser.add_argument('-s', "--scene", type=str, default='mm_kitchen_3a')
+parser.add_argument('-n', "--with_new_objects", action='store_true', default=False)
 args = parser.parse_args()
 
 scenes = args.scene
@@ -30,11 +33,10 @@ np.random.seed(seed)
 
 # TDWUtils.set_default_libraries(scene_library="../../local_asset_linux/scenes.json",
 #                                model_library="../../local_asset_linux/models.json")
-print(0)
+
 # c = Controller(launch_build=False)
 c = Controller()
 
-print(1)
 occ = OccupancyMap()
 occ.generate(cell_size=0.25, once=False)
 om = ObjectManager(transforms=True, rigidbodies=True, bounds=True)
@@ -45,9 +47,7 @@ procgenkitchen = ProcGenKitchen()
 procgenkitchen.create(scene=scenes)
 # Choose from: 
 # ['mm_craftroom_2a', 'mm_craftroom_2b', 'mm_craftroom_3a', 'mm_craftroom_3b', 
-#  'mm_kitchen_2a', 'mm_kitchen_2b', 'mm_kitchen_3a', 'mm_kitchen_3b']
-
-print(2)
+#  'mm_kitchen_2a
 commands_init_scene = [{"$type": "set_screen_size", "width": 1280, "height": 720}] # Set screen size
 commands_init_scene.extend(procgenkitchen.commands)
 
@@ -57,7 +57,7 @@ print("ProcGenKitchen init completed. ")
 
 
 d = {}
-with open('./scene_configs/list.json', 'r') as f:
+with open('./scene_configs/list_new.json' if args.with_new_objects else './scene_configs/list.json', 'r') as f:
     d = json.loads(f.read())
 
 l = []
@@ -97,7 +97,8 @@ print("Object placement on surfaces completed. ")
 
 # Read object list
 random_object_list_on_floor = [[] for i in range(1)] # The number of rooms in ProcGenKitchen is 1. 
-with open("./scene_configs/random_object_list_on_floor.txt") as f:
+with open("./scene_configs/random_object_list_on_floor_new.txt" if args.with_new_objects else
+          "./scene_configs/random_object_list_on_floor.txt") as f:
     for obj_name in f.readlines():
         for lst in random_object_list_on_floor:
             lst.append(obj_name[:-1].replace("\n", ""))
@@ -116,6 +117,7 @@ for x_index in range(occ.occupancy_map.shape[0]):
                 obj = c.get_unique_id()
                 candidate_name.append(obj_type)
                 candidate_targets.append(obj)
+                print(obj_type, obj)
                 commands.append(c.get_add_object(obj_type,
                                                  object_id=obj,
                                                  position={"x": x, 
@@ -204,7 +206,8 @@ fire_position = [grid_to_real(fire, origin, grid_size) for fire in fire_position
 import json
 values = []
 t_val = 0
-with open('./scene_configs/value_name.json', 'r') as f:
+with open('./scene_configs/value_name_new.json' if args.with_new_objects else
+          './scene_configs/value_name.json', 'r') as f:
     d = json.load(f)
 i = 0
 for index, obj in enumerate(candidate_targets):

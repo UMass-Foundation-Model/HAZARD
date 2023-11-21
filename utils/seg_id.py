@@ -22,7 +22,7 @@ class SegmentationID:
         self.reverse_id = dict()
         self.reverse_id[0] = 0
 
-        category_file = os.path.join(PATH, 'data', 'meta_data', 'categories.txt')
+        category_file = os.path.join(PATH, 'data', 'meta_data', 'categories_new.txt')
         with open(category_file, 'r') as f:
             self.global_categories = eval(f.read())
     

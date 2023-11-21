@@ -25,7 +25,8 @@ class Constants:
                     SLOP_ANGLE: float = 3.0,
                     # DRAG_COEFFICIENT: float = 0.47
                     # DRAG_COEFFICIENT: float = 4 # Coefficient of the drag force by the water
-                    DRAG_COEFFICIENT: float = 50
+                    DRAG_COEFFICIENT: float = 50,
+                    AGENT_DRAG_COEFFICIENT: float = 1.0
                  ) -> None:
 
         self.HAS_BUOYANCY = HAS_BUOYANCY
@@ -37,5 +38,6 @@ class Constants:
         self.FLOOD_FORCE_SCALE = FLOOD_FORCE_SCALE
         self.DRAG_COEFFICIENT = DRAG_COEFFICIENT
         self.SLOP_ANGLE = SLOP_ANGLE
+        self.AGENT_DRAG_COEFFICIENT = AGENT_DRAG_COEFFICIENT
 
 default_const = Constants()

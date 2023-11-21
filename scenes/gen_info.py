@@ -2,7 +2,7 @@ import json
 from random import choice
 import os
 
-with open('scene_configs/value.json', 'r') as f:
+with open('scene_configs/value_name_new.json', 'r') as f:
     v = json.load(f)
 
 
@@ -32,7 +32,9 @@ for dir in os.listdir(path):
             ret.append(choice(values_low))
         if len(values_high)>0:
             ret.append(choice(values_high))
-        if len(ret)!=4:
+        if len(ret) > 4:
+            info['target'] = info['target'][:4]
+        elif len(ret) < 4:
             print(ret)
         with open(child_dir+'/info.json', 'w') as f:
             json.dump(info, f)

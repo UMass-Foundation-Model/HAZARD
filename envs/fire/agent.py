@@ -233,8 +233,8 @@ class FireAgent(Replicant):
         # ])
         self.action = SequentialAction([
             TurnTo(target=target),
-            ReachFor(target=relative_pose_loc1,
-                     arms=[Arm.left],
+            ReachFor(targets=[relative_pose_loc2],
+                     arms=[Arm.right],
                      absolute=False,
                      dynamic=self.dynamic,
                      collision_detection=self.collision_detection,
@@ -246,8 +246,8 @@ class FireAgent(Replicant):
                      max_distance=1.0,
                      from_held=False,
                      held_point="bottom"),
-            ReachFor(target=relative_pose_loc2,
-                     arms=[Arm.right],
+            ReachFor(targets=[relative_pose_loc1],
+                     arms=[Arm.left],
                      absolute=False,
                      dynamic=self.dynamic,
                      collision_detection=self.collision_detection,

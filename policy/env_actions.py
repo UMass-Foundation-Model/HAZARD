@@ -71,7 +71,8 @@ def visualize_obs(env, obs, suffix="0", save_dir=os.path.join(PATH, "logs"), ast
 
 """this action is environment independent"""
 # def agent_walk_to(env: WindEnv, target: Union[int, np.ndarray, List], max_steps=100, reset_arms: bool = False, arrived_at=1.0):
-def agent_walk_to(env, target: Union[int, np.ndarray, List], max_steps=100, reset_arms: bool = False, arrived_at=1.0):
+def agent_walk_to(env, target: Union[int, np.ndarray, List], max_steps=100, reset_arms: bool = False, arrived_at=1.0,
+                task=None, effect_on_agents=False):
     # visualize_obs(env, None, suffix="0")
     start_frame = env.controller.frame_count
     
@@ -99,9 +100,39 @@ def agent_walk_to(env, target: Union[int, np.ndarray, List], max_steps=100, rese
         env.controller.do_action(agent_idx=0, action="move_to", params={"target": TDWUtils.array_to_vector3(env.controller.grid_to_real(path[1])),
                                                                         "reset_arms": reset_arms,
                                                                         "arrived_at": 0.5})
-        env.controller.next_key_frame()
+        if not effect_on_agents or task == "fire":
+            env.controller.next_key_frame(force_direction=None)
+        elif task == "wind":
+            wind_v = env.controller.manager.wind_v
+            env.controller.next_key_frame(force_direction=wind_v)
+        else:
+            assert env.controller.manager.flood_manager.source_from == 'x_max'
+            env.controller.next_key_frame(force_direction=np.array([-1, 0, 0]))
 
-def agent_walk_to_single_step(env, target: Union[int, np.ndarray, List], reset_arms: bool = False, arrived_at=1.0):
+
+def low_level_action(env, action, effect_on_agents=False, task=None, **kwargs):
+    assert action in ['move_by', 'turn_by', 'turn_to', 'reach_for']
+    forbidden_params = ['max_distance', 'duration', 'scale_duration', 'arrived_at']
+    for param in forbidden_params:
+        assert param not in kwargs
+    if 'target' in kwargs and type(kwargs['target']) == int:
+        kwargs['target'] = env.controller.manager.id_renumbering[kwargs['target']]
+    getattr(env.controller.agents[0], 'action')(**kwargs)
+    if action != "move_by":
+        effect_on_agents = False
+    if not effect_on_agents or task == "fire":
+        env.controller.next_key_frame()
+    elif task == "wind":
+        wind_v = env.controller.manager.wind_v
+        env.controller.next_key_frame(force_direction=wind_v)
+    else:
+        assert env.controller.manager.flood_manager.source_from == 'x_max'
+        env.controller.next_key_frame(force_direction=np.array([-1, 0, 0]))
+    return True, "success"
+
+
+def agent_walk_to_single_step(env, target: Union[int, np.ndarray, List], reset_arms: bool = False, arrived_at=1.0,
+                              effect_on_agents=False, task=None):
     agent_pos = env.controller.agents[0].dynamic.transform.position
     target_pos = env.controller.manager.objects[target].position if isinstance(target, int) else np.array(target)
     # print(target, env.controller.manager.objects[target].position, type(target))
@@ -122,7 +153,15 @@ def agent_walk_to_single_step(env, target: Union[int, np.ndarray, List], reset_a
     env.controller.do_action(agent_idx=0, action="move_to", params={"target": TDWUtils.array_to_vector3(env.controller.grid_to_real(path[1])),
                                                                     "reset_arms": reset_arms,
                                                                     "arrived_at": 0.5})
-    env.controller.next_key_frame()
+
+    if not effect_on_agents or task == "fire":
+        env.controller.next_key_frame()
+    elif task == "wind":
+        wind_v = env.controller.manager.wind_v
+        env.controller.next_key_frame(force_direction=wind_v)
+    else:
+        assert env.controller.manager.flood_manager.source_from == 'x_max'
+        env.controller.next_key_frame(force_direction=np.array([-1, 0, 0]))
     return True, "ongoing"
 
 """this action is environment independent"""

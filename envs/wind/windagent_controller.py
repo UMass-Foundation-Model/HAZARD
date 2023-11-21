@@ -34,7 +34,8 @@ class WindAgentController(WindController):
     Never ever use self.commands in here! For safety uses, self.commands can only be used in parent class
     """
     def __init__(self, use_local_resources: bool = False, image_capture_path: str = None, log_path: str = None,
-                 reverse_observation: bool = False, record_only: bool = False, **kwargs) -> None:
+                 reverse_observation: bool = False, record_only: bool = False, use_dino: bool = False,
+                 **kwargs) -> None:
         self.use_local_resources = use_local_resources
         self.image_capture_path = image_capture_path
         self.log_path = log_path
@@ -45,9 +46,14 @@ class WindAgentController(WindController):
         self.agents: List[WindAgent] = []
         self.comm_counter = 0
         self.use_gt = kwargs.get("use_gt", True)
+        self.use_dino = use_dino
         self.record_only = record_only
         if not self.use_gt:
-            self.detector = Detector(**kwargs)
+            if self.use_dino:
+                from utils.vision_dino import DetectorSAM
+                self.detector = DetectorSAM(**kwargs)
+            else:
+                self.detector = Detector(**kwargs)
         if use_local_resources:
             self.update_replicant_url()
         
@@ -58,6 +64,7 @@ class WindAgentController(WindController):
                                         map_size_h=self.map_size_h, map_size_v=self.map_size_v, grid_size=self.grid_size)
         
         self.maps = []
+        self.action_slowdown = 0
         # self.init_seg()
 
     def update_replicant_url(self):
@@ -148,6 +155,8 @@ class WindAgentController(WindController):
         self.containers = setup.containers
         self.targets = setup.target_ids
         self.target = setup.targets
+        if self.use_dino and not self.use_gt:
+            self.detector.set_targets(self.target)
         self.target_ids = setup.target_ids
         self.target_names = setup.target_names
         self.target_id2category = setup.target_id2category
@@ -174,14 +183,16 @@ class WindAgentController(WindController):
                 look_at[0] -= 3.0
                 look_at[2] -= 6.0
                 look_at = TDWUtils.array_to_vector3(look_at)
+                commands = [{"$type": "set_screen_size", "width": self.screen_size * 4, "height": self.screen_size * 4},
+                            {"$type": "set_target_framerate", "framerate": 30}]
             else:
                 look_at = self.agents[0].replicant_id
+                commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
+                            {"$type": "set_target_framerate", "framerate": 30}]
             camera = ThirdPersonCamera(avatar_id="record", position=TDWUtils.array_to_vector3(pos),
                                        look_at=look_at)
             self.add_ons.extend([camera])
             self.communicate([])
-            commands = [{"$type": "set_screen_size", "width": self.screen_size*4, "height": self.screen_size*4},
-                        {"$type": "set_target_framerate", "framerate": 30}]
         else:
             commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
                         {"$type": "set_target_framerate", "framerate": 30}]
@@ -200,8 +211,24 @@ class WindAgentController(WindController):
         if not self.record_only:
             self.communicate({"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)})
     
-    def next_key_frame(self) -> Tuple[List[ActionStatus], List[int]]:
+    def next_key_frame(self, force_direction=None) -> Tuple[List[ActionStatus], List[int]]:
         # print("next_key_frame")
+        agent_idx = 0
+        action_slowdown = 0
+        if force_direction is not None:
+            facing = self.agents[agent_idx].dynamic.transform.forward
+            force_direction = force_direction / np.linalg.norm(force_direction)
+            force_scale = (force_direction * (facing / np.linalg.norm(facing))).sum()
+            action_slowdown += (1 - force_scale) * self.constants.F_ON_AGENT
+
+        self.action_slowdown += action_slowdown
+        if self.action_slowdown > 1:
+            self.action_slowdown -= 1
+            tmp = self.agents[agent_idx].action
+            self.agents[agent_idx].action = None
+            self.communicate([])
+            self.agents[agent_idx].action = tmp
+
         initial_status = []
         have_ongoing_action = False
         for agent in self.agents:

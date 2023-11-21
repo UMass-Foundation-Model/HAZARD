@@ -1,3 +1,4 @@
+import pdb
 from typing import Any, Tuple, Dict
 from envs.fire.object import ObjectStatus
 from envs.fire.agent import *
@@ -7,6 +8,10 @@ from tdw.add_ons.logger import Logger
 from tdw.replicant.arm import Arm
 from tdw.replicant.image_frequency import ImageFrequency
 from utils.model import Semantic_Mapping
+from tdw.obi_data.fluids.disk_emitter import DiskEmitter
+from tdw.obi_data.fluids.cube_emitter import CubeEmitter
+from tdw.obi_data.fluids.fluid import Fluid
+from tdw.add_ons.obi import Obi
 from envs.fire import FireController
 from tdw.tdw_utils import TDWUtils
 from tdw.output_data import OutputData, Images
@@ -36,7 +41,8 @@ class FireAgentController(FireController):
     Never ever use self.commands in here! For safety uses, self.commands can only be used in parent class
     """
     def __init__(self, use_local_resources: bool = False, image_capture_path: str = None, log_path: str = None,
-                 reverse_observation: bool = False, record_only: bool = False, **kwargs) -> None:
+                 reverse_observation: bool = False, record_only: bool = False, use_dino: bool = False,
+                 **kwargs) -> None:
         self.frame_count = 0
         self.use_local_resources = use_local_resources
         self.image_capture_path = image_capture_path
@@ -48,9 +54,14 @@ class FireAgentController(FireController):
         self.extinguishers = []
         self.comm_counter = 0
         self.use_gt = kwargs.get("use_gt", True)
+        self.use_dino = use_dino
         self.record_only = record_only
         if not self.use_gt:
-            self.detector = Detector(**kwargs)
+            if self.use_dino:
+                from utils.vision_dino import DetectorSAM
+                self.detector = DetectorSAM(**kwargs)
+            else:
+                self.detector = Detector(**kwargs)
         # self.init_seg(vocab_path=f"{os.getcwd()}/seg/vocab.txt")
         if use_local_resources:
             self.update_replicant_url()
@@ -64,6 +75,14 @@ class FireAgentController(FireController):
 
         self.maps = []
         # self.init_seg()
+
+    def init_obi(self):
+        self.obi = Obi()
+        self.communicate([{"$type": "create_obi_solver"}])
+        self.obi.set_solver(solver_id=0, scale_factor=1.0, substeps=1)
+        self.add_ons.append(self.obi)
+        self.communicate([])
+        self.communicate([])
 
     def update_replicant_url(self):
         if not os.path.isfile(f"{os.getcwd()}/data/assets/replicant_0"): # There is no local model of replicant
@@ -178,6 +197,8 @@ class FireAgentController(FireController):
         self.maps = [None] * len(self.agents)
         self.add_ons.append(self.manager)
         self.target = setup.targets
+        if self.use_dino and not self.use_gt:
+            self.detector.set_targets(self.target)
         self.target_ids = setup.target_ids
         self.target_names = setup.target_names
         self.target_id2category = setup.target_id2category
@@ -187,14 +208,16 @@ class FireAgentController(FireController):
         if self.image_capture_path != None:
             if not self.record_only:
                 camera = ThirdPersonCamera(avatar_id="record",
-                                           position={"x": self.x_min+0.2, "y": 2.5, "z": self.z_min+0.2},
+                                           position={"x": 5, "y": 2, "z": 5},
                                            look_at=self.agents[0].replicant_id)
+                commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
+                            {"$type": "set_target_framerate", "framerate": 30}]
             else:
-                camera = ThirdPersonCamera(avatar_id="record", position={"x": -1.5, "y": 2.0, "z": -2.0},
+                camera = ThirdPersonCamera(avatar_id="record", position={"x": 0.0, "y": 5.0, "z": 0.0},
                                            look_at={"x": 0.0, "y": 0.0, "z": 0.0})
+                commands = [{"$type": "set_screen_size", "width": self.screen_size * 4, "height": self.screen_size * 4},
+                            {"$type": "set_target_framerate", "framerate": 30}]
             self.add_ons.extend([camera])
-            commands = [{"$type": "set_screen_size", "width": self.screen_size*4, "height": self.screen_size*4},
-                        {"$type": "set_target_framerate", "framerate": 30}]
         else:
             commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
                         {"$type": "set_target_framerate", "framerate": 30}]
@@ -213,7 +236,10 @@ class FireAgentController(FireController):
             commands.append({"$type": "set_kinematic_state", "id": obj, "is_kinematic": False, "use_gravity": True})
         self.communicate(commands)
 
-        if not self.record_only:
+        if len(self.extinguishers) > 0:
+            self.init_obi()
+
+        if not self.record_only and len(self.extinguishers) == 0:
             commands = [
                 {"$type": "set_field_of_view", "field_of_view": 120.0, "avatar_id": str(self.agents[0].replicant_id)}]
             """add a backpack or similar to the agent's left hand"""
@@ -240,7 +266,7 @@ class FireAgentController(FireController):
         self.z_max = max([region.z_max for region in self.scene_bounds.regions])
         self.z_min = min([region.z_min for region in self.scene_bounds.regions])
     
-    def next_key_frame(self) -> Tuple[List[ActionStatus], List[int]]:
+    def next_key_frame(self, force_direction=None) -> Tuple[List[ActionStatus], List[int]]:
         # print("next_key_frame")
         initial_status = []
         have_ongoing_action = False
@@ -284,9 +310,29 @@ class FireAgentController(FireController):
         """
         See the FireAgent class for allowed actions and their parameters.
         """
-        if action == "extinguish" or action == "stop":
+        if action == "stop":
             return
         return getattr(self.agents[agent_idx], action)(**params)
+
+    def add_extinguish_water(self, fire_pos):
+        object_id = self.get_unique_id()
+        rotate = self.agents[0].dynamic.transform.forward
+        rotate = rotate / np.linalg.norm(rotate)
+        print(rotate)
+        extinguisher_distance_to_agent = 1.0
+        position = {"x": float(self.agents[0].dynamic.transform.position[0]+rotate[0]*extinguisher_distance_to_agent),
+                    "y": float(self.agents[0].dynamic.transform.position[1]) + 0.7,
+                    "z": float(self.agents[0].dynamic.transform.position[2]+rotate[2]*extinguisher_distance_to_agent)}
+        rotation = {"x": 0,
+                    "y": 90,
+                    "z": 0}
+        self.obi.create_fluid(fluid="water",
+                              shape=CubeEmitter(),
+                              object_id=object_id,
+                              position=position,
+                              rotation=rotation,
+                              speed=0.9,
+                              lifespan=0.5)
     
     def do_extinguish(self, target: np.ndarray):
         for idx, fire in self.fire_info.items():
@@ -410,9 +456,9 @@ class FireAgentController(FireController):
                     # Determine which avatar captured the image.
                     if images.get_avatar_id() == "record":
                         # Save the image.
-                        if self.comm_counter % 10 == 0:
-                            TDWUtils.save_images(images=images, filename=str(self.comm_counter),
-                                                 output_directory=self.image_capture_path)
+                        # if self.comm_counter % 10 == 0:
+                        TDWUtils.save_images(images=images, filename=str(self.comm_counter),
+                                             output_directory=self.image_capture_path)
                         self.comm_counter += 1
         # The ImageCapture addon already saves the image. No need to save again. 
         return resp

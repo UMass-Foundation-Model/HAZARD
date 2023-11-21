@@ -198,6 +198,8 @@ class MCTS:
             else:
                 temp = state["raw"]["log_temp"] * obj_mask
                 avg_temp = temp.sum() / obj_mask.sum()
+            if self.task == 'fire':
+                avg_temp = avg_temp ** 2
             if obj_id not in self.status_history:
                 self.status_history[obj_id] = [avg_temp]
             else:

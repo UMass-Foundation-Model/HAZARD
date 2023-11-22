@@ -2,13 +2,12 @@
 
 ### Overview
 
-### [Observations](observations.md)
-
 ### [Action space](action_space.md)
 
 ### Default agents
 * [RL agent](rl_agent.md)
 * [MCTS agent](MCTS_agent.md)
+* [MCTS-dff agent](MCTS-diff_agent.md)
 * [Random agent](random_agent.md)
 * [Greedy agent](greedy_agent.md)
 * [Rule-based agent](rule_based_agent.md)

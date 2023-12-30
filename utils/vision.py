@@ -55,4 +55,4 @@ if __name__ == "__main__":
     img = 'outputs/flood_LLM4/0/rgb_43.png'
     img = mmcv.imread(img)
     result = detector.inference(img)
-    print(result.pred_instances)    print(result.pred_instances)
+    print(result.pred_instances)

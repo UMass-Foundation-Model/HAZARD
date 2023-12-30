@@ -65,7 +65,7 @@ class WindEnv(gym.Env):
             data_dirs = os.listdir(os.path.join(PATH, "data", "room_setup_wind"))
             data_dirs = [d for d in data_dirs if "suburb" in d]
             data_dir = os.path.join(PATH, "data", "room_setup_wind", data_dirs[self.RNG.randint(len(data_dirs))])
-        self.setup = SceneSetup(data_dir=data_dir)
+        self.setup = SceneSetup(data_dir=data_dir, record_mode=self.record_only)
         if self.controller is not None:
             self.controller.communicate({"$type": "terminate"})
             self.controller.socket.close()

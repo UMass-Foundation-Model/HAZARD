@@ -4,10 +4,36 @@ import numpy as np
 from tdw.tdw_utils import TDWUtils
 
 class SceneSetup:
-    def __init__(self, data_dir: str, is_flood = False) -> None:
+    def __init__(self, data_dir: str, is_flood = False, record_mode = False) -> None:
         playback = LogPlayback()
         playback.load(os.path.join(data_dir, "log.txt"))
         self.commands_list = playback.playback
+
+        if record_mode:
+            new_commands_list = []
+            table_ids = []
+            obstacles = []
+            for commands in self.commands_list:
+                new_commands = []
+                for command in commands:
+                    if command["$type"] == "add_object" and "table" in command["category"]:
+                        table_ids.append(command["id"])
+                    if command["$type"] == "rotate_object_by" and command["id"] in table_ids:
+                        command["angle"] += 90
+                        print(command)
+                    if command["$type"] == "add_object":
+                        for obs in ["table", "shelf", "cabinet", "chair", "stool", "suitcase", "basket", ]:
+                            if obs in command["category"] and command["id"] not in obstacles:
+                                obstacles.append(command["id"])
+                    if command["$type"] == "terminate":
+                        break
+                    new_commands.append(command)
+                new_commands_list.append(new_commands)
+            new_commands_list.append([{"$type": "bake_nav_mesh"}])
+            new_commands_list.append(
+                [{"$type": "make_nav_mesh_obstacle", "id": obs, "carve_type": "stationary"} for obs in obstacles])
+            self.commands_list = new_commands_list
+
         import json
         with open(os.path.join(data_dir, "info.json"), "r") as f:
             info = json.load(f)

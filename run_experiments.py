@@ -9,7 +9,7 @@ from policy.mcts import MCTS
 from policy.mctsv2 import MCTSv2
 from policy.record_agent import RecordAgent
 from policy.rl import RLAgent
-from policy.random import RandomAgent
+from policy.rand import RandomAgent
 from policy.custom import CustomAgent
 from policy.oracal import OracleAgent
 import argparse
@@ -122,7 +122,7 @@ if __name__ == "__main__":
         challenge = Challenge(env_name=args.env_name, data_dir=args.data_dir, output_dir=args.output_dir, logger=logger,
                               launch_build=not args.debug, debug=args.debug, port=args.port, screen_size=1024,
                               grid_size=args.grid_size, use_gt=args.use_gt, reverse_observation=args.reverse_observation,
-                              record_only=(args.agent_name == "record"), record_with_agents=args.record_with_agents,
+                              record_only=(args.agent_name == "record"), record_with_agents=args.record_with_agents or args.agent_name == "llmv2",
                               use_dino=args.use_dino, effect_on_agents=args.effect_on_agents)
     agent = get_agent(args)
     if os.path.exists(os.path.join(args.data_dir, "log.txt")): # single episode

@@ -74,6 +74,9 @@ class FireAgentController(FireController):
                                         map_size_h=self.map_size_h, map_size_v=self.map_size_v, grid_size=self.grid_size)
 
         self.maps = []
+        self.id2name = {}
+        self.other_containers = {}
+        self.containers = {}
         # self.init_seg()
 
     def init_obi(self):
@@ -123,6 +126,7 @@ class FireAgentController(FireController):
         self.add_ons = []
         self.manager.reset()
         self.extinguishers = []
+        self.id2name = {}
         self.frame_count = 0
         self.communicate([])
         
@@ -148,6 +152,7 @@ class FireAgentController(FireController):
                 temperature_record[data["name"]] = data["temp"]
         self.extinguishers = []
         self.containers = setup.containers
+        self.other_containers = {}
         for commands in setup.commands_list:
             filtered_commands = []
             tp = None
@@ -162,6 +167,7 @@ class FireAgentController(FireController):
                 if tp == "add_object":
                     name = command["name"]
                     idx = command["id"]
+                    self.id2name[idx] = name
                     pos = TDWUtils.vector3_to_array(command["position"])
                     if name in temperature_record:
                         self.manager.add_object(ObjectStatus(idx=idx, temperature_threshold=temperature_record[name], position=pos))
@@ -169,6 +175,8 @@ class FireAgentController(FireController):
                         self.manager.add_object(ObjectStatus(idx=idx, position=pos))
                     if name == "b05_fire_extinguisher":
                         self.extinguishers.append(idx)
+                if tp.startswith("add_") and tp.endswith("_container"):
+                    self.other_containers[command['id']] = command['container_id']
                 filtered_commands.append(command)
             self.communicate(filtered_commands)
             if tp == "terminate":
@@ -208,14 +216,14 @@ class FireAgentController(FireController):
         if self.image_capture_path != None:
             if not self.record_only:
                 camera = ThirdPersonCamera(avatar_id="record",
-                                           position={"x": 5, "y": 2, "z": 5},
-                                           look_at=self.agents[0].replicant_id)
+                                           position={"x": 0.0, "y": 10.0, "z": 0.0},
+                                           look_at={"x": 0.0, "y": 0.0, "z": 0.0}) # or self.agents[0].replicant_id
                 commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
                             {"$type": "set_target_framerate", "framerate": 30}]
             else:
-                camera = ThirdPersonCamera(avatar_id="record", position={"x": 0.0, "y": 5.0, "z": 0.0},
-                                           look_at={"x": 0.0, "y": 0.0, "z": 0.0})
-                commands = [{"$type": "set_screen_size", "width": self.screen_size * 4, "height": self.screen_size * 4},
+                camera = ThirdPersonCamera(avatar_id="record", position={"x": 0.0, "y": 6.0, "z": 0.0},
+                                           look_at=self.agents[0].replicant_id)
+                commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
                             {"$type": "set_target_framerate", "framerate": 30}]
             self.add_ons.extend([camera])
         else:
@@ -225,6 +233,7 @@ class FireAgentController(FireController):
         if self.image_capture_path is not None:
             commands.extend([{"$type": "set_pass_masks", "pass_masks": ["_img"], "avatar_id": "record"},
                              {"$type": "send_images", "frequency": "always", "ids": ["record"]}])
+            commands.extend([{"$type": "set_floorplan_roof", "show": False}])
 
         # Capture when running after init_scene. (Because screen size may be modified)
         resp = self.communicate([{"$type": "send_scene_regions"}])
@@ -514,7 +523,7 @@ class FireAgentController(FireController):
         obs_concat = np.concatenate([rgb, depth, log_temp], axis=0)
         
         sem = self.sem_map.forward(obs=obs_concat, id_map=seg_mask, camera_matrix=camera_matrix, maps_last=self.maps[agent_idx],
-                                   position=self.agents[agent_idx].dynamic.transform.position,
+                                   position=self.agents[agent_idx].dynamic.transform.position, record_mode=self.record_only,
                                    targets=[self.manager.id_renumbering[target] for target in self.target_ids])
         obs["sem_map"] = dict(height=sem["height"].cpu().numpy(),
                               explored=sem["explored"].cpu().numpy(),

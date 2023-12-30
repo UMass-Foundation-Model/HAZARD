@@ -48,6 +48,7 @@ class WindAgentController(WindController):
         self.use_gt = kwargs.get("use_gt", True)
         self.use_dino = use_dino
         self.record_only = record_only
+        self.id2name = {}
         if not self.use_gt:
             if self.use_dino:
                 from utils.vision_dino import DetectorSAM
@@ -65,6 +66,7 @@ class WindAgentController(WindController):
         
         self.maps = []
         self.action_slowdown = 0
+        self.other_containers = 0
         # self.init_seg()
 
     def update_replicant_url(self):
@@ -96,6 +98,7 @@ class WindAgentController(WindController):
         self.manager.reset()
         self.frame_count = 0
         self.communicate([])
+        self.id2name = {}
         
         self.last_reward = None
         self.communicate([{"$type": "destroy_all_objects"}])
@@ -126,6 +129,7 @@ class WindAgentController(WindController):
                 if tp == "add_object":
                     name = command["name"]
                     idx = command["id"]
+                    self.id2name[idx] = name
                     pos = TDWUtils.vector3_to_array(command["position"])
                     resistence = setup.other["wind_resistence"][str(idx)] if str(idx) in setup.other["wind_resistence"] else 0
                     self.manager.add_object(ObjectStatus(idx=idx, position=pos, resistence=resistence))
@@ -170,7 +174,7 @@ class WindAgentController(WindController):
 
         if self.image_capture_path != None:
             pos = copy.deepcopy(setup.agent_positions[0])
-            pos[1] = 4.0
+            pos[1] = 8.0
             # theta = self.RNG.random() * 2 * np.pi
             # pos[0] += np.cos(theta) * 2
             # pos[2] += np.sin(theta) * 2
@@ -399,7 +403,7 @@ class WindAgentController(WindController):
         obs_concat = np.concatenate([rgb, depth], axis=0)
         
         sem = self.sem_map.forward(obs=obs_concat, id_map=seg_mask, camera_matrix=camera_matrix, maps_last=self.maps[agent_idx],
-                                   position=self.agents[agent_idx].dynamic.transform.position,
+                                   position=self.agents[agent_idx].dynamic.transform.position, record_mode=self.record_only,
                                    targets=self.manager.get_renumbered_list(self.targets))
         obs["sem_map"] = dict(height=sem["height"].cpu().numpy(),
                               explored=sem["explored"].cpu().numpy(),

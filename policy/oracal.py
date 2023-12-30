@@ -37,6 +37,11 @@ class OracleAgent:
         self.controller = controller
         self.first_save = True
         self.step_limit = step_limit
+        self.target_damaged_status_sequence = []
+        self.target_position_sequence = []
+        self.map_list = []
+        self.step_limit = 0
+        self.frame_bias = 0
 
     def find_path(self, agent_pos, target, start_step):
         meet = False
@@ -48,6 +53,8 @@ class OracleAgent:
             target_id = self.controller.target_ids.index(target)
             cur_step = max(0, start_step + additional_steps - self.frame_bias)
             try:
+                if target_id not in self.target_position_sequence[cur_step]:
+                    return agent_pos, 0, 0
                 target_position = self.target_position_sequence[cur_step][target_id]
             except Exception:
                 pdb.set_trace()
@@ -89,6 +96,9 @@ class OracleAgent:
         return min_step, best_order, max_value
 
     def search_plan(self):
+        print(len(self.controller.target_ids))
+        if len(self.controller.target_ids) > 11:
+            return []
         self.frame_bias = self.step_limit - len(self.target_position_sequence)
         min_step, best_order, best_value = self.search_step([], self.agent_position, 0, 0)
         print("End search", min_step, best_order, best_value)
@@ -98,11 +108,11 @@ class OracleAgent:
         if self.first_save:
             self.agent_position = self.controller.agents[0].dynamic.transform.position
             self.first_save = False
-        position = []
+        position = {}
         damaged_status = []
         for idx in self.controller.target_ids:
             obj_status = self.controller.manager.objects[idx]
-            position.append(obj_status.position)
+            position[idx] = obj_status.position
             if self.task == "fire":
                 damaged_status.append(obj_status.state == FloodObjectState.FLOODED or
                                       obj_status.state == FloodObjectState.FLOODED_FLOATING)

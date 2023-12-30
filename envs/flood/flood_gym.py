@@ -66,7 +66,7 @@ class FloodEnv(gym.Env):
             data_dirs = [d for d in data_dirs if ("kitchen" in d or "craftroom" in d)]
             data_dir = os.path.join(PATH, "data", "room_setup_fire", data_dirs[self.RNG.randint(len(data_dirs))])
             # data_dir = os.path.join(PATH, "data", "room_setup", "1a-0-0")
-        self.setup = SceneSetup(data_dir=data_dir, is_flood=True)
+        self.setup = SceneSetup(data_dir=data_dir, is_flood=True, record_mode=self.record_only)
         if self.controller is not None:
             self.controller.communicate({"$type": "terminate"})
             self.controller.socket.close()

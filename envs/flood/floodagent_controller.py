@@ -43,6 +43,8 @@ class FloodAgentController(FloodController):
         self.use_dino = use_dino
         self.single_room = single_room
         self.record_only = record_only
+        self.id2name = {}
+        self.other_containers = {}
         if not self.use_gt:
             if self.use_dino:
                 from utils.vision_dino import DetectorSAM
@@ -94,6 +96,7 @@ class FloodAgentController(FloodController):
         self.flood_candidate = dict()
         self.initialized = False
         self.add_ons = []
+        self.id2name = {}
         self.manager.reset()
         self.frame_count = 0
         self.communicate([])
@@ -109,6 +112,7 @@ class FloodAgentController(FloodController):
             self.add_ons.append(logger)
             self.communicate([])
 
+        self.other_containers = {}
         for obj in setup.objects:
             self.manager.add_object(obj)
         for commands in setup.commands_list:
@@ -122,7 +126,15 @@ class FloodAgentController(FloodController):
                 if tp[:4] == "send" or tp.find("avatar") != -1 or "avatar_id" in command:
                     continue
                 filtered_commands.append(command)
+                if tp == "add_object":
+                    name = command["name"]
+                    idx = command["id"]
+                    self.id2name[idx] = name
+                if tp.startswith("add_") and tp.endswith("_container"):
+                    self.other_containers[command['id']] = command['container_id']
+            # json.dump(filtered_commands, open("/data/private/zqh/tmp.json", "w"))
             self.communicate(filtered_commands)
+
 
         if not self.record_only:
             if len(self.agents) == 0:
@@ -155,14 +167,14 @@ class FloodAgentController(FloodController):
             # camera = ThirdPersonCamera(avatar_id="record", position={"x": -7.78, "y": 7.67, "z": 0.16},
             #                            look_at=self.agents[0].replicant_id)
             if not self.record_only:
-                camera = ThirdPersonCamera(avatar_id="record", position={"x": 0.0,
-                                                                         "y": 2.5,
-                                                                         "z": 0.0},
+                camera = ThirdPersonCamera(avatar_id="record",
+                                           position={"x": 0.0, "y": 10.0, "z": 0.0},
                                            look_at={"x": 0.0, "y": 0.0, "z": 0.0})
+                # if len(self.agents) == 0 else self.agents[0].replicant_id)
                 commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
                             {"$type": "set_target_framerate", "framerate": 30}]
             else:
-                camera = ThirdPersonCamera(avatar_id="record", position={"x": -1.5, "y": 2.0, "z": -2.0},
+                camera = ThirdPersonCamera(avatar_id="record", position={"x": 1.5, "y": 2.0, "z": 0.0},
                                            look_at={"x": 0.0, "y": 0.0, "z": 0.0})
                 commands = [{"$type": "set_screen_size", "width": self.screen_size * 4, "height": self.screen_size * 4},
                             {"$type": "set_target_framerate", "framerate": 30}]
@@ -170,6 +182,7 @@ class FloodAgentController(FloodController):
         else:
             commands = [{"$type": "set_screen_size", "width": self.screen_size, "height": self.screen_size},
                         {"$type": "set_target_framerate", "framerate": 30}]
+            commands.extend([{"$type": "set_floorplan_roof", "show": False}])
 
         if self.image_capture_path is not None:
             commands.extend([{"$type": "set_pass_masks", "pass_masks": ["_img"], "avatar_id": "record"},
@@ -481,7 +494,7 @@ class FloodAgentController(FloodController):
         camera_matrix = self.agents[agent_idx].dynamic.camera_matrix.reshape((4, 4))
         obs_concat = np.concatenate([rgb, depth, flood_height], axis=0)
         sem = self.sem_map.forward(obs=obs_concat, id_map=seg_mask, camera_matrix=camera_matrix, maps_last=self.maps[agent_idx],
-                                   position=self.agents[agent_idx].dynamic.transform.position,
+                                   position=self.agents[agent_idx].dynamic.transform.position, record_mode=self.record_only,
                                    targets=[self.manager.id_renumbering[target] for target in self.target_ids])
         obs["sem_map"] = dict(height=sem["height"].cpu().numpy(),
                               explored=sem["explored"].cpu().numpy(),

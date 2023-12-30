@@ -179,7 +179,8 @@ def find_path(env: WindEnv, target: int, reset_arms: bool = False):
         env.controller.next_key_frame()
     env.controller.communicate([])
 
-def run(scene_name, image_path = ""):
+
+def run(scene_name, image_path=""):
     env = WindEnv(launch_build=True, screen_size=512, port=12138)
     # env = WindEnv(launch_build=False, screen_size=512, port=1071, use_local_resources=True)
     data_dir = os.path.join(PATH, "data", "room_setup_wind", scene_name)

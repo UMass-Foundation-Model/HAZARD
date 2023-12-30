@@ -46,8 +46,8 @@ def get_astar_weight(sem_map, origin, destination):
     # exp(x * 0.) * y= 10
     # exp(x * 1.6) * y = 1000
     # x = 3, y = 7
-    weight[height > 0.1] += np.exp(height[height > 0.1] * 3) * 7
-    # weight[height > 0.1] += 10
+    weight[height > 0.5] += np.exp(height[height > 0.5] * 3) * 7
+    weight[height > 0.1] += 10
     # weight[height > 0.5] += 50
     # weight[height > 1.6] += 1000
     # for each position, if it is near an obstacle, increase its weight by 50

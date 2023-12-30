@@ -234,7 +234,8 @@ class Semantic_Mapping(nn.Module):
             real_pos = [real_pos[0], real_pos[2]]
         return [int(real_pos[0] / self.grid_size + self.map_offset[0] + 0.5), int(real_pos[1] / self.grid_size + self.map_offset[1] + 0.5)]
     
-    def forward(self, obs, id_map, camera_matrix, maps_last, position: Optional[np.ndarray]=None, targets: Optional[List[int]]=None):
+    def forward(self, obs, id_map, camera_matrix, maps_last, position: Optional[np.ndarray]=None,
+                targets: Optional[List[int]]=None, record_mode=False):
         """ batched input on default """
         if not isinstance(camera_matrix, torch.Tensor):
             camera_matrix = torch.Tensor(camera_matrix).to(self.device)
@@ -321,10 +322,13 @@ class Semantic_Mapping(nn.Module):
         
         if position is not None:
             x, z = self.real_to_grid(position)
-            R = max(1, int(0.5 // self.grid_size))
-            map_exp[max(0, x-R):min(self.map_size_h, x+R+1), max(0, z-R):min(self.map_size_v, z+R+1)] = 1
-            map_height[max(0, x-R):min(self.map_size_h, x+R+1), max(0, z-R):min(self.map_size_v, z+R+1)] = 0
-        
+            R = max(1, int(0.2 // self.grid_size))
+            if not record_mode:
+                map_exp[max(0, x - R):min(self.map_size_h, x + R + 1),
+                max(0, z - R):min(self.map_size_v, z + R + 1)] = 1
+                map_height[max(0, x - R):min(self.map_size_h, x + R + 1),
+                max(0, z - R):min(self.map_size_v, z + R + 1)] = 0
+
         map_height = map_height * map_exp + maps_last["height"] * (1 - map_exp)
         map_id  = map_id * map_exp + maps_last["id"] * (1 - map_exp)
         if c > 4:

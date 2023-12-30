@@ -73,6 +73,7 @@ class Challenge:
         self.logger.debug(port)
         self.logger.info("Environment Created")
         self.debug = debug
+        self.output_parent_dir = output_dir
         self.output_dir = output_dir
         self.data_dir = data_dir
         #self.env.reset(data_dir=data_dir)
@@ -83,6 +84,7 @@ class Challenge:
         self.high_value = 5
         self.low_value = 1
         self.max_steps = max_steps
+        self.record_with_agents = record_with_agents
 
     def reset(self):
         self.holding_object = []
@@ -148,7 +150,7 @@ class Challenge:
                          self.id_reverse_renumbering(self.nearest_object)],
                      'id': str(self.nearest_object)}]
             except:
-                pdb.set_trace()
+                processed_input['nearest_object'] = []
         else:
             processed_input['nearest_object'] = []
         processed_input['step'] = self.env.controller.frame_count
@@ -230,6 +232,7 @@ class Challenge:
         num_eval_episodes = eval_episodes
 
         start = time.time()
+        print("OUTPUT_DIR", self.output_dir)
         for i in range(num_eval_episodes):
             start_time = time.time()
             if not os.path.exists(os.path.join(self.output_dir, str(i))):
@@ -311,7 +314,12 @@ class Challenge:
                 if isinstance(current_action, int) and agent.agent_type in ["rl", "random"]:
                     current_action = self.env.get_challenge_action(current_action)
                 print(current_action)
-                print(f"step {self.env.controller.comm_counter} action {current_action}", file=action_logger)
+                if current_action[0] == "pick_up":
+                    obj_name = self.env.controller.id2name[self.id_reverse_renumbering(self.nearest_object)]
+                    print(f"step {self.env.controller.comm_counter} action {current_action} {obj_name} "
+                          f"{str(self.id_reverse_renumbering(self.nearest_object))}", file=action_logger)
+                else:
+                    print(f"step {self.env.controller.comm_counter} action {current_action}", file=action_logger)
 
                 if agent.agent_type == 'oracle':
                     while self.env.controller.frame_count < self.max_steps:
@@ -322,13 +330,18 @@ class Challenge:
                     import json
                     json.dump(oracle_plan, open(os.path.join(self.output_dir, f"action-{str(i)}.json"), "w"))
                 elif current_action[0] == "walk_to":
-                    if self.env_name in ["fire", "flood"]:
+                    if self.record_with_agents:
                         action_result, action_info = agent_walk_to(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
-                                                               max_steps=100, reset_arms=False, arrived_at=1.25, task=self.env_name,
+                                                                   max_steps=100, reset_arms=False, arrived_at=0.5,
+                                                                   task=self.env_name, record_mode=True,
+                                                                   effect_on_agents=self.effect_on_agents)
+                    elif self.env_name in ["fire", "flood"]:
+                        action_result, action_info = agent_walk_to(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
+                                                               max_steps=100, reset_arms=False, arrived_at=0.5, task=self.env_name,
                                                                    effect_on_agents=self.effect_on_agents)
                     else:
                         action_result, action_info = agent_walk_to(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
-                                                               max_steps=100, reset_arms=False, arrived_at=2, task=self.env_name,
+                                                               max_steps=100, reset_arms=False, arrived_at=0.5, task=self.env_name,
                                                                    effect_on_agents=self.effect_on_agents)
                     if action_result:
                         self.nearest_object = int(current_action[1])
@@ -337,7 +350,7 @@ class Challenge:
                 elif current_action[0].startswith("low_level"):
                     action = current_action[0].split(".")[-1]
                     kwargs = current_action[1]
-                    action_result, action_info = low_level_action(env, effect_on_agents=self.effect_on_agents,
+                    action_result, action_info = low_level_action(self.env, effect_on_agents=self.effect_on_agents,
                                                                   task=self.env_name, action=action, **kwargs)
                     if action_result and action == "move_by":
                         self.nearest_object = self.env.controller.find_nearest_object()
@@ -346,12 +359,14 @@ class Challenge:
                 elif current_action[0] == "walk_to_single":
                     if self.env_name in ["fire", "flood"]:
                         action_result, action_info = agent_walk_to_single_step(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
-                                                               reset_arms=False, arrived_at=1.25, task=self.env_name,
-                                                                               effect_on_agents=self.effect_on_agents)
+                                                               reset_arms=False, arrived_at=0.1, task=self.env_name,
+                                                                               effect_on_agents=self.effect_on_agents,
+                                                                               record_mode=self.record_with_agents)
                     else:
                         action_result, action_info = agent_walk_to_single_step(self.env, target=self.id_reverse_renumbering(int(current_action[1])),
-                                                               reset_arms=False, arrived_at=2, task=self.env_name,
-                                                                               effect_on_agents=self.effect_on_agents)
+                                                               reset_arms=False, arrived_at=0.1, task=self.env_name,
+                                                                               effect_on_agents=self.effect_on_agents,
+                                                                               record_mode=self.record_with_agents)
                     if action_result and action_info == "success":
                         self.nearest_object = int(current_action[1])
                     else:
@@ -409,8 +424,10 @@ class Challenge:
             total_max_score += max_score
             step = self.env.controller.frame_count
             total_steps += step
-            if os.path.isfile(os.path.join(self.output_dir, "log.txt")):
-                shutil.move(os.path.join(self.output_dir, "log.txt"), os.path.join(self.output_dir, f"log-{str(i)}.txt"))
+            if os.path.isfile(os.path.join(self.output_parent_dir, "log.txt")):
+                print("    DEBUG Moving")
+                shutil.move(os.path.join(self.output_parent_dir, "log.txt"), os.path.join(self.output_dir, f"log.txt"))
+                shutil.move(os.path.join(self.output_parent_dir, "images"), os.path.join(self.output_dir, f"images"))
             # with open(os.path.join(self.output_dir, str(i), 'result_episode.json'), 'w') as f:
             #     json.dump(result, f)
         avg_score = total_score / num_eval_episodes

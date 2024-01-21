@@ -1,21 +1,19 @@
 ## Overview
 
 ### Our purpose
-We propose a new simulated embodied benchmark, called HAZARD, specifically designed to assess the decision-making abilities of embodied agents in dynamic situations. HAZARD consists of three unexpected disaster scenarios, including fire, flood, and wind, and specifically supports the utilization of large language models (LLMs) to assist common sense reasoning and decision-making.
-![overview.png](..%2F..%2Fpics%2Foverview.png)
-
+HAZARD is a simulated embodied benchmark, specifically designed to assess the decision-making abilities of embodied agents in dynamic situations. HAZARD consists of three unexpected disaster scenarios, including fire, flood, and wind, and specifically supports the utilization of large language models (LLMs) to assist common sense reasoning and decision-making.
 ### Code structure
-* Data: `data/`
-  * Fire & flood: `data/room_setup_fire`
-  * Wind: `data/room_setup_wind`
-* Simulator: `envs/`
-  * Fire: `envs/fire`
-  * flood: `envs/flood`
-  * Wind: `envs/wind`
 * Documentations: `documentation/`
-* Baseline agents: `policy/`
-* Custom scene generation: `scenes/`
-* Submit agent and run experiments: `run_experiments.py`
+* Data: `src/HAZARD/data/`
+  * Fire & flood: `src/HAZARD/data/room_setup_fire`
+  * Wind: `src/HAZARD/data/room_setup_wind`
+* Simulator: `src/HAZARD/envs/`
+  * Fire: `src/HAZARD/envs/fire`
+  * flood: `src/HAZARD/envs/flood`
+  * Wind: `src/HAZARD/envs/wind`
+* Baseline agents: `src/HAZARD/policy/`
+* Custom scene generation: `src/HAZARD/scenes/`
+* Submit agent and run experiments: `src/HAZARD/run_experiments.py`
 
 ### Next step
 * [Installation](install.md)

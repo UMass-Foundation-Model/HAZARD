@@ -106,7 +106,7 @@ def submit(
 
         # Parameters for examplar LLM or LLMv2 pipelines only
         max_tokens: int = 512,  # maximum max new tokens (only for examplar LLM or LLMv2 pipelines)
-        lm_source: str = "openai",  # 'openai' (use OpenAI API) or 'huggingface' (use OpenAI models)
+        lm_source: str = "openai",  # 'openai' (use OpenAI API) or 'huggingface' (use Huggingface models)
         # for 'openai' examplar LLM or LLMv2 pipelines only
         api_key: str = "",  # OpenAI api key
         api_key_file: str = "",  # instead of api_key, only if you want to use a file containing multiple keys

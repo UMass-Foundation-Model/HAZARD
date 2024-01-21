@@ -3,6 +3,10 @@
 ![Overview of HAZARD](pics/overview.png)
 An overview of three scenarios in the HAZARD challenge.
 
+[paper](https://openreview.net/pdf?id=n6mLhaBahJ)
+
+[project page](https://vis-www.cs.umass.edu/hazard/site)
+
 ## Detailed documentations
 
 ### [Get started](documentation/get_started/overview.md)

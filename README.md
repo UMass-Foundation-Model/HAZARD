@@ -27,11 +27,11 @@ An overview of three scenarios in the HAZARD challenge.
   * [Random agent](documentation/agents/random_agent.md)
   * [Greedy agent](documentation/agents/greedy_agent.md)
   * [Rule-based agent](documentation/agents/rule_based_agent.md)
-  * [LLM-based agent](documentation/agents/LLM_agent.md)
+  * [LLM-based agent](documentation/agents/LLM-based%20agent.md)
     * Version 1.0
     * Version 2.0
 
-* [Customized agent](custom_agent.md)
+* [Customized agent](documentation/agents/custom_agent.md)
 
 ### Baseline results
 

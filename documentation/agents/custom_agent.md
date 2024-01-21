@@ -41,6 +41,7 @@ This function should return a action for agent to execute, in the format of `(ac
 | `explore` | None | Agent will turn by 360 degrees, The observations during turning will update the semantic map of the agent |
 
 * Available low-level actions
+
 Currently only support 4 low-level actions. The params should follow the format of TDW replicant. Please refer the [documentation of TDW Replicant](https://github.com/threedworld-mit/tdw/blob/master/Documentation/lessons/replicants/actions.md) for more details.
 
 | Action name    | Params | Description | 

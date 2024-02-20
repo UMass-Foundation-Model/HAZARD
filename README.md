@@ -1,11 +1,22 @@
-# Repo for HAZARD Challenge: Embodied Decision Making in Dynamically Changing Environments
-
-![Overview of HAZARD](pics/overview.png)
-An overview of three scenarios in the HAZARD challenge.
-
-[paper](https://openreview.net/pdf?id=n6mLhaBahJ)
-
-[project page](https://vis-www.cs.umass.edu/hazard/site)
+<br />
+<p align="center">
+  <h1 align="center">Repo for HAZARD Challenge: Embodied Decision Making in Dynamically Changing Environments (ICLR 2024) </h1>
+  <p align="center">
+Qinhong Zhou*, Sunli Chen*, Yisong Wang, Haozhe Xu, Weihua Du, Hongxin Zhang,
+Yilun Du, Joshua B. Tenenbaum, Chuang Gan
+  </p>
+  <p align="center">
+    <a href='https://arxiv.org/abs/2401.12975'>
+      <img src='https://img.shields.io/badge/Paper-PDF-red?style=flat&logo=arXiv&logoColor=red' alt='Paper PDF'>
+    </a>
+    <a href='https://vis-www.cs.umass.edu/hazard/' style='padding-left: 0.5rem;'>
+      <img src='https://img.shields.io/badge/Project-Page-blue?style=flat&logo=Google%20chrome&logoColor=blue' alt='Project Page'>
+    </a>
+  </p>
+  <p align="center">
+    <img src="pics/overview.png" alt="Logo" width="95%">
+  </p>
+</p>
 
 ## Detailed documentations
 

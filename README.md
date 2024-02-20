@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-  <h1 align="center">Repo for HAZARD Challenge: Embodied Decision Making in Dynamically Changing Environments (ICLR 2024) </h1>
+  <h1 align="center">HAZARD Challenge: Embodied Decision Making in Dynamically Changing Environments (ICLR 2024) </h1>
   <p align="center">
 Qinhong Zhou*, Sunli Chen*, Yisong Wang, Haozhe Xu, Weihua Du, Hongxin Zhang,
 Yilun Du, Joshua B. Tenenbaum, Chuang Gan

@@ -5,9 +5,9 @@ import time
 from collections import deque
 
 import gym
-import envs.fire
-import envs.wind
-import envs.flood
+import HAZARD.envs.fire
+import HAZARD.envs.wind
+import HAZARD.envs.flood
 import numpy as np
 import torch
 import torch.nn as nn

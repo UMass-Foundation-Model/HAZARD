@@ -46,6 +46,7 @@ Yilun Du, Joshua B. Tenenbaum, Chuang Gan
 
 ### Baseline results
 
+* Full log files can be found in [this link](https://drive.google.com/file/d/1Z1xtble1nCpq1tyuiwYD4wzynRi1MwVK/view?usp=sharing)
 * W/o perception (use ground truth segmentations)
 
   * Fire

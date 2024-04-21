@@ -5,21 +5,12 @@ from envs.fire.fire_utils import ObjectState as FireObjectState
 from src.HAZARD.utils.scene_setup import SceneSetup
 import tqdm
 
-dirname = "outputs/fire_LLM"
-if len(sys.argv) > 1:
+if len(sys.argv) > 2:
     dirname = sys.argv[1]
-if "outputs" not in dirname:
-    if os.path.exists(str(os.path.join("outputs", dirname))):
-        dirname = str(os.path.join("outputs", dirname))
-    else:
-        dirname = str(os.path.join("results", dirname))
+    taskname = sys.argv[2]
 print("dirname: ", dirname)
 
 tasks = ["flood", "fire", "wind"]
-taskname = None
-for task in tasks:
-    if task in dirname:
-        taskname = task
 
 scenes = os.listdir(dirname)
 scenes = [scene for scene in scenes if os.path.isdir(os.path.join(dirname, scene))]
@@ -31,8 +22,8 @@ data_dirs = {
 }
 
 def get_values(taskname, scene, object_id, states):
-    waterproof_dict = json.load(open("scenes/scene_configs/fluid.json"))
-    value_dict = json.load(open("data/meta_data/value.json"))
+    waterproof_dict = json.load(open("src/HAZARD/scenes/scene_configs/fluid.json"))
+    value_dict = json.load(open("src/HAZARD/data/meta_data/value.json"))
     data_dir = data_dirs[taskname]
     if os.path.exists(os.path.join("data", data_dir, "test_set", scene)):
         scene_setup = SceneSetup(os.path.join("data", data_dir, "test_set", scene))

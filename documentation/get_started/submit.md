@@ -68,3 +68,17 @@ submit(output_dir="outputs/", env_name="fire", agent=my_agent, port=1071, max_te
 ```
 The detailed requirements of a customized agent can be found in [this](../agents/custom_agent.md)
 
+### Evaluation
+The following step will calculate the three metrics used in our paper (Value, Step, and Damage) after the `submit` function completes.
+```bash
+python src/HAZARD/utils/calc_value.py <path to output_dir> <task name>
+```
+`task name` is selected from fire, wind, or flood.
+The program will output four numbers in format of
+```
+Average rate ...
+Average value rate ...
+Average step ...
+Damage rate ...
+```
+, where `Average value rate` is the Value metric, `Average step` is the step metric, and `Damage rate` is the Damage metric.

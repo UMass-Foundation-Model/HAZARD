@@ -96,7 +96,7 @@ class Challenge:
         self.have_finished_list = []
 
     def get_target_info(self, target_list):
-        value_dict = json.load(open(os.path.join(PATH, "scenes/scene_configs/value.json")))
+        value_dict = json.load(open(os.path.join(PATH, "src/HAZARD/scenes/scene_configs/value.json")))
         object_attribute_dict = {}
         for target_category in target_list:
             object_attribute_dict[target_category] = {}
@@ -106,14 +106,14 @@ class Challenge:
             else:
                 object_attribute_dict[target_category]['value'] = self.low_value
         if self.env_name == 'fire':
-            fireproof_dict = json.load(open(os.path.join(PATH, "scenes/scene_configs/fire.json")))
+            fireproof_dict = json.load(open(os.path.join(PATH, "src/HAZARD/scenes/scene_configs/fire.json")))
             for target_category in target_list:
                 if target_category in fireproof_dict:
                     object_attribute_dict[target_category]['fireproof'] = fireproof_dict[target_category]
                 else:
                     object_attribute_dict[target_category]['fireproof'] = 0
         elif self.env_name == 'flood':
-            waterproof_dict = json.load(open(os.path.join(PATH, "scenes/scene_configs/fluid.json")))
+            waterproof_dict = json.load(open(os.path.join(PATH, "src/HAZARD/scenes/scene_configs/fluid.json")))
             for target_category in target_list:
                 if target_category in waterproof_dict:
                     object_attribute_dict[target_category]['waterproof'] = waterproof_dict[target_category]
@@ -186,10 +186,10 @@ class Challenge:
     def get_score(self):
         total_score = 0
         max_score = 0
-        value_dict = json.load(open("data/meta_data/value.json"))
+        value_dict = json.load(open("src/HAZARD/data/meta_data/value.json"))
         self.final_states = dict()
         if self.env_name in ["fire", "flood"]:
-            waterproof_dict = json.load(open("scenes/scene_configs/fluid.json"))
+            waterproof_dict = json.load(open("src/HAZARD/scenes/scene_configs/fluid.json"))
             print("finally:", self.target_status)
             for target in self.target_status:
                 name = self.env.controller.target_id2name[target]
@@ -430,8 +430,10 @@ class Challenge:
             total_steps += step
             if os.path.isfile(os.path.join(self.output_parent_dir, "log.txt")):
                 print("    DEBUG Moving")
-                shutil.move(os.path.join(self.output_parent_dir, "log.txt"), os.path.join(self.output_dir, f"log.txt"))
-                shutil.move(os.path.join(self.output_parent_dir, "images"), os.path.join(self.output_dir, f"images"))
+                if os.path.exists(os.path.join(self.output_parent_dir, "log.txt")):
+                    shutil.move(os.path.join(self.output_parent_dir, "log.txt"), os.path.join(self.output_dir, f"log.txt"))
+                if os.path.exists(os.path.join(self.output_parent_dir, "images")):
+                    shutil.move(os.path.join(self.output_parent_dir, "images"), os.path.join(self.output_dir, f"images"))
             # with open(os.path.join(self.output_dir, str(i), 'result_episode.json'), 'w') as f:
             #     json.dump(result, f)
         avg_score = total_score / num_eval_episodes

@@ -75,35 +75,6 @@ class mcts_state:
         if len(self.holding_objects) == 0 and ('walk_to' not in self.last_action[0] or miss_target_flag):
             for obj in self.target_list:
                 mcts_trans.append({'action': ("walk_to", obj['id']), 'cost': self.get_distance(self.agent_pos, obj['pos'])})
-
-        # consider value
-        for action in mcts_trans:
-            if action['action'][1] == None or action['cost'] == 0:
-                continue
-            value = 1
-            for object in self.target_list:
-                if action['action'][1] == object['id']:
-                    value = self.objects_info[object['category']]['value']
-            if self.task in ['fire', 'flood']:
-                vulnerable = 1e5
-                for object in self.target_list:
-                    if action['action'][1] == object['id']:
-                        value = self.objects_info[object['category']]['value']
-                        if 'waterproof' in self.objects_info[object['category']]:
-                            vulnerable = 1e5 if self.objects_info[object['category']]['waterproof'] == 1 else 0.01
-                        elif 'fireproof' in self.objects_info[object['category']]:
-                            vulnerable = 1000 if self.objects_info[object['category']]['fireproof'] == 1 else 100
-                if int(action['action'][1]) not in self.status_history:
-                    pass
-                elif len(self.status_history[int(action['action'][1])]) == 1:
-                    vulnerable -= self.status_history[int(action['action'][1])][-1]
-                else:
-                    delta = self.status_history[int(action['action'][1])][-1] - self.status_history[int(action['action'][1])][-2]
-                    status_prediction = self.status_history[int(action['action'][1])][-1] + delta
-                    vulnerable -= status_prediction
-                if vulnerable < 0:
-                    value /= 2
-            action['cost'] /= value
         return mcts_trans
 
     def apply_trans(self, action):

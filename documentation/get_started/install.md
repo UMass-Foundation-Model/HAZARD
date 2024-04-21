@@ -23,5 +23,16 @@ pip install -U openmim
 mim install mmcv>=2.0.0rc1
 ```
 
+Also, download the rcnn checkpoint from [google drive](https://drive.google.com/file/d/1GFAAkOV5fy_L4c6E7nmtcAxt82BlUbF2/view?usp=sharing) and put it under `src/HAZARD/data`.
+
 ### Next step
 * [Create your own agent and submit](submit.md)
+
+### Common issues
+1. Multiple env registration in gym: update gym.
+2. Cannot import HAZARD: add `your_directory/src` to `PYTHONPATH`. In linux, it should be:
+```
+export PYTHONPATH=$PYTHONPATH:your_directory/src
+```
+3. Missing imports from mmcv module: follow the official installation guide of mmcv. (You may need to compile it locally if you are using certain versions of CUDA.)
+4. To run RL training, install baselines as shown in [rl installation guide](../../ppo/README.md). You may need a separate conda environment if you encounter conflicts.

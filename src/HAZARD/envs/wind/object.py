@@ -1,4 +1,5 @@
 from typing import Dict, Set, Optional
+from .wind_utils import *
 import numpy as np
 
 class ObjectStatus:

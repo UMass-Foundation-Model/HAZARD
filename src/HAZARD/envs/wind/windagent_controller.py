@@ -64,7 +64,7 @@ class WindAgentController(WindController):
         
         self.maps = []
         self.action_slowdown = 0
-        self.other_containers = 0
+        self.other_containers = {}
         # self.init_seg()
 
     def update_replicant_url(self):

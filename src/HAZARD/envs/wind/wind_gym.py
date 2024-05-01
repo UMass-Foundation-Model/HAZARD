@@ -2,6 +2,7 @@ import gym
 import gym.spaces
 from .agent import *
 import numpy as np
+from .windagent_controller import *
 # from src.HAZARD.policy.env_actions import agent_drop, agent_pickup, agent_explore, agent_walk_to_single_step
 
 from enum import IntEnum

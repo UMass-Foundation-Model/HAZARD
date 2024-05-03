@@ -116,3 +116,5 @@ submit
 Both fire and flood setting should contain 25 episodes, and the wind setting should contain 20 episodes.
 
 We also provide a zip file [example](https://drive.google.com/file/d/1NHDieF6EDI5mdCxKDGYpl3stuq-Jnteh/view?usp=sharing) for leaderboard submission.
+
+Currently the leaderboard is based on the without Perception and without Effect-on-agent setting of HAZARD.

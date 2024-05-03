@@ -18,6 +18,8 @@ Yilun Du, Joshua B. Tenenbaum, Chuang Gan
   </p>
 </p>
 
+**New**: The [leaderboard submission](documentation/get_started/submit.md#submit-to-the-leaderboard) is open now! 
+
 ## Detailed documentations
 
 ### [Get started](documentation/get_started/overview.md)

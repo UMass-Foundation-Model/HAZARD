@@ -68,7 +68,7 @@ submit(output_dir="outputs/", env_name="fire", agent=my_agent, port=1071, max_te
 ```
 The detailed requirements of a customized agent can be found in [this](../agents/custom_agent.md)
 
-### Evaluation
+### Self Evaluation
 The following step will calculate the three metrics used in our paper (Value, Step, and Damage) after the `submit` function completes.
 ```bash
 python src/HAZARD/utils/calc_value.py <path to output_dir> <task name>
@@ -82,3 +82,37 @@ Average step ...
 Damage rate ...
 ```
 , where `Average value rate` is the Value metric, `Average step` is the step metric, and `Damage rate` is the Damage metric.
+
+### Submit to the Leaderboard
+The leaderboard can be found at the bottom of the [HAZARD homepage](https://vis-www.cs.umass.edu/hazard/).
+You can submit the results on all fire, flood, and wind test episodes with a zip file.
+The content within the zip file needs to be organized as the following
+```
+submit
+├── fire
+│   ├── mm_kitchen_3a-1
+│   │   ├── actions.txt
+│   │   └── eval_result.json
+│   ├── mm_kitchen_3a-10
+│   │   ├── actions.txt
+│   │   └── eval_result.json
+...
+├── flood
+│   ├── mm_kitchen_3a-1
+│   │   ├── actions.txt
+│   │   └── eval_result.json
+│   ├── mm_kitchen_3a-10
+│   │   ├── actions.txt
+│   │   └── eval_result.json
+└── wind
+    ├── suburb_scene_2023-3-0
+    │   ├── actions.txt
+    │   └── eval_result.json
+    ├── suburb_scene_2023-3-1
+    │   ├── actions.txt
+    │   └── eval_result.json
+...
+```
+Both fire and flood setting should contain 25 episodes, and the wind setting should contain 20 episodes.
+
+We also provide a zip file [example](https://drive.google.com/file/d/1NHDieF6EDI5mdCxKDGYpl3stuq-Jnteh/view?usp=sharing) for leaderboard submission.

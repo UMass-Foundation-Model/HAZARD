@@ -1,12 +1,12 @@
 from typing import Any, Tuple, Dict
-from envs.wind.object import ObjectStatus
-from envs.wind.agent import *
+from .object import ObjectStatus
+from .agent import *
 from tdw.add_ons.third_person_camera import ThirdPersonCamera
 from tdw.add_ons.logger import Logger
 from tdw.replicant.arm import Arm
 from tdw.replicant.image_frequency import ImageFrequency
 from src.HAZARD.utils.model import Semantic_Mapping
-from envs.wind import WindController
+from .wind import WindController
 from tdw.tdw_utils import TDWUtils
 from tdw.librarian import HumanoidLibrarian
 import numpy as np

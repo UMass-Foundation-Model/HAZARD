@@ -1,5 +1,5 @@
 from tdw.add_ons.add_on import AddOn
-from envs.wind.object import *
+from .object import *
 from tdw.output_data import OutputData, Transforms, Bounds, Rigidbodies
 from tdw.output_data import Replicants, SegmentationColors, ReplicantSegmentationColors
 from typing import Dict, List

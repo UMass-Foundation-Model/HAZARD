@@ -30,9 +30,9 @@ Also, download the rcnn checkpoint from [google drive](https://drive.google.com/
 
 ### Common issues
 1. Multiple env registration in gym: update gym.
-2. Cannot import HAZARD: add `your_directory/src` to `PYTHONPATH`. In linux, it should be:
+2. Cannot import HAZARD: add `HAZARD/` to `PYTHONPATH`. In linux, it should be:
 ```
-export PYTHONPATH=$PYTHONPATH:your_directory/src
+export PYTHONPATH=$PYTHONPATH:<path to HAZARD>
 ```
 3. Missing imports from mmcv module: follow the official installation guide of mmcv. (You may need to compile it locally if you are using certain versions of CUDA.)
 4. To run RL training, install baselines as shown in [rl installation guide](../../ppo/README.md). You may need a separate conda environment if you encounter conflicts.

@@ -11,7 +11,7 @@ from policy.record_agent import RecordAgent
 from policy.rl import RLAgent
 from policy.rand import RandomAgent
 from policy.custom import CustomAgent
-from policy.oracal import OracleAgent
+from policy.oracle import OracleAgent
 from datetime import datetime
 import os
 
